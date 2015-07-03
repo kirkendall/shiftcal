@@ -1,0 +1,22 @@
+/* XPM */
+static char * chainlink_xpm[] = {
+"25 14 5 1",
+" 	c None",
+"X	c orange3",
+"O	c black",
+"+	c orange2",
+"@	c orange4",
+"                     XXX ",
+"                    X+++X",
+"     XXX  XXX       X+O+X",
+"    X+++XX+++X      X+++X",
+"    X+O+XX+O+X       XXX ",
+"   @X+++XX+++X@      XXX ",
+" XXX@XXX  XXX@XXX   X+++X",
+"X+++X@      @X+++X  X+@+X",
+"X+O+X        X+O+X @X+++X",
+"X+++XXX      X+++XXX@XXX ",
+" XXX+++X      XXX+++X@   ",
+"   X+O+X        X+O+X    ",
+"   X+++X        X+++X    ",
+"    XXX          XXX     "};
