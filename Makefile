@@ -25,7 +25,7 @@ INCPHP= include/account.php include/admmenu.php \
 	include/view.php
 
 INCSRC=	$(INCPHP) include/calform.js include/countdown.js include/util.js \
-	include/xmlextras.js
+	<?php echo CALURL; ?>js/xmlextras.js
 
 PDFSRC=	viewmypdf08.php include/fpdf.php include/pmPDF.php \
 	include/font/courier.php include/font/helvetica.php \

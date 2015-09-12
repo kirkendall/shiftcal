@@ -117,7 +117,7 @@ a.timetitle { text-decoration: none; }
 a.timetitle:focus { font-size: larger; }
 span.clipped { white-space: nowrap; overflow: hidden; }
 </style>
-<script type="text/JavaScript" src="include/xmlextras.js"></script>
+<script type="text/JavaScript" src="<?php echo CALURL; ?>js/xmlextras.js"></script>
 <script type="text/JavaScript">
 
 // List of pending fetches
