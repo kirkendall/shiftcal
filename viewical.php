@@ -5,7 +5,7 @@
 	# users can read the event's full description.
 
 	include("include/common.php");
-  header("Content-type: text/json");
+  header("Content-type: text/calendar");
 	header("Cache-control: private");
   
   # get id for event we want to display
