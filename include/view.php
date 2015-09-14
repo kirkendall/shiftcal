@@ -311,7 +311,7 @@ function fullentry($record)
     if (!isset($_REQUEST['p'])) {
 	print "&nbsp;&nbsp;<a href=\"calforum.php?id=$id\" title=\"$forumtitle\"><img border=0 src=\"$forumimg\" alt=\"[forum]\"></a>\n";
     }
-    print "<p><a href='viewical.php?eventId=$id'>Add to Calendar</a></p>";
+    // print "<p><a href='viewical.php?eventId=$id'>Add to Calendar</a></p>";
     print "</div></dd>\n";
 
     # if this event has no image, then the next event's
