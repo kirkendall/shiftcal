@@ -34,7 +34,7 @@ VERSION:2.0
 CALSCALE:GREGORIAN
 METHOD:REQUEST
 BEGIN:VEVENT
-DTSTART:<?php print date('Ymd', strtotime($event->eventdate)) .  "T" . date('His', strtotime($event->eventtime)) . "Z\n"; ?>
+DTSTART:<?php echo date('Ymd', strtotime($event->eventdate)) .  "T" . date('His', strtotime($event->eventtime)) . "Z\n"; ?>
 DURATION:PT<?php echo ($event->duration * 1). "M\n"; ?>
 DESCRIPTION:<?php print $event->descr . "\n"; ?>
 URL:http://shift2bikes.org
