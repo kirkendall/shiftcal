@@ -78,7 +78,7 @@ $this_page = basename($_SERVER['PHP_SELF']);
             <span class="icon-bar"></span>    
           </button>
           <a class="navbar-brand" href="http://www.shift2bikes.org/">
-			<img alt="Shift" src="images/shiftLogo_plain.gif">
+			<img alt="Shift" src="http://www.shift2bikes.org/images/shiftLogo_plain.gif">
 		  </a>
         </div>
 		    
