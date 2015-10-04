@@ -103,6 +103,9 @@ else
 $stat = $_REQUEST["stat"];
 if ($stat != "A" && stat != "C")
     $stat = "B";
+$family = $_REQUEST["family"];
+$general = $_REQUEST["general"];
+$adult = $_REQUEST["adult"];
 ?>
 
 <!-- colors from logo image:
@@ -203,6 +206,28 @@ if ($stat != "A" && stat != "C")
 	  </td>
 	</tr>
 	<tr class=form>
+	  <th class=form>Audience:</th>
+	  <td class=form>
+<?php
+	    $all = FALSE;
+	    if ($family != "y" && $general != "y" && $adult != "y")
+	    $all = TRUE;
+	    print "<input type=checkbox name=family value=y";
+	    if ($family == "y" || $all)
+		print " checked";
+	    print ">Family-friendly\n";
+	    print "<input type=checkbox name=general value=y";
+	    if ($general == "y" || $all)
+		print " checked";
+	    print ">General\n";
+	    print "<input type=checkbox name=adult value=y";
+	    if ($adult == "y" || $all)
+		print " checked";
+	    print ">21+\n";
+?>
+	  </td>
+	</tr>
+	<tr class=form>
 	  <td  colspan=2 style="text-align: center; border-top: thin solid yellow;">
 	    <input type=submit value="Search">
 	  </td>
@@ -250,7 +275,25 @@ if ($stat == "A" || $stat == "C") {
 	$where .= " AND ";
     $where .= "eventstatus = \"$stat\"";
 }
-
+$or = "";
+if ($family == "y") {
+	 $or = "audience = \"F\" ";
+}
+if ($general == "y") {
+	if ($or != ""){
+		$or .= " OR ";
+	}
+	$or .= "audience = \"G\" ";
+}
+if ($adult == "y") {
+	if ($or != ""){
+		$or .= " OR ";
+	}
+	$or .= "audience = \"A\" ";
+}
+if ($or != "") {
+	$where .= "($or)";
+}
 # were we able to make any WHERE clause?
 if ($where != "") {
     $sql = "SELECT * FROM calevent, caldaily WHERE calevent.id = caldaily.id AND $where";
