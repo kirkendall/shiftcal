@@ -6,7 +6,7 @@ function calloadoptions()
     $cal = array();
 
     # Begin by loading the default values of all options
-    $fp = fopen("optionsdefault", "r");
+    $fp = fopen("include/text/optionsdefault.txt", "r");
     if ($fp)
     {
 	while (($line = fgets($fp)) !== FALSE) {
@@ -19,7 +19,7 @@ function calloadoptions()
     }
 
     # Allow the defaults to be overridden via site options
-    $fp = fopen("options", "r");
+    $fp = fopen("include/text/options.txt", "r");
     if ($fp)
     {
 	while (($line = fgets($fp)) !== FALSE) {
