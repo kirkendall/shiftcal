@@ -29,7 +29,6 @@
 #		and block their spam.
 
 	include("include/common.php");
-	include(INCLUDES."/header.html");
 
 	# Make sure we have an "id" or "edit" parameter, identifying the event
 	if ($_REQUEST["edit"] != "") {
@@ -52,7 +51,7 @@
 	mysql_select_db(DBDATABASE, $conn);
 
 	# Fetch info about this event
-	$result = mysql_query("SELECT id, descr, title, tinytitle, dates, eventtime, name, email, emailforum FROM calevent WHERE id=\"${id}\"", $conn) or die(mysql_error());
+	$result = mysql_query("SELECT id, descr, title, tinytitle, dates, eventtime, name, email, emailforum, image FROM calevent WHERE id=\"${id}\"", $conn) or die(mysql_error());
 	if (mysql_num_rows($result) == 0) die("Event #$id not found");
 	$event = mysql_fetch_array($result);
 
@@ -66,6 +65,12 @@
 	    $date = mysql_fetch_array($result);
 	    $date = $date['eventdate'];
 	}
+    
+  // prepare some variables for the header.
+  $event_title = $event['title'] . ' - ' . date("F jS, Y", strtotime($date)) . ' |  S H I F T to bikes!';    
+  $event_image = "eventimages/" . $event['id']. "." . pathinfo($event['image'])['extension'];    
+  
+	include("include/header-calforum.php");  
 ?>
 <?php
 # This computes the checksum.  There's also a JavaScript version of
