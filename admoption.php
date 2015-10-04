@@ -34,7 +34,7 @@
     $type = "string";
     $state = "OTHER";
     $linenum = 0;
-    $fp = fopen("optionsdefault", "r") or die("Couldn't open optiondefaults");
+    $fp = fopen("include/text/optionsdefault.txt", "r") or die("Couldn't open optiondefaults");
     while (($line = fgets($fp)) !== FALSE) {
 	$line = trim($line);
 	$linenum++;

@@ -45,7 +45,7 @@
 		print "<td>&nbsp;</td>\n";
 	    else if ($days > 3 && file_exists("Quotations")) {
 		mt_srand ((double) microtime() * 1000000);
-		$lines = file("Quotations");
+		$lines = file("includes/text/quotations.txt");
 		$line_number = mt_rand(0,sizeof($lines)-1);
 		$quotation = htmlspecialchars($lines[$line_number]);
 		$quotation = preg_replace('/^(.*)~/','<em>$1</em><br>--',$quotation);
