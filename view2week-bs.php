@@ -88,6 +88,7 @@
 <hr class="event-divider" />
 
 <?php include ("bs-inc/footer.php");?>
-  
+ 
+ </div> 
 </body>
 </html>
