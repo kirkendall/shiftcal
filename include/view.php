@@ -259,7 +259,7 @@ function fullentry($record)
 	}
 	print "\n<img src=\"$image\" height=$imageheight width=$imagewidth align=\"right\" alt=\"\">\n";
     }
-    print "<a name=\"${dayofmonth}-${id}\" style=\"$style\">${title}</a>\n";
+    print "<a href=\"calforum.php?id=$id\" name=\"${dayofmonth}-${id}\" style=\"$style\">${title}</a>\n";
     print "<a href=\"#${dayofmonth}-{$id}\"><img border=0 src=\"images/chain.gif\" alt=\"Link\" title=\"Link to this event\"></a>\n";
     if (isset($_COOKIE['havemore']) && $_COOKIE['havemore'] == 'bikefun')
 	print "<a href=\"calform.php?edit=".obscure($id)."\"><img src=\"images/edit.gif\" alt=\"[edit]\" border=0></a>\n";
@@ -308,9 +308,6 @@ function fullentry($record)
     if ($weburl != "") print ", <a href=\"$weburl\">$webname</a>";
     if ($contact != "") print ", ".mangleemail($contact);
     if ($phone != "") print ", $phone";
-    if (!isset($_REQUEST['p'])) {
-	print "&nbsp;&nbsp;<a href=\"calforum.php?id=$id\" title=\"$forumtitle\"><img border=0 src=\"$forumimg\" alt=\"[forum]\"></a>\n";
-    }
     // print "<p><a href='viewical.php?eventId=$id'>Add to Calendar</a></p>";
     print "</div></dd>\n";
 
