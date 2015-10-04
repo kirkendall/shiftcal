@@ -51,6 +51,22 @@ auxiliary:
 	viewrssrecent.php - recently modified events feed
 	viewrsstomorrow.php - tomorrow
 	viewrssweek.php - coming week
+	README.md - README for this project
+	css/ - css abstracted out of main files.
+	doc/ - documentation, some way out of date and some current
+	explain/ - in-app help
+	js/ - javascript abstracted out of main files
+	old/ - old files, shouldn't be needed or used other than as reference
+	setup/ - sql init and other setup bits, not needed once site is running
+	themes/ - some alternate color schemes, ones other than 'orange' not used
+	
+
+works in progress:
+	bs-inc: bootstrap include (Tom)
+	bootstrap: bootstrap'd version of the site (Tom)
+	view2week-bs.php: bootstrap calendar view
+
+	
 	
 unknown:
 	viewtoday2.php
