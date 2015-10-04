@@ -1,4 +1,4 @@
-t# shiftcal
+# shiftcal
 
 This is the source code for the Shift calendar.
 ===============================================
