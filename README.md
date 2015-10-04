@@ -16,7 +16,7 @@ to add an event, you start at 'calform.php' to fill out one of three versions of
 
 pedalpalooza event viewing and editing has a fair # of files associated with it, which makes sense, since pedalpalooza usage is more than the rest of the year combined.  The most-used files are ppcurrent.php which redirects to whatever year of pedalpalooza is specified as current in include/common.php - eg viewpp2015.php.  The other functionality in the PP stuff: a counter for # of events which is embedded in the PP overview page, a calendar exporter, helpers to view single days/events, and make a personalized calendar.
 
-*See the code_manifest.txt file for more info about each php file in the project*
+*See the doc/notes/code_manifest.txt file for more info about each php file in the project*
 
 How to setup & run locally
 --------------------------
