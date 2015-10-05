@@ -1037,6 +1037,6 @@ The JavaScript code doesn't exactly mimic the PHP code.)</font>
 	    print "  verifyaddress(document.forms.cal.address.value);\n";
 	}
 	print "</script>\n";
-	include(INCLUDES."/footer.html");
+	include("include/footer.html");
 #vi:se sw=4:
 ?>

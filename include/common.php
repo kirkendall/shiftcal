@@ -159,66 +159,13 @@ function unobscure($ob)
 # Convert a time string from "hh:mm:ss" format to "h:mmpm" format
 function hmmpm($hhmmss)
 {
-    $h = substr($hhmmss, 0, 2) + 0; # to convert to an integer
-    $m = substr($hhmmss, 3, 2);
-    if ($h == 0) {
-	$ampm = "am";
-	$h = 12;
-    } else if ($h < 12) {
-	$ampm = "am";
-    } else if ($h == 12) {
-	$ampm = "pm";
-    } else {
-	$ampm = "pm";
-	$h -= 12;
-    }
-    return $h.":".$m.$ampm;
+  return date("g:ia", strtotime($hhmmss));
 }
 
 # Return the result of adding minutes to a given time of day
 function endtime($eventtime, $eventduration)
 {
-    # parse the "h:mmpm" or "hh:mmpm" time, and convert to minutes
-    if (strlen($eventtime) == 7)
-    {
-	$h = substr($eventtime, 0, 2);
-	$m = substr($eventtime, 3, 2);
-	$ampm = substr($eventtime, 5, 2);
-    }
-    else
-    {
-	$h = substr($eventtime, 0, 1);
-	$m = substr($eventtime, 2, 2);
-	$ampm = substr($eventtime, 4, 2);
-    }
-    if ($h == 12 && $ampm == "am")
-	$h = 0;
-    else if ($h != 12 && $ampm == "pm")
-	$h += 12;
-    $m += $h * 60;
-
-    # add the duration minutes
-    $m += $eventduration;
-
-    # break it down into hours and minutes again
-    $h = floor($m / 60) % 24;
-    $m = $m % 60;
-
-    # convert it back into an "h:mmpm" or "hh:mmpm" string
-    if ($h == 0) {
-	$ampm = "am";
-	$h = 12;
-    } else if ($h < 12) {
-	$ampm = "am";
-    } else if ($h == 12) {
-	$ampm = "pm";
-    } else {
-	$ampm = "pm";
-	$h -= 12;
-    }
-    if ($m < 10)
-	$m = "0".$m;
-    return $h.":".$m.$ampm;	
+  return date("g:ia", strtotime("$eventtime + $eventduration minutes"));	
 }
 
 # Mangle an email address.  The result is an HTML string that uses images
