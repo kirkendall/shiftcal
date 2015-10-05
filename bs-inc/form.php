@@ -1,11 +1,10 @@
 <!-- TO-DO: Connect to DB, SELECT correct date range, foreach row in range, fill an event template div, then display that div here -->
 
 <?php
-
-// Connecting, selecting database
-	$link = mysql_connect('50.63.224.91', 'maxwar', 'M@xw@r99')
-		or die('Could not connect: ' . mysql_error()); 
-		mysql_select_db('maxwar') or die('Could not select database');
+	include("include/common.php");
+	///include(INCLUDES."/header.html");
+	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
+	mysql_select_db(DBDATABASE, $conn);
  ?> 
 
 <!-- Form -->	
