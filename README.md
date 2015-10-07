@@ -31,7 +31,12 @@ Minimally you'll need to do the following:
 - run mysql < init.sql to create an empty database
 - profit! (aka load http://localhost/shiftcal)
 
-#### For Macs, here are step-by-step instructions:
+#### You can run it with XAMPP locally
+See the installation instructions for
+[OSX](https://www.apachefriends.org/faq_osx.html),
+[Linux](https://www.apachefriends.org/faq_linux.html) or [Windows](https://www.apachefriends.org/faq_windows.html)
+
+#### To setup it up manually on OSX, here are step-by-step instructions:
 
 - Install php
   - `brew tap homebrew/dupes`
