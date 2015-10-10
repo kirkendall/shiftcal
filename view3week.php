@@ -24,8 +24,8 @@
 ?>
 <link rel='stylesheet' href='<?php echo CALURL; ?>css/view3week.css' />
 <?php
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
 
 	# Choose the starting date.  This is always the Sunday at or before
 	# today.  We'll move forward from there.

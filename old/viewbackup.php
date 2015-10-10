@@ -12,8 +12,8 @@
 	$today = date("Y-m-d", time() - 3600 * TZTWEAK);
 
 	# For each event with current or future dates...
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
 	$result = mysql_query("SELECT * FROM calevent, caldaily WHERE caldaily.id = calevent.id AND eventdate >= \"${today}\" ORDER BY calevent.id, eventdate, exceptionid DESC", $conn) or die(mysql_error());
 	$previd = "";
 	while ($record = mysql_fetch_array($result)) {

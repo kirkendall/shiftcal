@@ -21,8 +21,8 @@
 <link rel='stylesheet' href='<?php echo CALURL; ?>css/viewmonth.css' />
 
 <?php
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
 
 	# Choose the month.
 	$now = getdate();

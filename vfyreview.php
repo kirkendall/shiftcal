@@ -15,8 +15,8 @@
 include("include/common.php");
 
 # Open a connection to the SQL server
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 # Fetch the edit= parameter and convert it to an id
 $id = unobscure($_REQUEST["edit"]);

@@ -3,8 +3,8 @@
 <?php
 	include("include/common.php");
 	///include(INCLUDES."/header.html");
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
  ?> 
 
 <!-- Form -->	

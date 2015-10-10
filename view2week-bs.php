@@ -1,8 +1,8 @@
 <?php 		include("include/common.php");
 			include("include/view-bs.php");
 
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
 	# The default starting date is today. Showing 14 days per screeen. 
 	# Pagination adds or subtracts 14 days. 
 	if(isset($_GET['startdate'])) {

@@ -7,8 +7,8 @@
     include("include/view.php");
     header("Content-type: text/plain");
     header("Cache-control: private");
-    $conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-    mysql_select_db(DBDATABASE, $conn);
+    
+    
 
  
     # Parse the "dates" value

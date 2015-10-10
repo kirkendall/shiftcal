@@ -8,8 +8,8 @@ header("Content-type: text/plain");
 header("Cache-control: private");
 include("include/common.php");
 include("include/repeat.php");
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 
 # This function returns TRUE if a dates represents a weekly event

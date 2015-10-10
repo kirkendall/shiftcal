@@ -24,8 +24,8 @@ header("Content-type: text/xml");
 print "<"."?xml version=\"1.0\" encoding=\"iso-8859-1\" ?".">\n";
 
 # Open a connection to the SQL server
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 # Parse the "dates" parameter to generate the list of new dates
 $newdates = repeatdates($_REQUEST["dates"]);

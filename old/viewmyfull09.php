@@ -29,8 +29,8 @@ include(INCLUDES."/header.html");
 <?php
 
 # Connect to MySQL
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 
 # This function generates a token identifying a specific event on a given date

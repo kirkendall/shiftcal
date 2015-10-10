@@ -24,8 +24,8 @@
 <?php
 	print "    <lastBuildDate>".substr(date("r"), 0, 26)."GMT</lastBuildDate>\r\n";
 
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
 
 	function datelink($sqldate) {
 		if ($sqldate >= PPSTART && $sqldate <= PPEND)

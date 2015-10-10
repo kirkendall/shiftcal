@@ -1,8 +1,6 @@
 <?php
 	include("include/common.php");
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn) or die(mysql_error());
-
+    
 	$fields = "dayname(eventdate) as weekday,"
 		. "dayofmonth(eventdate) as monthday,"
 		. "hour(eventtime) as hour,"

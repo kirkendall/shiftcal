@@ -15,8 +15,8 @@ include('include/repeat.php');
 include('include/repeatdebug.php');
 include('include/common.php');
 include('include/daily.php');
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 # This calls addslashes if a value contains any unslashed quotes
 function maybeaddslashes($str)

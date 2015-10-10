@@ -1,7 +1,7 @@
 <?php
 include("include/common.php");
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 include(INCLUDES."/header.html");
 

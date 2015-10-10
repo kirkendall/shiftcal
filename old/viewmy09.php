@@ -17,8 +17,8 @@
     include("include/common.php");
     include(INCLUDES."/header.html");
     include("include/view.php");
-    $conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-    mysql_select_db(DBDATABASE, $conn);
+    
+    
 
     # Create the calshare table.  If the table already exists, then this
     # will fail harmlessly

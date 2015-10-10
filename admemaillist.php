@@ -39,8 +39,8 @@ if (!$loggedin) {
 # The usual initialization...
 include("include/common.php");
 include("include/repeat.php");
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 # If CSV then output the MIME type
 if (($_REQUEST['format'] == 'csv'||$_REQUEST['format'] == 'plain') && $_REQUEST['dates'])
