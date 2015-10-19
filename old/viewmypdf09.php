@@ -54,9 +54,6 @@ function ischecked($sqldate, $id)
     return FALSE;
 }
 
-# Connect to MySQL
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
 
 # Start the PDF output
 $args = array('folds' => 1, 'borders' => 0);

@@ -10,8 +10,8 @@
     if (!$conn)
     {
 	include("include/common.php");
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
     }
 
     # Check for a remote=Y parameter, indicating that this is embedded in

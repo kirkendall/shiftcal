@@ -7,8 +7,8 @@
 	header("Cache-control: private");
   
   # connect to the database
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
 
 	# Compute $today and $tomorrow.  This is slightly complicated by the
 	# fact that Thinkhost uses the Eastern timezone, not Pacific.

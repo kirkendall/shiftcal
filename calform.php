@@ -16,8 +16,8 @@
 
 	include("include/common.php");
 	include(INCLUDES."/header.html");
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
 
 	# If there's an "edit" parameter, then convert it to $id, retrieve
 	# that event, and load its values into the form.

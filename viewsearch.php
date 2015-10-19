@@ -37,8 +37,8 @@ include(INCLUDES."/header.html");
 <?php
 
 # Connect to MySQL
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 # This is used for choosing which side images should go on.  The
 # preferred side is always the right side since it doesn't interfere

@@ -13,8 +13,8 @@
   if (!$event_id) die();
   
   # connect to the database
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
 
 	$result = mysql_query("SELECT calevent.*, caldaily.* FROM calevent, caldaily WHERE caldaily.id = calevent.id AND calevent.id = \"${event_id}\"", $conn) or die(mysql_error());
 

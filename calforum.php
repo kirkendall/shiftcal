@@ -46,10 +46,6 @@
 	else
 	    $admin = 0;
 
-	# Connect to the server
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die("Can't connect to MySQL: ".mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
-
 	# Fetch info about this event
 	$result = mysql_query("SELECT id, descr, title, tinytitle, dates, eventtime, name, email, emailforum, image FROM calevent WHERE id=\"${id}\"", $conn) or die(mysql_error());
 	if (mysql_num_rows($result) == 0) die("Event #$id not found");

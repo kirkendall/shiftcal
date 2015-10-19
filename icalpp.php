@@ -4,8 +4,8 @@
     include("include/view.php");
     header("Content-type: text/calendar");
     header("Cache-control: private");
-    $conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-    mysql_select_db(DBDATABASE, $conn);
+    
+    
 ?>
 BEGIN:VCALENDAR
 CALSCALE:GREGORIAN

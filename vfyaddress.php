@@ -2,8 +2,8 @@
 include("include/common.php");
 
 # Open a connection to the SQL server
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 # Compare two words, allowing for spelling errors and abbreviations.
 # Return 1.0- if perfect, 0.98 if abbreviation, 0.80 if match with a

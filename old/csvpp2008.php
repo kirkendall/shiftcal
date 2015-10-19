@@ -7,8 +7,8 @@
     include("include/view.php");
     header("Content-type: text/plain");
     header("Cache-control: private");
-    $conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-    mysql_select_db(DBDATABASE, $conn);
+    
+    
 ?>
 weekday,dayofmonth,datestype,time,endtime,timedetails,venue,address,locdetails,area,audience,title,tinytitle,printdescr
 <?php

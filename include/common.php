@@ -28,6 +28,11 @@ define("PPURL", "viewpp2015.php");	    # URL of the festival calendar
 define("PPSMALL", "images/pp2015.jpg");     # URL of the medium poster image
 define("PPLARGE", "images/pp2015full.jpg"); # URL of the full-size poster image
 
+# Create a database connection
+$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
+mysql_select_db(DBDATABASE, $conn);
+
+
 # Use the default timezone
 date_default_timezone_set('America/Los_Angeles');
 

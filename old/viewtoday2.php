@@ -10,9 +10,12 @@
   # other, more complete PHP documents, wherever you want a "today and
   # tomorrow" mini-PP calendar.
 	include("calcommon.php");
-	global $conn;
 	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	mysql_select_db(DBDATABASE, $conn) or die(mysql_error());
+
+	global $conn;
+	
+	
 
 	# Compute $today and $tomorrow.  This is slightly complicated by the
 	# fact that Thinkhost uses the Eastern timezone, not Pacific.

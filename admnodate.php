@@ -6,8 +6,8 @@
 # before sending back the modified list.  Parameters include:
 
     include("include/common.php");
-    $conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-    mysql_select_db(DBDATABASE, $conn);
+    
+    
 
     $loggedin = 0;
     if ($_POST["user"] == ADMINUSER && $_POST["pass"] == ADMINPASS) {

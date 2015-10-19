@@ -23,8 +23,8 @@
 <?php
 
 #Open a connection to the MySQL server
-$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-mysql_select_db(DBDATABASE, $conn);
+
+
 
 # This function creates the calcount table if it doesn't already exist, and
 # then it counts the events within the given date range and stores it in the

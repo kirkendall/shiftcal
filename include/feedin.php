@@ -76,8 +76,8 @@ function feedin($source, $newevents)
 
     # Open a connection to MySQL, if we don't have one already
     if (!$conn) {
-	$conn = mysql_connect(DBHOST, DBUSER, DBPASSWORD) or die(mysql_error());
-	mysql_select_db(DBDATABASE, $conn);
+	
+	
     }
 
     # Start by adding used=false to each event and its daily records
