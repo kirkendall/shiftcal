@@ -25,14 +25,14 @@
 #  `printcontact` int(1) (0) [possible values [01]]
 #  `title` varchar(255) ('TITLE')
 #  `tinytitle` varchar(255) ('TINYTITLE')
-#  `audience` char(1) ('G') [possible values [FGA]]
+#  `audience` char(1) ('G') [possible values [FGA]] (family/general/adult)
 #  `descr` text ('DESCRIPTION')
 #  `printdescr` text ('PRINTDESCRIPTION')
 #  `image` varchar(255) '' [relative path to image]
 #  `imageheight` int(11) (0) [calculated upon upload?  0 if no image]
 #  `imagewidth` int(11) (0) [calculated upon upload?  0 if no image]
 #  `dates` varchar(255) ('Monday, October 5') [formatted by calform.php?]
-#  `datestype` char(1) ('O') [possible values [OCS]]
+#  `datestype` char(1) ('O') [possible values [OCS] (one/consecutive/scattered)
 #  `eventtime` time DEFAULT NULL,('19:00:00')
 #  `eventduration` int(11) (120) [in minutes]
 #  `timedetails` varchar(255) ('TIMEDETAILS')
