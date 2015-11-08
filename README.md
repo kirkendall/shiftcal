@@ -45,6 +45,10 @@ Now that your environment is ready, let's get the source code installed and setu
 
 For additional explanation, expansion, and clarification of these instructions for those using XAMPP and/or OSX, see https://github.com/ShiftGithub/shiftcal/wiki/in-depth-setup-instructions
 
+How to make improvements to integration with Facebook  
+-----------------------------------------------------
+
+The Facebook app ID is 135930960098034. 
 
 How to propose changes
 ----------------------
