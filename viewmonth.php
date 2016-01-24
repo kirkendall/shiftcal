@@ -125,7 +125,7 @@
 	</form>
       </th>
 <?php
-    if (isset($_COOKIE['havemore']) && $_COOKIE['havemore'] == 'bikefun') {
+    if (isset($_COOKIE[ADMINCOOKIE]) && $_COOKIE[ADMINCOOKIE] == 'bikefun') {
 	print "      <th>\n";
 	print "        <form action=\"admin.php\">\n";
 	print "          <input type=submit value=\"Administration Menu\">\n";

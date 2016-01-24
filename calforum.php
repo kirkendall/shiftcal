@@ -41,7 +41,7 @@
 	if ($id == "") die("You must pass an 'id' parameter");
 
 	# Also check whether we're logged in as the administrator
-	if ($_COOKIE["havemore"] == "bikefun")
+	if ($_COOKIE[ADMINCOOKIE] == "bikefun")
 	    $admin = 1;
 	else
 	    $admin = 0;

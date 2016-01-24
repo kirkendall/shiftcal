@@ -31,9 +31,9 @@
 
     $loggedin = 0;
     if ($_POST["user"] == ADMINUSER && $_POST["pass"] == ADMINPASS) {
-	setcookie("havemore", "bikefun", time()+3600, "/");
+	setcookie(ADMINCOOKIE, "bikefun", time()+3600, "/");
 	$loggedin = 1;
-    } else if ($_COOKIE["havemore"] == "bikefun") {
+    } else if ($_COOKIE[ADMINCOOKIE] == "bikefun") {
 	$loggedin = 1;
     }
 

@@ -3,12 +3,12 @@
 
     # Check parameters and cookies to determine whether we're logged in
     if ($_REQUEST["logout"]) {
-	setcookie("havemore", "", time() - 86400, "/");
+	setcookie(ADMINCOOKIE, "", time() - 86400, "/");
 	$loggedin = 0;
     } else if ($_POST["user"] == ADMINUSER && $_POST["pass"] == ADMINPASS) {
-	setcookie("havemore", "bikefun", time() + 86400, "/");
+	setcookie(ADMINCOOKIE, "bikefun", time() + 86400, "/");
 	$loggedin = 1;
-    } else if ($_COOKIE["havemore"] == "bikefun") {
+    } else if ($_COOKIE[ADMINCOOKIE] == "bikefun") {
 	$loggedin = 1;
     } else {
 	$loggedin = 0;

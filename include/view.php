@@ -261,7 +261,7 @@ function fullentry($record)
     }
     print "<a href=\"calforum.php?id=$id\" name=\"${dayofmonth}-${id}\" style=\"$style\">${title}</a>\n";
     print "<a href=\"#${dayofmonth}-{$id}\"><img border=0 src=\"images/chain.gif\" alt=\"Link\" title=\"Link to this event\"></a>\n";
-    if (isset($_COOKIE['havemore']) && $_COOKIE['havemore'] == 'bikefun')
+    if (isset($_COOKIE[ADMINCOOKIE]) && $_COOKIE[ADMINCOOKIE] == 'bikefun')
 	print "<a href=\"calform.php?edit=".obscure($id)."\"><img src=\"images/edit.gif\" alt=\"[edit]\" border=0></a>\n";
     if ($badge != "") print "<img align=left src=\"".IMAGES."/$badge\" alt=\"$badgealt\" title=\"$badgehint\">\n";
     if ($image && ($imageover > 0 || $imageheight <= RIGHTHEIGHT / 2)) {

@@ -7,7 +7,7 @@ include(INCLUDES."/header.html");
 
 # Make sure this user is logged in as the administrator, and that the
 # safety words have been said.
-if ($_COOKIE["havemore"] != "bikefun") {
+if ($_COOKIE[ADMINCOOKIE] != "bikefun") {
     print "<h1>No Permission</h1>\n";
     print "You must log in as the administrator before you're allowed\n";
     print "to do that.  You can log in <a href=\"admin.php\">here</a>.\n";

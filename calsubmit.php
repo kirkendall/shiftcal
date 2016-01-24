@@ -197,7 +197,7 @@ if ($imgchange == 'delete') {
 }
 
 # figure out the implied new value for the "review" flag
-if ($_COOKIE['havemore'] == 'bikefun')
+if ($_COOKIE[ADMINCOOKIE] == 'bikefun')
     $review = 'A'; # Calendar Crew changed it, must like it now
 else if ($oldreview == 'S')
     $review = 'R'; # Organizer changed it after being asked to do so
@@ -549,7 +549,7 @@ if ($changeimage) {
     }
 }
 	
-if ($_COOKIE['havemore'] == 'bikefun')
+if ($_COOKIE[ADMINCOOKIE] == 'bikefun')
     print "<p>You have <strong>successfully $action</strong> the ".htmlspecialchars(stripslashes($tinytitle))." event.\n";
 else
     print "<p>Your event has been <strong>successfully $action</strong>.\n";
@@ -588,7 +588,7 @@ if ($action != 'deleted') {
 
 # send email
 if ($_REQUEST['minorchange'] != 'on') {
-    if ($_COOKIE['havemore'] == 'bikefun')
+    if ($_COOKIE[ADMINCOOKIE] == 'bikefun')
 	$msgbody =  "Your event has been $action by the Calendar Crew.\n";
     else
 	$msgbody =  "Your event has been successfully $action.\n";
@@ -660,7 +660,7 @@ if ($locname != "" && ($addressverified == 'Y' || $area == 'V')) {
 <button onclick="window.location.replace('calform.php');">Add Another Event</button>
 <?php
     print "<button onclick=\"window.location.replace('".viewurl($daylist[1]['sqldate'], $id)."');\">View Calendar</button>\n";
-    if ($_COOKIE['havemore'] == 'bikefun') {
+    if ($_COOKIE[ADMINCOOKIE] == 'bikefun') {
 	print "<button onclick=\"window.location.replace('admreview.php".($_REQUEST['reviewdates'] ? '?dates='.$_REQUEST['reviewdates'] : "")."#a_$id');\">Edit Print Descriptions</button>\n";
 	print "<button onclick=\"window.location.replace('admin.php');\">Administration Menu</button>\n";
     }

@@ -134,7 +134,7 @@ $adult = $_REQUEST["adult"];
     <button onClick="window.location.replace('view3week.php');">Current Calendar</button>
 <?php
     print "<button onClick=\"window.location.replace('".PPURL."');\">".PPNAME." Calendar</button>\n";
-    if ($_COOKIE["havemore"] == "bikefun") {
+    if ($_COOKIE[ADMINCOOKIE] == "bikefun") {
 	print "<button onClick=\"window.location.replace('admin.php');\">Administration Menu</button>\n";
     }
 ?>

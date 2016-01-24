@@ -112,7 +112,7 @@ function alldays(checkbox)
 	print "	<button onclick=\"window.location.replace('viewsearch.php')\">Search</button>\n";
 	print "	<br><button onclick=\"window.location.replace('mobilepp.php')\">Mobile Version</button>\n";
 	print "	<button onclick=\"window.location.replace('viewmypp.php')\">Custom Pocket Reference</button>\n";
-	if ($_COOKIE["havemore"] == "bikefun") {
+	if ($_COOKIE[ADMINCOOKIE] == "bikefun") {
 	  print " <br><button onclick=\"window.location.replace('admin.php')\">Administration Menu</button>\n";
 	}
 	print "      </td>\n";

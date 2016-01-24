@@ -919,7 +919,7 @@ the <a href="/contacts/index.php?eCon=CalCrew">Calendar Crew</a>.
     </tr>
 
     <?php
-	if (isset($_COOKIE['havemore']) && $_COOKIE['havemore'] == 'bikefun') {
+	if (isset($_COOKIE[ADMINCOOKIE]) && $_COOKIE[ADMINCOOKIE] == 'bikefun') {
 	    print "<tr>\n";
       	    print "<td class=\"section\" rowspan=3><font size=\"+2\">WHY</font></td>\n";
 	    print "<td class=\"lbl\">Comment:</td>\n";
@@ -1037,6 +1037,6 @@ The JavaScript code doesn't exactly mimic the PHP code.)</font>
 	    print "  verifyaddress(document.forms.cal.address.value);\n";
 	}
 	print "</script>\n";
-	include("include/footer.html");
+	include(INCLUDES."/footer.html");
 #vi:se sw=4:
 ?>
