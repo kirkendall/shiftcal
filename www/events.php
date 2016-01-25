@@ -1,25 +1,20 @@
 <?php
 include(getcwd() . '/../app/init.php');
 
-function load_one($id) {
-    $event = Event($_GET['id']);
-    if ($event) {
-        fJSON::output($event->toArray());
-        return;
-    }
-    http_response_code(404);
+if (isset($_GET['startdate']) && ($parseddate = strtotime($_GET['startdate']))) {
+    $startdate = $parseddate;
+} else {
+    $startdate = time();
 }
 
-
-if (isset($_GET['id'])) {
-    load_one($_GET['id']);
-}
-else {
-    $json = array('events' => array());
-    foreach (Event::getSome() as $event) {
-        $json['events'] []= $event->toArray();
-    }
-
-    fJSON::output($json);
+if (isset($_GET['enddate']) && ($parseddate = strtotime($_GET['enddate']))) {
+    $enddate = $parseddate;
+} else {
+    $enddate = time();
 }
 
+$json = array('events' => array());
+foreach (EventTime::getRange($startdate,$enddate) as $event) {
+    $json['events'] []= $event->toArray();
+}
+fJSON::output($json);
