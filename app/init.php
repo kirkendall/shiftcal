@@ -1,6 +1,17 @@
 <?php
 
 include_once('config.php');
-include('event.php');
+include_once('schema.php');
 
-fORMDatabase::attach(new fDatabase('mysql', $DBDB, $DBUSER, $DBPASS, $DBHOST));
+include('models/Event.php');
+include('models/EventTime.php');
+
+$database = new fDatabase('mysql', $DBDB, $DBUSER, $DBPASS, $DBHOST);
+fORMDatabase::attach($database);
+
+$schema = updateSchema($database);
+fORMSchema::attach($schema);
+
+
+include('fixdb.php');
+fixDb();
