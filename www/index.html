@@ -7,10 +7,6 @@
   <script src="shiftcal.js"></script>
 </head>
 <body>
-
-
-
-
   <div id="mustache-html"></div>
 
   <script id="mustache-template" type="text/template">
@@ -19,7 +15,7 @@
     <div class="dateHeader">{{date}}</div>
         {{#events}}
           <div class="event">
-            <div class="time"> <h3>{{time}} </h3></div>
+            <div class="time"> <h3>{{displayTime}} </h3></div>
             <div class="details">
 		<h3> {{title}} </h3>
                 <p> {{venue}} </p>
@@ -32,61 +28,5 @@
     {{/dates}}
   </script>
 
-  <script type="text/javascript">	    
-	var obj = { "events": [		
-		
-		{
-            "id": "1009",
-            "title": "A Hobbit's Ride",
-            "date": "9/12/2016",
-            "time": "9:30 AM",
-            "venue": "Middleearth",
-            "address": "123 NE 0th Ave, Portland, OR",
-            "organizer": "Bilbo Baggins",
-            "email": "bilbo@baggins.com",
-            "details": "We will bike to the cave where Bilbo met Smeagol",
-            "length": "8 miles"
-        },
-        {
-            "id": "1010",
-            "title": "Hello Ride",
-            "date": "9/13/2016",
-            "time": "10:30 AM",
-            "venue": "Middleearth",
-            "address": "123 NE 0th Ave, Portland, OR",
-            "organizer": "Bilbo Baggins",
-            "email": "bilbo@baggins.com",
-            "details": "We will bike to the cave where Bilbo met Smeagol",
-            "length": "8 miles"
-        },
-        {
-            "id": "1011",
-            "title": "Another event on the 13th",
-            "date": "9/13/2016",
-            "time": "2:30 PM",
-            "venue": "Smaug's cavern",
-            "address": "666 Misty Mountain Boulevard, Portland, OR",
-            "organizer": "Bilbo Baggins",
-            "email": "bilbo@baggins.com",
-            "details": "We will bike to the cave where Bilbo met Smeagol",
-            "length": "4 miles"
-        },
-          
-        {
-            "id": "1012",
-            "title": "Goodbye Ride",
-            "date": "9/14/2016",
-            "time": "11:30 AM",
-            "venue": "Middleearth",
-            "address": "123 NE 0th Ave, Portland, OR",
-            "organizer": "Bilbo Baggins",
-            "email": "bilbo@baggins.com",
-            "details": "We will bike to the cave where Bilbo met Smeagol",
-            "length": "8 miles"
-        }
-		
-	]};
-
-  </script>
 </body>
 </html>
