@@ -8,7 +8,7 @@ class EventTime extends fActiveRecord {
                 'eventdate>=' => $firstDay,
                 'eventdate<=' => $lastDay
             ), // where
-            array('eventdate' => 'desc')  // order by
+            array('eventdate' => 'asc')  // order by
         );
     }
 

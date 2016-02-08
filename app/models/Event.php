@@ -21,6 +21,7 @@ class Event extends fActiveRecord {
             'organizer' => $this->getName(),
             'email' => $this->getEmail(),
             'details' => $this->getDescr(),
+            'time' => strval($this->getEventtime()),
             'length' => NULL
         );
     }
