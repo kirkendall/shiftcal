@@ -5,21 +5,36 @@ body {
   max-width: 400px;
   margin: auto;
 }
+/*div { border: 1px solid red }*/
 .dateHeader{
 background-color: #fdd;
 float:left;
-width: 99%;
+width: 100%;
 padding: 5px 10px 15px;
 font-weight: bold;
 font-size: 1.25em;
 }
-.time{
+.time, .hideButton{
 float:left;
 width: 25%;
 text-align: right;
 margin-right: 2%;
+clear:left;
 }
-.details{
+.summary, .mainDetails, .otherButtons{
 float:left;
 width: 72%;
+clear:right;
+}
+.mainDetails p, .hideButton button {
+	margin-top: 1em;
+}
+.mainDetails p.contactInfo {
+	margin-bottom: 0.25em;
+}
+.mainDetails p.email {
+	margin-top: 0.25em;
+}
+.otherButtons a {
+	text-decoration: none;
 }

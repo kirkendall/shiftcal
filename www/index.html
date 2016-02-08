@@ -14,14 +14,35 @@
     <div class="date">
     <div class="dateHeader">{{date}}</div>
         {{#events}}
-          <div class="event">
-            <div class="time"> <h3>{{displayTime}} </h3></div>
-            <div class="details">
-		<h3> {{title}} </h3>
+          <div class="event" data-event-id="{{id}}">
+            <div class="time">
+				<h3>{{displayTime}}</h3>
+			</div>
+            <div class="summary">
+				<h3> {{title}} </h3>
                 <p> {{venue}} </p>
                 <p> {{address}} </p>
                 <p> {{length}}</p>
-	    </div>
+	        </div>
+			<div class="eventDetails">
+				<div class="hideButton">&nbsp;</div>
+				<div class="otherButtons">
+					<a href="{{mapLink}}" target="_blank">
+						<button class="map" >Map</button>
+					</a>
+					<button class="export" >Export</button>
+				</div>
+				<div class="hideButton">
+					<button class="hide">Hide</button>
+				</div>
+				<div class="mainDetails">
+					<p>{{details}}</p>
+					<p class="contactInfo">Organized by: {{organizer}}</p>
+					{{#email}}
+					<p class="email">Contact info: {{email}}</p>
+					{{/email}}
+				</div>
+			</div>
           </div>
         {{/events}}
     </div>

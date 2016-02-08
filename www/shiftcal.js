@@ -22,6 +22,8 @@ $(document).ready( function() {
 				meridian = 'PM';
 			}
 			value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
+			value.mapLink = 'http://maps.google.com/?bounds=45.389771,-122.829208|45.659647,-122.404175&q=';
+			value.mapLink += encodeURIComponent( value.address );
 			groupedByDate[date].events.push(value);
 		});
 
