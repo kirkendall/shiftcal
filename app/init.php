@@ -11,7 +11,3 @@ fORMDatabase::attach($database);
 
 $schema = updateSchema($database);
 fORMSchema::attach($schema);
-
-
-include('fixdb.php');
-fixDb();
