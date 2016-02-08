@@ -2,7 +2,7 @@
 /*
  * A way to test this endpoint is to use curl
  * Create a file test_data.json with the json you want to submit
- * curl -H 'Content-Type: application/json' -X POST --data-binary "@test_data.json" http://<your server>/manage_event.php
+ * curl -H 'Content-Type: application/json' -X POST --data-binary "@test.json" http://localhost:8080/shift-flourish/www/manage_event.php
  */
 
 
@@ -20,8 +20,11 @@ function build_json_response($input) {
 
     $_POST = $data; // fValidation inspects $_POST for field data
     $validator = new fValidation();
-    $validator->addRequiredFields('title');
-
+    $validator->addRequiredFields('title', 'address', 'comic'); //TODO: add 'start_date', 'start_time'
+    $validator->addEmailFields('email');
+    $validator->addValidValuesRule('comic', array(true));
+    $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for \1');
+    
     $messages = $validator->validate(TRUE, TRUE);
     if ($messages) {
         return array(
