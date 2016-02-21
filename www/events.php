@@ -14,7 +14,7 @@ if (isset($_GET['enddate']) && ($parseddate = strtotime($_GET['enddate']))) {
 }
 
 $json = array('events' => array());
-foreach (EventTime::getRange($startdate,$enddate) as $event) {
-    $json['events'] []= $event->toArray();
+foreach (EventTime::getRange($startdate,$enddate) as $eventTime) {
+    $json['events'] []= $eventTime->toEventSummaryArray();
 }
 fJSON::output($json);

@@ -20,7 +20,7 @@ function build_json_response($input) {
 
     $_POST = $data; // fValidation inspects $_POST for field data
     $validator = new fValidation();
-    $validator->addRequiredFields('title', 'address', 'comic'); //TODO: add 'start_date', 'start_time'
+    $validator->addRequiredFields('title', 'address', 'comic', 'dates'); //TODO: add 'start_date', 'start_time'
     $validator->addEmailFields('email');
     $validator->addValidValuesRule('comic', array(true));
     $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for \1');
@@ -35,7 +35,7 @@ function build_json_response($input) {
         );
     }
 
-    return $data;
+    return Event::fromArray($input)->toDetailArray();
 }
 
 $response = build_json_response(file_get_contents('php://input'));

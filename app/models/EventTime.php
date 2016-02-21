@@ -12,30 +12,20 @@ class EventTime extends fActiveRecord {
         );
     }
 
-    public static function get2Weeks() {
-        $end = date('Y-n-j');
-        // Start date
-        $start = date('d-m-Y', strtotime("-2 weeks"));
-
-        $startDate = strtotime($start);
-        $endDate = strtotime($end);
-
-        $firstDayOfStartWeek = strtotime('-'.date('w', $startDate).' days', $startDate);
-        $lastDayOfEndWeek    = strtotime('+'.(7-date('w', $endDate)).' days', $endDate);
-
-        return EventTime::getRange($firstDayOfStartWeek, $lastDayOfEndWeek);
-    }
-
-    public function getEvent() {
+    private function getEvent() {
         if ($this->getEventstatus() === 'E') {
             return $this->createEvent('exceptionid');
         }
         return $this->createEvent('id');
     }
 
-    public function toArray() {
+    public function getFormattedDate() {
+        return $this->getEventdate()->format('Y-m-d');
+    }
+
+    public function toEventSummaryArray() {
         $eventArray = $this->getEvent()->toArray();
-        $eventArray['date'] = $this->getEventdate()->format('Y-m-d');
+        $eventArray['date'] = $this->getFormattedDate();
         return $eventArray;
     }
 }
