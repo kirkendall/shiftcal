@@ -2,7 +2,7 @@ $(document).ready( function() {
 	var startDate = new Date();
 	var endDate = new Date();
 	endDate.setDate(startDate.getDate() + 3);
-	$.get( '/events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
+	$.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
 		var groupedByDate = [];
 		var mustacheData = { dates: [] };
 		$.each(data.events, function( index, value ) {
