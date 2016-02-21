@@ -9,6 +9,6 @@ if (isset($_GET['id'])) {
     } catch (fExpectedException $e) { 
         echo $e->printMessage();
     }
-    $json['events'] []= $event->toArray();
+    $json['events'] []= $event->toDetailArray();
     fJSON::output($json);
 }

@@ -27,18 +27,22 @@ class Event extends fActiveRecord {
     }
 
     public function getTimes() {
-        $events = $this->buildEventTimes();
+        $events = $this->buildEventTimes('id');
+        $eventTimes = [];
+        foreach ($events as $event) {
+            $eventTimes []= $event->getEventdate()->format('Y-m-d'); // + $this->getEventtime();
+        }
+        return $eventTimes;
     }
 
     public function toDetailArray() {
         // first get the data into an array
         $detailArray = $this->toArray();
         // add all times that exist, maybe none.
-        $eventTimes = $this->getTimes();
-        $timesJson = array('timestamps' => array($eventTimes));
-        $detailArray["times"] = $timesJson;
+        $detailArray["times"] = $this->getTimes();
         // return potentially augmented array
         $this->toArray();
+        return $detailArray;
     }
 }
 fORM::mapClassToTable('Event', 'calevent');
