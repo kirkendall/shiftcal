@@ -1,8 +1,8 @@
 <?php
-$DBUSER = 'shift';
-$DBPASS = 'shift';
-$DBDB   = 'shift';
-$DBHOST = 'localhost';
+$DBUSER = 'root';
+$DBPASS = '';
+$DBDB   = 'pp';
+$DBHOST = '127.0.0.1';
 
 date_default_timezone_set('America/Los_Angeles');
 

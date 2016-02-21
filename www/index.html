@@ -1,29 +1,29 @@
 <html lang="en">
-<head> 
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="index.css">
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-  <script src="shiftcal.js"></script>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="shiftcal.js"></script>
 </head>
 <body>
   <div id="mustache-html"></div>
 
   <script id="mustache-template" type="text/template">
-    {{#dates}}
-    <div class="date">
-    <div class="dateHeader">{{date}}</div>
-        {{#events}}
-          <div class="event" data-event-id="{{id}}">
-            <div class="time">
+	{{#dates}}
+	<div class="date">
+	<div class="dateHeader">{{date}}</div>
+		{{#events}}
+		  <div class="event" data-event-id="{{id}}">
+			<div class="time">
 				<h3>{{displayTime}}</h3>
 			</div>
-            <div class="summary">
+			<div class="summary">
 				<h3> {{title}} </h3>
-                <p> {{venue}} </p>
-                <p> {{address}} </p>
-                <p> {{length}}</p>
-	        </div>
+				<p> {{venue}} </p>
+				<p> {{address}} </p>
+				<p> {{length}}</p>
+			</div>
 			<div class="eventDetails">
 				<div class="hideButton">&nbsp;</div>
 				<div class="otherButtons">
@@ -43,10 +43,10 @@
 					{{/email}}
 				</div>
 			</div>
-          </div>
-        {{/events}}
-    </div>
-    {{/dates}}
+		  </div>
+		{{/events}}
+	</div>
+	{{/dates}}
   </script>
 
 </body>
