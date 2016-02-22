@@ -14,17 +14,8 @@ padding: 5px 10px 15px;
 font-weight: bold;
 font-size: 1.25em;
 }
-.time, .hideButton{
-float:left;
-width: 25%;
-text-align: right;
-margin-right: 2%;
-clear:left;
-}
-.summary, .mainDetails, .otherButtons{
-float:left;
-width: 72%;
-clear:right;
+.time h3 {
+	text-align: right;
 }
 .mainDetails p, .hideButton button {
 	margin-top: 1em;
