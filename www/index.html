@@ -17,35 +17,37 @@
 	<div class="date">
 	<div class="dateHeader">{{date}}</div>
 		{{#events}}
-		  <div class="event" data-event-id="{{id}}">
-			<div class="time">
+		  <div class="event row" data-event-id="{{id}}">
+			<div class="time col-md-4">
 				<h3>{{displayTime}}</h3>
 			</div>
-			<div class="summary">
-				<h3> {{title}} </h3>
-				<p> {{venue}} </p>
-				<p> {{address}} </p>
-				<p> {{length}}</p>
-			</div>
-			<div class="eventDetails">
-				<div class="hideButton">&nbsp;</div>
-				<div class="otherButtons">
-					<a href="{{mapLink}}" target="_blank">
-						<button class="map" >Map</button>
-					</a>
-					<button class="export" >Export</button>
+			<div class="col-md-8">
+				<div class="summary">
+					<h3> {{title}} </h3>
+					<p> {{venue}} </p>
+					<p> {{address}} </p>
+					<p> {{length}}</p>
 				</div>
-				<div class="hideButton">
-					<button class="hide">Hide</button>
+				<div class="eventDetails">
+					<div class="hideButton">&nbsp;</div>
+					<div class="otherButtons">
+						<a href="{{mapLink}}" target="_blank">
+							<button class="btn btn-default map">Map</button>
+						</a>
+						<button class="btn btn-default export">Export</button>
+					</div>
+					<div class="hideButton">
+						<button class="btn btn-default hide">Hide</button>
+					</div>
+					<div class="mainDetails">
+						<p>{{details}}</p>
+						<p class="contactInfo">Organized by: {{organizer}}</p>
+						{{#email}}
+						<p class="email">Contact info: {{email}}</p>
+						{{/email}}
+					</div>
 				</div>
-				<div class="mainDetails">
-					<p>{{details}}</p>
-					<p class="contactInfo">Organized by: {{organizer}}</p>
-					{{#email}}
-					<p class="email">Contact info: {{email}}</p>
-					{{/email}}
-				</div>
-			</div>
+			  </div>
 		  </div>
 		{{/events}}
 	</div>
