@@ -5,6 +5,24 @@
  * curl -H 'Content-Type: application/json' -X POST --data-binary "@test.json" http://localhost:8080/shift-flourish/www/manage_event.php
  */
 
+/**
+ * This endpoint updates events, expecting a POST with json of the form:
+ *  JSON:
+ *  {
+ *
+ *  }
+ *
+ *  If there is a problem the error code will be 400 with a json response of the form:
+ *  {
+ *      "error": {
+ *          "message": "Error message"
+ *          "fields": {
+ *              "field1": "Error for field 1",
+ *              ...
+ *          }
+ *      }
+ *  }
+ */
 
 include(getcwd() . '/../app/init.php');
 

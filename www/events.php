@@ -1,6 +1,26 @@
 <?php
 include(getcwd() . '/../app/init.php');
 
+/**
+ * This endpoint returns a list of events between the GET parameters startdate and enddate of the form:
+ *  JSON:
+ *  {
+ *      events: [
+ *          {
+ *
+ *          },
+ *          ...
+ *      ]
+ *  }
+ *
+ * If there is a problem the error code will be 400 with a json response of the form:
+ *  {
+ *      "error": {
+ *          "message": "Error message"
+ *      }
+ *  }
+ */
+
 if (isset($_GET['startdate']) && ($parseddate = strtotime($_GET['startdate']))) {
     $startdate = $parseddate;
 } else {
