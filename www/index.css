@@ -17,7 +17,10 @@ font-size: 1.25em;
 .time h3 {
 	text-align: right;
 }
-.mainDetails p, .hideButton button {
+.hideButton {
+    text-align:right;
+}
+.mainDetails p {
 	margin-top: 1em;
 }
 .mainDetails p.contactInfo {
@@ -28,4 +31,14 @@ font-size: 1.25em;
 }
 .otherButtons a {
 	text-decoration: none;
+}
+.navbar-brand {
+    padding: 2px 15px;
+}
+.navbar-default {
+    background-color: #f90;
+    background-image: none;
+}
+a.expandDetails {
+    color:inherit;
 }
