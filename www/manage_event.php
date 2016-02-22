@@ -5,6 +5,24 @@
  * curl -H 'Content-Type: application/json' -X POST --data-binary "@test.json" http://localhost:8080/shift-flourish/www/manage_event.php
  */
 
+/**
+ * This endpoint updates events, expecting a POST with json of the form:
+ *  JSON:
+ *  {
+ *
+ *  }
+ *
+ *  If there is a problem the error code will be 400 with a json response of the form:
+ *  {
+ *      "error": {
+ *          "message": "Error message"
+ *          "fields": {
+ *              "field1": "Error for field 1",
+ *              ...
+ *          }
+ *      }
+ *  }
+ */
 
 include(getcwd() . '/../app/init.php');
 
@@ -20,7 +38,7 @@ function build_json_response($input) {
 
     $_POST = $data; // fValidation inspects $_POST for field data
     $validator = new fValidation();
-    $validator->addRequiredFields('title', 'address', 'comic'); //TODO: add 'start_date', 'start_time'
+    $validator->addRequiredFields('title', 'address', 'comic', 'dates'); //TODO: add 'start_date', 'start_time'
     $validator->addEmailFields('email');
     $validator->addValidValuesRule('comic', array(true));
     $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for \1');
@@ -35,7 +53,7 @@ function build_json_response($input) {
         );
     }
 
-    return $data;
+    return Event::fromArray($input)->toDetailArray();
 }
 
 $response = build_json_response(file_get_contents('php://input'));
