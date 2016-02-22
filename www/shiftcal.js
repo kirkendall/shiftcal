@@ -1,4 +1,8 @@
 $(document).ready( function() {
+    $(document).on('click', 'a.expandDetails', function(e) {
+        e.preventDefault();
+        return false;
+    });
 	var startDate = new Date();
 	var endDate = new Date();
 	endDate.setDate(startDate.getDate() + 3);
