@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
 }
 else {
     $response['error'] = array(
-        'message' => "Request incomplete, please pass an id in the url ?id=<id>"
+        'message' => "Request incomplete, please pass an id in the url"
     );
 }
 
