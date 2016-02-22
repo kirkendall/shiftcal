@@ -30,23 +30,26 @@
                     <div class="time col-md-4">
                         <h3>{{displayTime}}</h3>
                     </div>
-                    <div class="col-md-8">
-                        <div class="summary">
-                            <h3> {{title}} </h3>
-                            <p> {{venue}} </p>
-                            <p> {{address}} </p>
-                            <p> {{length}}</p>
+                    <a class="expandDetails" href="#" data-toggle="collapse" data-target="#detailsContainer{{id}}">
+                        <div class="col-md-8" >
+                            <div class="summary">
+                                <h3> {{title}} </h3>
+                                <p> {{venue}} </p>
+                                <p> {{address}} </p>
+                                <p> {{length}}</p>
+                            </div>
                         </div>
-                        <div class="eventDetails">
-                            <div class="hideButton">&nbsp;</div>
+                    </a>
+                    <div id="detailsContainer{{id}}" class="collapse">
+                        <div class="hideButton col-md-4">
+                            <button class="btn btn-default"data-toggle="collapse" data-target="#detailsContainer{{id}}">Hide</button>
+                        </div>
+                        <div class="eventDetails col-md-8">
                             <div class="otherButtons">
                                 <a href="{{mapLink}}" target="_blank">
                                     <button class="btn btn-default map">Map</button>
                                 </a>
                                 <button class="btn btn-default export">Export</button>
-                            </div>
-                            <div class="hideButton">
-                                <button class="btn btn-default hide">Hide</button>
                             </div>
                             <div class="mainDetails">
                                 <p>{{details}}</p>
