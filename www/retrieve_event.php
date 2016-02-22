@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
     } catch (fExpectedException $e) {
         // Assuming event not found
         $response['error'] = array(
-            'message' => $e->printMessage()
+            'message' => $e->getMessage()
         );
     }
 }
