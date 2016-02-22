@@ -1,58 +1,58 @@
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-	<link rel="stylesheet" type="text/css" href="index.css">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="shiftcal.js"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="shiftcal.js"></script>
 </head>
 <body>
-  <div id="mustache-html"></div>
+    <div id="mustache-html"></div>
 
-  <script id="mustache-template" type="text/template">
-	{{#dates}}
-	<div class="date">
-	<div class="dateHeader">{{date}}</div>
-		{{#events}}
-		  <div class="event row" data-event-id="{{id}}">
-			<div class="time col-md-4">
-				<h3>{{displayTime}}</h3>
-			</div>
-			<div class="col-md-8">
-				<div class="summary">
-					<h3> {{title}} </h3>
-					<p> {{venue}} </p>
-					<p> {{address}} </p>
-					<p> {{length}}</p>
-				</div>
-				<div class="eventDetails">
-					<div class="hideButton">&nbsp;</div>
-					<div class="otherButtons">
-						<a href="{{mapLink}}" target="_blank">
-							<button class="btn btn-default map">Map</button>
-						</a>
-						<button class="btn btn-default export">Export</button>
-					</div>
-					<div class="hideButton">
-						<button class="btn btn-default hide">Hide</button>
-					</div>
-					<div class="mainDetails">
-						<p>{{details}}</p>
-						<p class="contactInfo">Organized by: {{organizer}}</p>
-						{{#email}}
-						<p class="email">Contact info: {{email}}</p>
-						{{/email}}
-					</div>
-				</div>
-			  </div>
-		  </div>
-		{{/events}}
-	</div>
-	{{/dates}}
-  </script>
+    <script id="mustache-template" type="text/template">
+        {{#dates}}
+        <div class="date">
+        <div class="dateHeader">{{date}}</div>
+            {{#events}}
+                <div class="event row" data-event-id="{{id}}">
+                    <div class="time col-md-4">
+                        <h3>{{displayTime}}</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="summary">
+                            <h3> {{title}} </h3>
+                            <p> {{venue}} </p>
+                            <p> {{address}} </p>
+                            <p> {{length}}</p>
+                        </div>
+                        <div class="eventDetails">
+                            <div class="hideButton">&nbsp;</div>
+                            <div class="otherButtons">
+                                <a href="{{mapLink}}" target="_blank">
+                                    <button class="btn btn-default map">Map</button>
+                                </a>
+                                <button class="btn btn-default export">Export</button>
+                            </div>
+                            <div class="hideButton">
+                                <button class="btn btn-default hide">Hide</button>
+                            </div>
+                            <div class="mainDetails">
+                                <p>{{details}}</p>
+                                <p class="contactInfo">Organized by: {{organizer}}</p>
+                                {{#email}}
+                                <p class="email">Contact info: {{email}}</p>
+                                {{/email}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/events}}
+        </div>
+        {{/dates}}
+    </script>
 
 </body>
 </html>
