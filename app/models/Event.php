@@ -13,17 +13,25 @@ class Event extends fActiveRecord {
         details:
         length:
         */
-        return array(
+        $details = array(
             'id' => $this->getId(),
             'title' => $this->getTitle(),
             'venue' => $this->getLocname(),
             'address' => $this->getAddress(),
             'organizer' => $this->getName(),
-            'email' => $this->getEmail(),
             'details' => $this->getDescr(),
             'time' => strval($this->getEventtime()),
             'length' => NULL
         );
+
+        if ($this->getHideemail() == 0) {
+            $details['email'] = $this->getEmail();
+        }
+        else {
+            $details['email'] = null;
+        }
+
+        return $details;
     }
 
     public static function fromArray($input) {
