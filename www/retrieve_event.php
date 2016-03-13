@@ -25,7 +25,6 @@ if (isset($_GET['id'])) {
         $event = new Event($event_id);
         $response = $event->toDetailArray();
     } catch (fExpectedException $e) {
-        // Assuming event not found
         $response['error'] = array(
             'message' => $e->getMessage()
         );

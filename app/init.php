@@ -2,6 +2,7 @@
 
 include_once('config.php');
 include_once('schema.php');
+include_once('util.php');
 
 include('models/Event.php');
 include('models/EventTime.php');

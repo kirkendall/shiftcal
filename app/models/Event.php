@@ -46,16 +46,19 @@ class Event extends fActiveRecord {
             $event = new Event();
         }
 
-        // Load existing event/create new event
-        // Insert data into object
-        // Save, get id back
-        // Load existing dates
-        // Build list of input dates
-        // Iterate existing:
-        //  If in input remove from list
-        //  If not in input delete
-        // Iterate remaining
-        //  Create eventtime
+        // These are marked as required
+        $event->setTitle(get($input['title'], 'Title missing'));
+        $event->setLocname(get($input['venue'], 'Venue missing'));
+        $event->setAddress(get($input['address'], 'Address missing'));
+        $event->setName(get($input['organizer'], 'Organizer missing'));
+        $event->setEmail(get($input['email'], 'Email missing'));
+
+        // These are optional
+        $event->setHideemail(get($input['hideemail'], 0));
+        $event->setDescr(get($input['details'], ''));
+        $event->setEventtime(get($input['time'], ''));
+        $event->setHighlight(0);
+        // Length
         return $event;
     }
 
