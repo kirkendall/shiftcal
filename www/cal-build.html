@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>S H I F T to Bikes Calendar Building</title>
+    <style type="text/css">
+        #date-select-container {
+            width: 200px;
+            margin: 0 auto;
+            background-color: #fff56f;
+        }
+        #date-select {
+            height: 300px;
+            background-color: #ffbd2c;
+            overflow: scroll;
+        }
+        #load-earlier {
+            background-color: green;
+        }
+        #load-later {
+            background-color: red;
+        }
+        .loading-zone {
+            height: 600px;
+        }
+    </style>
+    <script>
+        // Scroll to proper loading position
+        (function ($) {$(window).load(function() {
+
+            var dates = [
+                '2016-3-1',
+                '2016-3-10',
+                '2015-12-1',
+                '2016-4-1'
+            ];
+            var $dateSelect = $('#date-select'),
+                $loadLater = $('#load-later'),
+                $loadEarlier = $('#load-earlier');
+
+            function loadLaterTop() {
+                return $loadLater.offset().top - $dateSelect.offset().top;
+            }
+
+            function loadEarlierBottom() {
+                return ($loadEarlier.offset().top + $loadEarlier.prop('scrollHeight')) - $dateSelect.offset().top;
+            }
+
+            $dateSelect.scrollTop(loadLaterTop());
+            $dateSelect.scroll(function(){
+                if (loadLaterTop() <= $dateSelect.height()) {
+                    console.log("Load later");
+                }
+                if (loadEarlierBottom() >= 0) {
+                    console.log("Load earlier");
+                }
+            });
+
+        })})(jQuery);
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <img alt="Shift2Bikes" src="images/shiftLogo_plain.gif" />
+            </a>
+        </div>
+    </div>
+</nav>
+<div id="date-select-container">
+    <div id="date-select">
+        <div id="load-earlier" class="loading-zone"></div>
+        <div id="load-later" class="loading-zone"></div>
+    </div>
+</div>
+
+<script id="mustache-select-month" type="text/template">
+
+</script>
+
+</body>
+</html>
