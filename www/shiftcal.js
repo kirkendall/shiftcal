@@ -91,6 +91,11 @@ $(document).ready( function() {
         var template = $('#mustache-edit').html();
         var info = Mustache.render(template, shiftEvent);
         $('#mustache-html').empty().append(info);
+        $('#edit-header').affix({
+            offset: {
+                top: 100,
+            }
+        })
     }
 
     displayCalendar();
