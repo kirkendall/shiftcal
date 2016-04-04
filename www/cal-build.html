@@ -10,7 +10,7 @@
     <title>S H I F T to Bikes Calendar Building</title>
     <style type="text/css">
         #date-select-container {
-            width: 200px;
+            width: 320px;
             margin: 0 auto;
             background-color: #fff56f;
         }
@@ -18,6 +18,9 @@
             height: 300px;
             background-color: #ffbd2c;
             overflow: scroll;
+        }
+        #month-table {
+            width: 100%;
         }
         #load-earlier {
             background-color: green;
@@ -29,20 +32,55 @@
             height: 600px;
         }
 
-        .calendar-row {
-            border-top: 1px solid gray;
-            background-color: #eee;
-        }
-        .calendar-row:nth-child(odd) {
-            background-color: #ddd;
-        }
         .calendar-day {
+            border-top: 1px solid gray;
             padding: 3px;
+            line-height: 1.5em;
+            text-align: center;
+        }
+
+        .calendar-day:hover {
+            cursor: pointer;
+            background-color: #eea236;
+        }
+
+        .calendar-day.today {
+            background-color: green;
+        }
+
+        .calendar-day.selected {
+            background-color: red;
         }
 
         .calendar-month-title {
+            position: relative;
+            width: 30px;
+        }
+
+        .color-jan, .color-mar, .color-may, .color-jul, .color-sep, .color-nov {
+            background-color: #aaa;
+        }
+        .color-jan-odd, .color-mar-odd, .color-may-odd,
+        .color-jul-odd, .color-sep-odd, .color-nov-odd {
+            background-color: #bbb;
+        }
+        .color-feb, .color-apr, .color-jun, .color-aug, .color-oct, .color-dec {
+            background-color: #ccc;
+        }
+        .color-feb-odd, .color-apr-odd, .color-jun-odd,
+        .color-aug-odd, .color-oct-odd, .color-dec-odd {
+            background-color: #ddd;
+        }
+
+        .calendar-month-title span {
             white-space: nowrap;
             transform: rotate(-90deg);
+            width: 0;
+            left: 10px;
+            bottom: 0;
+            display: block;
+            position: absolute;
+            font-size: .8em;
         }
     </style>
     <script>
@@ -61,10 +99,24 @@
             for (var i=0; i<dates.length; i++) {
                 dateMap[normalizeDate(dates[i])] = true;
             }
+
+            function dateList() {
+                var dates = [];
+                for (var key in dateMap) {
+                    if (dateMap.hasOwnProperty(key) && dateMap[key]) {
+                        dates.push(key);
+                    }
+                }
+                return dates;
+            }
+
+
             // The JOY of javascript
             var monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"
             ];
+            var cellClases = ["color-jan", "color-feb", "color-mar", "color-apr", "color-may", "color-jun",
+            "color-jul", "color-aug", "color-sep", "color-oct", "color-nov", "color-dec"];
 
             var today = new Date();
             function isToday(date) {
@@ -94,7 +146,8 @@
                 for (var i=0;i<7;i++) {
                     var day = {};
                     day['day'] = date.getDate();
-                    day['classes'] = (isToday(date) ? "today" : "") + " " + (isSelected(date) ? "selected" : "");
+                    day['date'] = normalizeDate(date);
+                    day['classes'] = (isToday(date) ? "today" : "") + " " + (isSelected(date) ? "selected" : "") + " " + cellClases[date.getMonth()] + (date.getDay() % 2 == 0 ? "-odd" : "");
                     week.push(day);
 
                     date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
@@ -110,6 +163,7 @@
                 //   weeksInMonth - rows that the title spans
                 //   days:
                 //     day: title
+                //     date: yyyy-m-d (normalized)
                 //     selected: cell class if selected
 
                 // Normalize date, ensuring first of month
@@ -188,6 +242,19 @@
             $dateSelect.scrollTop(loadLaterTop());
             $dateSelect.scroll(checkBounds);
 
+            $monthTable.click(function(ev) {
+                var e = ev.target;
+                if (e.hasAttribute('data-date')) {
+                    var $e = $(e),
+                        date = $e.attr('data-date');
+
+                    dateMap[date] = !dateMap[date];
+                    $e.toggleClass('selected', dateMap[date]);
+                    return false;
+                }
+                return true;
+            });
+
         })})(jQuery);
     </script>
 </head>
@@ -214,10 +281,10 @@
 {{#weeks}}
 <tr class="calendar-row">
     {{#monthTitle}}
-    <td rowspan="{{weeksInMonth}}" class="calendar-month-title">{{monthTitle}}</td>
+    <td rowspan="{{weeksInMonth}}" class="calendar-month-title"><span>{{monthTitle}}</span></td>
     {{/monthTitle}}
     {{#days}}
-    <td class="calendar-day {{classes}}">{{day}}</td>
+    <td class="calendar-day {{classes}}" data-date="{{date}}">{{day}}</td>
     {{/days}}
 </tr>
 {{/weeks}}
