@@ -28,20 +28,124 @@
         .loading-zone {
             height: 600px;
         }
+
+        .calendar-row {
+            border-top: 1px solid gray;
+            background-color: #eee;
+        }
+        .calendar-row:nth-child(odd) {
+            background-color: #ddd;
+        }
+        .calendar-day {
+            padding: 3px;
+        }
+
+        .calendar-month-title {
+            white-space: nowrap;
+            transform: rotate(-90deg);
+        }
     </style>
     <script>
         // Scroll to proper loading position
         (function ($) {$(window).load(function() {
 
+
             var dates = [
-                '2016-3-1',
-                '2016-3-10',
-                '2015-12-1',
-                '2016-4-1'
+                '2016-4-1',
+                    '2016-4-5',
+                    '2016-5-1'
             ];
+
+            var dateMap = {};
+
+            for (var i=0; i<dates.length; i++) {
+                dateMap[normalizeDate(dates[i])] = true;
+            }
+            // The JOY of javascript
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            var today = new Date();
+            function isToday(date) {
+                return (date.getDate() == today.getDate()
+                        && date.getMonth() == today.getMonth()
+                        && date.getFullYear() == today.getFullYear())
+            }
+
+            function normalizeDate(date) {
+                var jsd = new Date(date);
+                var day = jsd.getDate();
+                var monthIndex = jsd.getMonth();
+                var year = jsd.getFullYear();
+
+                return year + '-' + (monthIndex+1) + '-' + day;
+            }
+
+            function isSelected(date) {
+                return !!dateMap[normalizeDate(date)];
+            }
+
+            function makeWeekData(date) {
+                // date is the first day in the week
+                // [{ day - string to display
+                //    classes - classes to display },...]
+                var week = [];
+                for (var i=0;i<7;i++) {
+                    var day = {};
+                    day['day'] = date.getDate();
+                    day['classes'] = (isToday(date) ? "today" : "") + " " + (isSelected(date) ? "selected" : "");
+                    week.push(day);
+
+                    date = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+                }
+                return week;
+            }
+
+            function makeMonthData(date) {
+                // date is a day in a month to add
+
+                // weeks:
+                //   monthTitle - left title, only in first week
+                //   weeksInMonth - rows that the title spans
+                //   days:
+                //     day: title
+                //     selected: cell class if selected
+
+                // Normalize date, ensuring first of month
+                var firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+                // Find the first day of the week for the week the 1st falls on
+                var firstDay = new Date(firstOfMonth.getFullYear(), firstOfMonth.getMonth(), -firstOfMonth.getDay()+1);
+
+                var firstOfNextMonth = new Date(date.getFullYear(), date.getMonth()+1, 1);
+                // Don't include the week next months 1st lands on
+                var stopDay = new Date(firstOfNextMonth.getFullYear(), firstOfNextMonth.getMonth(), -firstOfNextMonth.getDay()+1);
+
+                var weeks = [];
+                for (var startOfWeek=firstDay;startOfWeek<stopDay;) {
+                    var week = {};
+                    week['days'] = makeWeekData(startOfWeek);
+                    weeks.push(week);
+
+                    startOfWeek = new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + 7);
+                }
+                weeks[0]['monthTitle'] = monthNames[firstOfMonth.getMonth()] + " " + firstOfMonth.getFullYear();
+                weeks[0]['weeksInMonth'] = weeks.length;
+
+                return {"weeks": weeks};
+            }
+
+            function getMonthHTML(date) {
+                return Mustache.render(monthTemplate, makeMonthData(date));
+            }
+
             var $dateSelect = $('#date-select'),
                 $loadLater = $('#load-later'),
-                $loadEarlier = $('#load-earlier');
+                $loadEarlier = $('#load-earlier'),
+                $monthTable = $("#month-table"),
+                monthTemplate = $('#mustache-select-month').html(),
+                earliestMonth = new Date(),
+                latestMonth = earliestMonth;
 
             function loadLaterTop() {
                 return $loadLater.offset().top - $dateSelect.offset().top;
@@ -51,15 +155,38 @@
                 return ($loadEarlier.offset().top + $loadEarlier.prop('scrollHeight')) - $dateSelect.offset().top;
             }
 
-            $dateSelect.scrollTop(loadLaterTop());
-            $dateSelect.scroll(function(){
-                if (loadLaterTop() <= $dateSelect.height()) {
-                    console.log("Load later");
+            $monthTable.append(getMonthHTML(earliestMonth));
+
+            var checking = false;
+            function checkBounds() {
+                if (checking) {
+                    return;
                 }
+                var added = false;
                 if (loadEarlierBottom() >= 0) {
-                    console.log("Load earlier");
+                    latestMonth = new Date(latestMonth.getFullYear(), latestMonth.getMonth()-1, 1);
+                    var preHeight = $monthTable.height();
+                    $monthTable.prepend(getMonthHTML(latestMonth));
+                    var heightChange = $monthTable.height() - preHeight;
+                    $dateSelect.scrollTop($dateSelect.scrollTop() + heightChange);
+                    added = true;
                 }
-            });
+                if (loadLaterTop() <= $dateSelect.height()) {
+                    earliestMonth = new Date(earliestMonth.getFullYear(), earliestMonth.getMonth()+1, 1);
+                    $monthTable.append(getMonthHTML(earliestMonth));
+                    added = true;
+                }
+                if (added) {
+                    checking = true;
+                    setTimeout(function() {
+                        checking = false;
+                        checkBounds();
+                    }, 10);
+                }
+            }
+
+            $dateSelect.scrollTop(loadLaterTop());
+            $dateSelect.scroll(checkBounds);
 
         })})(jQuery);
     </script>
@@ -77,12 +204,23 @@
 <div id="date-select-container">
     <div id="date-select">
         <div id="load-earlier" class="loading-zone"></div>
+        <table id="month-table">
+        </table>
         <div id="load-later" class="loading-zone"></div>
     </div>
 </div>
 
 <script id="mustache-select-month" type="text/template">
-
+{{#weeks}}
+<tr class="calendar-row">
+    {{#monthTitle}}
+    <td rowspan="{{weeksInMonth}}" class="calendar-month-title">{{monthTitle}}</td>
+    {{/monthTitle}}
+    {{#days}}
+    <td class="calendar-day {{classes}}">{{day}}</td>
+    {{/days}}
+</tr>
+{{/weeks}}
 </script>
 
 </body>
