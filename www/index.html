@@ -18,6 +18,11 @@
                     <img alt="Shift2Bikes" src="images/shiftLogo_plain.gif" />
                 </a>
             </div>
+            <div id="navbar" class="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#addEvent" id="add-event-button">Add Event</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div id="mustache-html"></div>
@@ -74,17 +79,17 @@
         </div>
         <div id="general-fields">
             <label for="event-title">Event title:</label>
-            <input type="text" name="event-title" id="event-title"></input>
+            <input type="text" name="event-title" id="event-title">{{title}}</input>
             <label for="event-description">Description:</label>
-            <input type="text" name="event-description" id="event-description"></input>
+            <input type="text" name="event-description" id="event-description">{{description}}</input>
             <label for="venue-name">Venue name:</label>
-            <input type="text" name="venue-name" id="venue-name"></input>
+            <input type="text" name="venue-name" id="venue-name">{{venue}}</input>
             <label for="venue-address">Address</label>
-            <input type="text" name="venue-address" id="venue-address"></input>
+            <input type="text" name="venue-address" id="venue-address">{{address}}</input>
             <label for="route-length">Length of route:</label>
             <select name="route-length" id="route-length">
                 {{# lengthOptions }}
-                <option value="{{range}}" selected="{{isSelected}}">{{range}} miles</option>
+                <option value="{{range}}" {{# isSelected }}selected{{/ isSelected }}>{{range}} miles</option>
                 {{/ lengthOptions }}
             </select>
             <label for="event-dates">Dates:</label>
@@ -98,19 +103,19 @@
             <label for="event-time">Time:</label>
             <select name="event-time" id="event-time">
                 {{# timeOptions }}
-                <option value="{{time}}" selected="{{isSelected}}">{{time}}</option>
+                <option value="{{time}}" {{# isSelected }}selected{{/ isSelected }}>{{time}}</option>
                 {{/ timeOptions }}
             </select>
             <label for="organizer-name">Your name:</label>
-            <input type="text" name="organizer-name" id="organizer-name"></input>
+            <input type="text" name="organizer-name" id="organizer-name">{{name}}</input>
             <label for="organizer-email">Your email:</label>
-            <input type="text" email="organizer-email" id="organizer-email"></input>
-            <input type="checkbox" name="email-me" id="email-me"></input>
+            <input type="text" email="organizer-email" id="organizer-email">{{email}}</input>
+            <input type="checkbox" name="email-me" id="email-me" {{# emailMe }}checked{{/ emailMe }} ></input>
             <label for="email-me">Send forum messages to this email address</label>
-            <input type="checkbox" name="hide-email" id="hide-email"></input>
+            <input type="checkbox" name="hide-email" id="hide-email" {{# hideEmail }}checked{{/ hideEmail }}></input>
             <label for="hide-email">Don't publish my email address online</label>
             <p>For tips on making your ride successful, we ask that you read the <a href="rideleadingcomic.html">Ride Leading Comic</a> at least once before submitting an event</p>
-            <input type="checkbox" name="read-comic" id="read-comic"></input>
+            <input type="checkbox" name="read-comic" id="read-comic" {{# readComic }}checked{{/ readComic }}></input>
             <label for="read-comic">I have read the Ride Leading Comic</label>
         </div>
     </script>
