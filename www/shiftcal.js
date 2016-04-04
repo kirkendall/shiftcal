@@ -53,7 +53,9 @@ $(document).ready( function() {
         });
     }
     function displayEditForm( id ) {
-        var shiftEvent = {};
+        var shiftEvent = {
+            id: id
+        };
         shiftEvent.lengthOptions = [
             {
                 range: "0-3"
@@ -96,6 +98,23 @@ $(document).ready( function() {
                 top: 100,
             }
         })
+        $('#save-button').click(function() {
+            var postVars = {};
+            $('form').serializeArray().map(function(x){postVars[x.name] = x.value;}) ;
+            $.ajax({
+                type: 'POST',
+                url: 'manage_event.php',
+                data: JSON.stringify(postVars),
+                success: function(returnVal) {
+                        alert('saved!');
+                    },
+                error: function(returnVal) {
+                        alert(returnVal.responseText);
+                    },
+                dataType: 'json',
+                contentType: 'application/json'
+            });
+        });
     }
 
     displayCalendar();
