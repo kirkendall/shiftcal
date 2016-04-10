@@ -1,12 +1,5 @@
 $(document).ready( function() {
     function displayCalendar() {
-        $(document).on('click', 'a.expandDetails', function(e) {
-            e.preventDefault();
-            return false;
-        });
-        $(document).on('click', 'a#add-event-button', function(e) {
-            displayEditForm();
-        });
         var startDate = new Date();
         var endDate = new Date();
         endDate.setDate(startDate.getDate() + 3);
@@ -49,7 +42,7 @@ $(document).ready( function() {
             }
             var template = $('#mustache-template').html();
             var info = Mustache.render(template, mustacheData);
-            $('#mustache-html').append(info);
+            $('#mustache-html').empty().append(info);
         });
     }
     function displayEditForm( id ) {
@@ -321,6 +314,19 @@ $(document).ready( function() {
         }
     }
     /* /Date Picker JS */
+
+    $(document).on('click', 'a#add-event-button', function(e) {
+        displayEditForm();
+    });
+
+    $(document).on('click', 'a#view-events-button', function(e) {
+        displayCalendar();
+    });
+
+    $(document).on('click', 'a.expandDetails', function(e) {
+        e.preventDefault();
+        return false;
+    });
 
     if (/^#addEvent/.test(location.hash)) {
         displayEditForm();
