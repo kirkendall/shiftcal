@@ -103,18 +103,12 @@
                     {{/ lengthOptions }}
                 </select>
             </div>
-            <div class="form-group">
-                <label for="event-dates">Dates:</label>
-                <input name="start-date" class="form-control" id="start-date">{{startDate}}</input>
-            </div>
-            <div id="show-repeat-options"></div>
-            <div id="repeat-options">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="repeat-frequency">{{repeatFrequency}}</input>
-                </div>
-                <div class="form-group">
-                    <label for="end-date">End date:</label>
-                    <input name="end-date" class="form-control" id="end-date">{{endDate}}</input>
+            <div id="date-select-container" class="form-group">
+                <div id="date-select">
+                    <div id="load-earlier" class="loading-zone"></div>
+                    <table id="month-table">
+                    </table>
+                    <div id="load-later" class="loading-zone"></div>
                 </div>
             </div>
             <div class="form-group">
@@ -153,6 +147,18 @@
                 </label>
             </div>
         </form>
+    </script>
+    <script id="mustache-select-month" type="text/template">
+        {{#weeks}}
+        <tr class="calendar-row">
+            {{#monthTitle}}
+            <td rowspan="{{weeksInMonth}}" class="calendar-month-title"><span>{{monthTitle}}</span></td>
+            {{/monthTitle}}
+            {{#days}}
+            <td class="calendar-day {{classes}}" data-date="{{date}}">{{day}}</td>
+            {{/days}}
+        </tr>
+        {{/weeks}}
     </script>
 </body>
 </html>

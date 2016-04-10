@@ -53,3 +53,79 @@ a.expandDetails {
     top: 0;
     background: #fff;
 }
+
+/* Date Picker CSS */
+#date-select-container {
+    width: 320px;
+    margin: 0 auto;
+    background-color: #fff56f;
+}
+#date-select {
+    height: 300px;
+    background-color: #ffbd2c;
+    overflow: scroll;
+}
+#month-table {
+    width: 100%;
+}
+#load-earlier {
+    background-color: green;
+}
+#load-later {
+    background-color: red;
+}
+.loading-zone {
+    height: 600px;
+}
+
+.calendar-day {
+    border-top: 1px solid gray;
+    padding: 3px;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+.calendar-day:hover {
+    cursor: pointer;
+    background-color: #eea236;
+}
+
+.calendar-day.today {
+    background-color: green;
+}
+
+.calendar-day.selected {
+    background-color: red;
+}
+
+.calendar-month-title {
+    position: relative;
+    width: 30px;
+}
+
+.color-jan, .color-mar, .color-may, .color-jul, .color-sep, .color-nov {
+    background-color: #aaa;
+}
+.color-jan-odd, .color-mar-odd, .color-may-odd,
+.color-jul-odd, .color-sep-odd, .color-nov-odd {
+    background-color: #bbb;
+}
+.color-feb, .color-apr, .color-jun, .color-aug, .color-oct, .color-dec {
+    background-color: #ccc;
+}
+.color-feb-odd, .color-apr-odd, .color-jun-odd,
+.color-aug-odd, .color-oct-odd, .color-dec-odd {
+    background-color: #ddd;
+}
+
+.calendar-month-title span {
+    white-space: nowrap;
+    transform: rotate(-90deg);
+    width: 0;
+    left: 10px;
+    bottom: 0;
+    display: block;
+    position: absolute;
+    font-size: .8em;
+}
+/* /Date Picker CSS */
