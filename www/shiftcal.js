@@ -99,7 +99,7 @@ $(document).ready( function() {
             offset: {
                 top: 100
             }
-        })
+        });
         $('#save-button').click(function() {
             var postVars = {};
             $('form').serializeArray().map(function(x){postVars[x.name] = x.value;}) ;
@@ -130,7 +130,8 @@ $(document).ready( function() {
         earliestMonth,
         latestMonth,
         dateMap,
-        today;
+        today,
+        selectedCount = 0;
 
     // Some constants used for generating html. The JOY of javascript stdlib
     var monthNames = ["January", "February", "March", "April", "May", "June",
@@ -157,6 +158,7 @@ $(document).ready( function() {
         dateMap = {};
         for (var i=0; i<dates.length; i++) {
             dateMap[normalizeDate(dates[i])] = true;
+            selectedCount++;
         }
 
         // Scrolling container for the table
@@ -188,7 +190,17 @@ $(document).ready( function() {
                     date = $e.attr('data-date');
 
                 dateMap[date] = !dateMap[date];
+                if (dateMap[date]) {
+                    selectedCount++;
+                    $('#save-button').prop('disabled', false);
+                } else {
+                    selectedCount--;
+                    if ( selectedCount === 0 ) {
+                        $('#save-button').prop('disabled', true);
+                    }
+                }
                 $e.toggleClass('selected', dateMap[date]);
+
                 return false;
             }
             return true;
