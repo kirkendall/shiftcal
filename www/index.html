@@ -32,11 +32,11 @@
         <div class="dateHeader">{{date}}</div>
             {{#events}}
                 <div class="event row" data-event-id="{{id}}">
-                    <div class="time col-md-4">
+                    <div class="time col-xs-4">
                         <h3>{{displayTime}}</h3>
                     </div>
                     <a class="expandDetails" href="#" data-toggle="collapse" data-target="#detailsContainer{{id}}">
-                        <div class="col-md-8" >
+                        <div class="col-xs-8" >
                             <div class="summary">
                                 <h3> {{title}} </h3>
                                 <p> {{venue}} </p>
@@ -46,10 +46,10 @@
                         </div>
                     </a>
                     <div id="detailsContainer{{id}}" class="collapse">
-                        <div class="hideButton col-md-4">
+                        <div class="hideButton col-xs-4">
                             <button class="btn btn-default"data-toggle="collapse" data-target="#detailsContainer{{id}}">Hide</button>
                         </div>
-                        <div class="eventDetails col-md-8">
+                        <div class="eventDetails col-xs-8">
                             <div class="otherButtons">
                                 <a href="{{mapLink}}" target="_blank">
                                     <button class="btn btn-default map">Map</button>
@@ -72,9 +72,10 @@
     </script>
     <script id="mustache-edit" type="text/template">
         <div id="edit-header" >
-            <button id="events-button">Events</button>
-            <button id="view-button">View Event</button>
-            <button id="save-button">Save</button>
+            <div class="btn-group" role="group">
+                <button id="view-button" type="button" class="btn btn-secondary">Preview</button>
+                <button id="save-button" type="button" class="btn btn-primary">Save</button>
+            </div>
         </div>
         <form id="general-fields">
             <input type="hidden" name="id">{{id}}</input>
