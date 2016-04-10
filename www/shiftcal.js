@@ -97,7 +97,7 @@ $(document).ready( function() {
 
         $('#edit-header').affix({
             offset: {
-                top: 100,
+                top: 100
             }
         })
         $('#save-button').click(function() {
@@ -310,5 +310,9 @@ $(document).ready( function() {
     }
     /* /Date Picker JS */
 
-    displayCalendar();
+    if (/^#addEvent/.test(location.hash)) {
+        displayEditForm();
+    } else {
+        displayCalendar();
+    }
 });
