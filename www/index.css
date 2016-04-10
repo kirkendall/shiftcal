@@ -39,6 +39,17 @@ font-size: 1.25em;
     background-color: #f90;
     background-image: none;
 }
+nav.navbar {
+    margin-bottom:40px;
+}
 a.expandDetails {
     color:inherit;
+}
+#edit-header {
+    width:100%;
+}
+.affix {
+    position: fixed;
+    top: 0;
+    background: #fff;
 }
