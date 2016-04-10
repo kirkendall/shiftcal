@@ -53,6 +53,11 @@ a.expandDetails {
     top: 0;
     background: #fff;
 }
+/* Cheat bootstrap for one line mobile nav */
+.nav>li>a {
+    display:inline-block;
+    color:#000 !important;
+}
 
 /* Date Picker CSS */
 #date-select-container {
