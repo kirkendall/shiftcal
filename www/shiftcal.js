@@ -29,6 +29,7 @@ $(document).ready( function() {
                 value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
                 value.mapLink = 'http://maps.google.com/?bounds=45.389771,-122.829208|45.659647,-122.404175&q=';
                 value.mapLink += encodeURIComponent( value.address );
+                value.showEditButton = true; // TODO: permissions
                 groupedByDate[date].events.push(value);
             });
 
@@ -49,47 +50,68 @@ $(document).ready( function() {
             $('#mustache-html').empty().append(info);
         });
     }
+
     function displayEditForm( id ) {
-        var shiftEvent = {
-            id: id
-        };
-        shiftEvent.lengthOptions = [
-            {
-                range: "0-3"
-            },
-            {
-                range: "3-8"
-            },
-            {
-                range: "8-15"
-            },
-            {
-                range: "15+"
-            }
-        ];
+        if (id) {
+            // TODO: loading spinner
+            $.get( 'retrieve_event.php?id=' + id, function( data ) {
+                data.readComic = true;
+                populateEditForm( data );
+            });
+        } else {
+            populateEditForm({ dates: [] });
+        }
+    }
+
+    function populateEditForm( shiftEvent ) {
+        var i, h, m, meridian,
+            displayHour, displayMinute, timeChoice,
+            template, rendered,
+            lengths = [ '0-3', '3-8', '8-15', '15+' ];
+
+        shiftEvent.lengthOptions = [];
+        for ( i = 0; i < lengths.length; i++ ) {
+            shiftEvent.lengthOptions.push({
+                range: lengths[i]
+            });
+        }
+
         shiftEvent.timeOptions = [];
-        for ( var a = 0; a < 2; a++ ) {
-            for ( var h = 0; h < 12; h++ ) {
-                for ( var m = 0; m < 60; m += 15 ) {
-                    var displayHour = h;
-                    if ( displayHour === 0 ) {
-                        displayHour = 12;
-                    }
-                    var displayMinute = m;
-                    if ( displayMinute == 0 ) {
-                        displayMinute = "00";
-                    }
-                    var meridian = ( a == 0 ) ? "AM" : "PM";
-                    shiftEvent.timeOptions.push({
-                        time: displayHour + ":" + displayMinute + " " + meridian
-                    });
+        meridian = 'AM';
+        for ( h = 0; h < 24; h++ ) {
+            for ( m = 0; m < 60; m += 15 ) {
+                if ( h > 11 ) {
+                    meridian = 'PM';
+                };
+                if ( h === 0 ) {
+                    displayHour = 12;
+                } else if ( h > 12 ) {
+                    displayHour = h - 12;
+                } else {
+                    displayHour = h;
                 }
+                displayMinute = m;
+                if ( displayMinute === 0 ) {
+                    displayMinute = '00';
+                }
+                timeChoice = {
+                    time: displayHour + ':' + displayMinute + ' ' + meridian,
+                    value: h + ':' + displayMinute + ':00'
+                };
+                if (h < 10) {
+                    timeChoice.value = '0' + timeChoice.value;
+                }
+                if (shiftEvent.time === timeChoice.value) {
+                    timeChoice.isSelected = true;
+                }
+                shiftEvent.timeOptions.push(timeChoice);
             }
         }
         shiftEvent.timeOptions.push({ time: "11:59 PM" });
-        var template = $('#mustache-edit').html();
-        var info = Mustache.render(template, shiftEvent);
-        $('#mustache-html').empty().append(info);
+
+        template = $('#mustache-edit').html();
+        rendered = Mustache.render(template, shiftEvent);
+        $('#mustache-html').empty().append(rendered);
         setupDatePicker(shiftEvent['dates'] || []);
 
         $('#edit-header').affix({
@@ -97,6 +119,9 @@ $(document).ready( function() {
                 top: 100
             }
         });
+        if (shiftEvent.dates.length === 0) {
+            $('#save-button').prop('disabled', true);
+        }
         $('#save-button').click(function() {
             var postVars = {},
                 isNew = !shiftEvent.id;
@@ -118,6 +143,7 @@ $(document).ready( function() {
                     var msg = isNew ? 'Event saved!' : 'Event updated!';
                     $('#save-result').addClass('text-success').text(msg);
                     shiftEvent.id = returnVal.id;
+                    location.hash = '#editEvent/' + returnVal.id;
                 },
                 error: function(returnVal) {
                     var err = returnVal.responseJSON.error;
@@ -350,8 +376,18 @@ $(document).ready( function() {
         return false;
     });
 
+    $(document).on('click', 'button.edit', function(e) {
+        var id = $(e.target).closest('div.event').data('event-id');
+        displayEditForm(id);
+    });
+
     if (/^#addEvent/.test(location.hash)) {
         displayEditForm();
+    } else if (
+        /^#editEvent/.test(location.hash) &&
+        location.hash.indexOf('/') > 0
+    ) {
+        displayEditForm(location.hash.split('/')[1]);
     } else {
         displayCalendar();
     }
