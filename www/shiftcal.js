@@ -94,20 +94,31 @@ $(document).ready( function() {
             }
         });
         $('#save-button').click(function() {
-            var postVars = {};
+            var postVars = {},
+                isNew = !shiftEvent.id;
             $('.form-group').removeClass('has-error');
             $('.help-block').remove();
-            $('form').serializeArray().map(function(x){postVars[x.name] = x.value;}) ;
+            $('#save-result').removeClass('text-success').removeClass('text-danger').text('');
+            $('form').serializeArray().map(function (x) {
+                postVars[x.name] = x.value;
+            });
             postVars['dates'] = dateList();
+            if (!isNew) {
+                postVars['id'] = shiftEvent.id;
+            }
             $.ajax({
                 type: 'POST',
                 url: 'manage_event.php',
                 data: JSON.stringify(postVars),
                 success: function(returnVal) {
-                    alert('saved!');
+                    var msg = isNew ? 'Event saved!' : 'Event updated!';
+                    $('#save-result').addClass('text-success').text(msg);
+                    shiftEvent.id = returnVal.id;
                 },
                 error: function(returnVal) {
-                    $.each(returnVal.responseJSON.error.fields, function( fieldName, message ) {
+                    var err = returnVal.responseJSON.error;
+                    $('#save-result').addClass('text-danger').text(err.message);
+                    $.each(err.fields, function(fieldName, message) {
                         $('input[name=' + fieldName + ']')
                             .closest('.form-group,.checkbox')
                             .addClass('has-error')
