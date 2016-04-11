@@ -79,22 +79,22 @@
             <span id="save-result"></span>
         </div>
         <form id="general-fields">
-            <input type="hidden" name="id">{{id}}</input>
+            <input type="hidden" name="id" value="{{id}}" />
             <div class="form-group">
                 <label class="control-label" for="title">Event title:</label>
-                <input type="text" class="form-control" name="title" id="title">{{title}}</input>
+                <input type="text" class="form-control" name="title" id="title" value="{{title}}" />
             </div>
             <div class="form-group">
                 <label class="control-label" for="details">Description:</label>
-                <input type="text" class="form-control" name="details" id="details">{{description}}</input>
+                <input type="text" class="form-control" name="details" id="details" value="{{details}}" />
             </div>
             <div class="form-group">
                 <label class="control-label" for="venue">Venue name:</label>
-                <input type="text" class="form-control" name="venue" id="venue">{{venue}}</input>
+                <input type="text" class="form-control" name="venue" id="venue" value="{{venue}}" />
             </div>
             <div class="form-group">
                 <label class="control-label" for="address">Address</label>
-                <input type="text" class="form-control" name="address" id="address">{{address}}</input>
+                <input type="text" class="form-control" name="address" id="address" value="{{address}}" />
             </div>
             <div class="form-group">
                 <label class="control-label" for="length">Length of route:</label>
@@ -122,28 +122,28 @@
             </div>
             <div class="form-group">
                 <label class="control-label" for="organizer">Your name:</label>
-                <input type="text" class="form-control" name="organizer" id="organizer">{{name}}</input>
+                <input type="text" class="form-control" name="organizer" id="organizer" value="{{organizer}}">
             </div>
             <div class="form-group">
                 <label class="control-label" for="email">Your email:</label>
-                <input type="text" class="form-control" name="email" id="email">{{email}}</input>
+                <input type="text" class="form-control" name="email" id="email" value="{{email}}" >
             </div>
             <div class="checkbox">
                 <label class="control-label" for="email-me">
-                    <input type="checkbox" name="email-me" id="email-me" {{# emailMe }}checked{{/ emailMe }} ></input>
+                    <input type="checkbox" name="email-me" id="email-me" {{# emailMe }}checked{{/ emailMe }} />
                     Send forum messages to this email address
                 </label>
             </div>
             <div class="checkbox">
                 <label class="control-label" for="hideemail">
-                    <input type="checkbox" name="hideemail" id="hideemail" {{# hideEmail }}checked{{/ hideEmail }}></input>
+                    <input type="checkbox" name="hideemail" id="hideemail" {{# hideEmail }}checked{{/ hideEmail }} />
                     Don't publish my email address online
                 </label>
             </div>
             <p>For tips on making your ride successful, we ask that you read the <a href="rideleadingcomic.html">Ride Leading Comic</a> at least once before submitting an event</p>
             <div class="checkbox">
                 <label class="control-label" for="read_comic">
-                    <input type="checkbox" name="read_comic" id="read_comic" {{# readComic }}checked{{/ readComic }}></input>
+                    <input type="checkbox" name="read_comic" id="read_comic" {{# readComic }}checked{{/ readComic }} />
                     I have read the Ride Leading Comic
                 </label>
             </div>
