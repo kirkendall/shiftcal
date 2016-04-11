@@ -18,9 +18,13 @@ $(document).ready( function() {
                 var timeParts = value.time.split(':');
                 var hour = parseInt(timeParts[0]);
                 var meridian = 'AM';
-                if ( hour > 12 ) {
-                    hour = hour - 12;
+                if ( hour === 0 ) {
+                    hour = 12;
+                } else if ( hour >= 12 ) {
                     meridian = 'PM';
+                    if ( hour > 12 ) {
+                        hour = hour - 12;
+                    }
                 }
                 value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
                 value.mapLink = 'http://maps.google.com/?bounds=45.389771,-122.829208|45.659647,-122.404175&q=';
