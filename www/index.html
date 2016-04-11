@@ -80,23 +80,23 @@
         <form id="general-fields">
             <input type="hidden" name="id">{{id}}</input>
             <div class="form-group">
-                <label for="title">Event title:</label>
+                <label class="control-label" for="title">Event title:</label>
                 <input type="text" class="form-control" name="title" id="title">{{title}}</input>
             </div>
             <div class="form-group">
-                <label for="details">Description:</label>
+                <label class="control-label" for="details">Description:</label>
                 <input type="text" class="form-control" name="details" id="details">{{description}}</input>
             </div>
             <div class="form-group">
-                <label for="venue">Venue name:</label>
+                <label class="control-label" for="venue">Venue name:</label>
                 <input type="text" class="form-control" name="venue" id="venue">{{venue}}</input>
             </div>
             <div class="form-group">
-                <label for="address">Address</label>
+                <label class="control-label" for="address">Address</label>
                 <input type="text" class="form-control" name="address" id="address">{{address}}</input>
             </div>
             <div class="form-group">
-                <label for="length">Length of route:</label>
+                <label class="control-label" for="length">Length of route:</label>
                 <select name="length" class="form-control" id="length">
                     {{# lengthOptions }}
                     <option value="{{range}}" {{# isSelected }}selected{{/ isSelected }}>{{range}} miles</option>
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="time">Time:</label>
+                <label class="control-label" for="time">Time:</label>
                 <select name="time" class="form-control" id="time">
                     {{# timeOptions }}
                     <option value="{{time}}" {{# isSelected }}selected{{/ isSelected }}>{{time}}</option>
@@ -120,28 +120,28 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="organizer">Your name:</label>
+                <label class="control-label" for="organizer">Your name:</label>
                 <input type="text" class="form-control" name="organizer" id="organizer">{{name}}</input>
             </div>
             <div class="form-group">
-                <label for="email">Your email:</label>
+                <label class="control-label" for="email">Your email:</label>
                 <input type="text" class="form-control" name="email" id="email">{{email}}</input>
             </div>
             <div class="checkbox">
-                <label for="email-me">
+                <label class="control-label" for="email-me">
                     <input type="checkbox" name="email-me" id="email-me" {{# emailMe }}checked{{/ emailMe }} ></input>
                     Send forum messages to this email address
                 </label>
             </div>
             <div class="checkbox">
-                <label for="hideemail">
+                <label class="control-label" for="hideemail">
                     <input type="checkbox" name="hideemail" id="hideemail" {{# hideEmail }}checked{{/ hideEmail }}></input>
                     Don't publish my email address online
                 </label>
             </div>
             <p>For tips on making your ride successful, we ask that you read the <a href="rideleadingcomic.html">Ride Leading Comic</a> at least once before submitting an event</p>
             <div class="checkbox">
-                <label for="read_comic">
+                <label class="control-label" for="read_comic">
                     <input type="checkbox" name="read_comic" id="read_comic" {{# readComic }}checked{{/ readComic }}></input>
                     I have read the Ride Leading Comic
                 </label>

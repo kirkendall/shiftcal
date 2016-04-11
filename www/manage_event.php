@@ -38,7 +38,8 @@ function build_json_response($input) {
 
     $_POST = $data; // fValidation inspects $_POST for field data
     $validator = new fValidation();
-    $validator->addRequiredFields('title', 'venue', 'address', 'organizer', 'email', 'read_comic'); //TODO: add 'start_date', 'start_time'
+    //TODO: validate length, add 'start_date', 'start_time', custom error for checkboxes
+    $validator->addRequiredFields('title', 'venue', 'address', 'organizer', 'email', 'read_comic');
     $validator->addEmailFields('email');
     $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for \1');
     

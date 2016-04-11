@@ -95,6 +95,8 @@ $(document).ready( function() {
         });
         $('#save-button').click(function() {
             var postVars = {};
+            $('.form-group').removeClass('has-error');
+            $('.help-block').remove();
             $('form').serializeArray().map(function(x){postVars[x.name] = x.value;}) ;
             postVars['dates'] = dateList();
             $.ajax({
@@ -102,11 +104,16 @@ $(document).ready( function() {
                 url: 'manage_event.php',
                 data: JSON.stringify(postVars),
                 success: function(returnVal) {
-                        alert('saved!');
-                    },
+                    alert('saved!');
+                },
                 error: function(returnVal) {
-                        alert(returnVal.responseText);
-                    },
+                    $.each(returnVal.responseJSON.error.fields, function( fieldName, message ) {
+                        $('input[name=' + fieldName + ']')
+                            .closest('.form-group,.checkbox')
+                            .addClass('has-error')
+                            .append('<div class="help-block">' + message + '</div>');
+                    });
+                },
                 dataType: 'json',
                 contentType: 'application/json'
             });
