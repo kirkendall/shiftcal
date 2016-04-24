@@ -1,0 +1,168 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="shiftcal.js"></script>
+    <title>S H I F T to Bikes</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <img alt="Shift2Bikes" src="images/shiftLogo_plain.gif" />
+                </a>
+                <ul class="nav navbar-nav">
+                    <li><a href="#viewEvents" id="view-events-button">Events</a><a href="#addEvent" id="add-event-button">Add Event</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="mustache-html" class="container"></div>
+
+    <script id="mustache-template" type="text/template">
+        {{#dates}}
+        <div class="date">
+        <div class="dateHeader">{{date}}</div>
+            {{#events}}
+                <div class="event row" data-event-id="{{id}}">
+                    <div class="time col-xs-4">
+                        <h3>{{displayTime}}</h3>
+                    </div>
+                    <a class="expandDetails" href="#" data-toggle="collapse" data-target="#detailsContainer{{id}}">
+                        <div class="col-xs-8" >
+                            <div class="summary">
+                                <h3> {{title}} </h3>
+                                <p> {{venue}} </p>
+                                <p> {{address}} </p>
+                                <p> {{length}}</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div id="detailsContainer{{id}}" class="collapse">
+                        <div class="hideButton col-xs-4">
+                            <button class="btn btn-default"data-toggle="collapse" data-target="#detailsContainer{{id}}">Hide</button>
+                        </div>
+                        <div class="eventDetails col-xs-8">
+                            <div class="otherButtons">
+                                <a href="{{mapLink}}" target="_blank">
+                                    <button class="btn btn-default map">Map</button>
+                                </a>
+                                <button class="btn btn-default export">Export</button>
+                                {{#showEditButton}}<a href="#editEvent/{{id}}" >
+                                    <button class="btn btn-default edit">Edit</button>
+                                </a>{{/showEditButton}}
+                            </div>
+                            <div class="mainDetails">
+                                <p>{{details}}</p>
+                                <p class="contactInfo">Organized by: {{organizer}}</p>
+                                {{#email}}
+                                <p class="email">Contact info: {{email}}</p>
+                                {{/email}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/events}}
+        </div>
+        {{/dates}}
+    </script>
+    <script id="mustache-edit" type="text/template">
+        <div id="edit-header" >
+            <div class="btn-group" role="group">
+                <button id="view-button" type="button" class="btn btn-secondary">Preview</button>
+                <button id="save-button" type="button" class="btn btn-primary">Save</button>
+            </div>
+            <span id="save-result"></span>
+        </div>
+        <form id="general-fields">
+            <input type="hidden" name="id" value="{{id}}" />
+            <div class="form-group">
+                <label class="control-label" for="title">Event title:</label>
+                <input type="text" class="form-control" name="title" id="title" value="{{title}}" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="details">Description:</label>
+                <input type="text" class="form-control" name="details" id="details" value="{{details}}" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="venue">Venue name:</label>
+                <input type="text" class="form-control" name="venue" id="venue" value="{{venue}}" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="address">Address</label>
+                <input type="text" class="form-control" name="address" id="address" value="{{address}}" />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="length">Length of route:</label>
+                <select name="length" class="form-control" id="length">
+                    {{# lengthOptions }}
+                    <option value="{{range}}" {{# isSelected }}selected{{/ isSelected }}>{{range}} miles</option>
+                    {{/ lengthOptions }}
+                </select>
+            </div>
+            <div id="date-select-container" class="form-group">
+                <div id="date-select">
+                    <div id="load-earlier" class="loading-zone"></div>
+                    <table id="month-table">
+                    </table>
+                    <div id="load-later" class="loading-zone"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="time">Time:</label>
+                <select name="time" class="form-control" id="time">
+                    {{# timeOptions }}
+                    <option value="{{time}}" {{# isSelected }}selected{{/ isSelected }}>{{time}}</option>
+                    {{/ timeOptions }}
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="organizer">Your name:</label>
+                <input type="text" class="form-control" name="organizer" id="organizer" value="{{organizer}}">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="email">Your email:</label>
+                <input type="text" class="form-control" name="email" id="email" value="{{email}}" >
+            </div>
+            <div class="checkbox">
+                <label class="control-label" for="email-me">
+                    <input type="checkbox" name="email-me" id="email-me" {{# emailMe }}checked{{/ emailMe }} />
+                    Send forum messages to this email address
+                </label>
+            </div>
+            <div class="checkbox">
+                <label class="control-label" for="hideemail">
+                    <input type="checkbox" name="hideemail" id="hideemail" {{# hideEmail }}checked{{/ hideEmail }} />
+                    Don't publish my email address online
+                </label>
+            </div>
+            <p>For tips on making your ride successful, we ask that you read the <a href="rideleadingcomic.html">Ride Leading Comic</a> at least once before submitting an event</p>
+            <div class="checkbox">
+                <label class="control-label" for="read_comic">
+                    <input type="checkbox" name="read_comic" id="read_comic" {{# readComic }}checked{{/ readComic }} />
+                    I have read the Ride Leading Comic
+                </label>
+            </div>
+        </form>
+    </script>
+    <script id="mustache-select-month" type="text/template">
+        {{#weeks}}
+        <tr class="calendar-row">
+            {{#monthTitle}}
+            <td rowspan="{{weeksInMonth}}" class="calendar-month-title"><span>{{monthTitle}}</span></td>
+            {{/monthTitle}}
+            {{#days}}
+            <td class="calendar-day {{classes}}" data-date="{{date}}">{{day}}</td>
+            {{/days}}
+        </tr>
+        {{/weeks}}
+    </script>
+</body>
+</html>
