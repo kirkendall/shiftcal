@@ -8,15 +8,9 @@ It has been sanitized of passwords from the copy running at http://shift2bikes.o
 Basic Architecture
 ------------------
 
-The landing page index.php is very minimal - it loads site config from include/common.php and then loads the MAINPAGE.  By default currently, MAINPAGE = view3week.php.
+The front-end uses jQuery, Mustache templates, and Bootstrap.
 
-view3week.php provides a 3-week calendar view with all 3 weeks of the event data listed at the bottom.  Links from the calendar to event data are included and navigable without talking to the server, after the page loads.  It has links to a simple search form (viewsearch.php) and a full-month view (viewmonth.php), and allows you to move between months.
-
-To add an event, you start at 'calform.php' to fill out one of three versions of the event info page.  It submits to calsubmit.php and uses the verification code in vfyaddress.php and vfyvenue.php (these being broken is non-fatal), but vfydates.php is needed as it parses and accepts date specifications like "first thursdays" or "first of every month except december".
-
-Pedalpalooza event viewing and editing has a fair # of files associated with it, which makes sense, since Pedalpalooza usage is more than the rest of the year combined.  The most-used files are ppcurrent.php which redirects to whatever year of pedalpalooza is specified as current in include/common.php - eg viewpp2015.php.  The other functionality in the PP stuff: a counter for # of events which is embedded in the PP overview page, a calendar exporter, helpers to view single days/events, and a link to make a personalized printable calendar with just events you select.
-
-*See the doc/notes/code_manifest.txt file for more info about each php file in the project*
+The back-end uses Flourish php and MySQL.
 
 How to setup & run locally
 --------------------------
