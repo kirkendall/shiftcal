@@ -27,8 +27,7 @@ $(document).ready( function() {
                     }
                 }
                 value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
-                value.mapLink = 'http://maps.google.com/?bounds=45.389771,-122.829208|45.659647,-122.404175&q=';
-                value.mapLink += encodeURIComponent( value.address );
+                value.mapLink = getMapLink(value.address);
                 value.showEditButton = true; // TODO: permissions
                 groupedByDate[date].events.push(value);
             });
@@ -49,6 +48,12 @@ $(document).ready( function() {
             var info = Mustache.render(template, mustacheData);
             $('#mustache-html').empty().append(info);
         });
+    }
+
+    function getMapLink(address) {
+        return 'http://maps.google.com/' +
+            '?bounds=45.389771,-122.829208|45.659647,-122.404175&q=' +
+            encodeURIComponent(address);
     }
 
     function displayEditForm( id ) {
@@ -175,27 +180,27 @@ $(document).ready( function() {
     //
     function previewEvent(shiftEvent) {
         var previewEvent = {},
-            editForm,
             mustacheData;
         $.extend(previewEvent, shiftEvent, eventFromForm());
         previewEvent.displayTime = previewEvent.time;
         previewEvent['length'] += ' miles';
-        editForm = $('#general-fields').remove();
+        previewEvent['preview'] = true;
+        previewEvent['mapLink'] = getMapLink(previewEvent['address']);
+        $('#general-fields').hide();
         mustacheData = {dates: [{
             date: previewEvent.dates[0],
             events: [previewEvent]
         }]};
         $('#preview-button').hide();
         $('#preview-edit-button').show().on('click', function() {
+            $('#general-fields').show();
             $('.date').remove();
-            $('#mustache-html').append(editForm);
             $('#preview-button').show();
             $('#preview-edit-button').hide();
         });
         var template = $('#mustache-template').html();
         var info = Mustache.render(template, mustacheData);
         $('#mustache-html').append(info);
-        $('#detailsContainer').show();
     }
 
     /* Date Picker JS */
