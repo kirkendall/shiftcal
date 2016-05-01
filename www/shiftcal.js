@@ -411,7 +411,8 @@ $(document).ready( function() {
         displayEditForm();
     });
 
-    $(document).on('click', 'a#view-events-button', function(e) {
+    $(document).on('click', 'a#view-events-button, #confirm-cancel', function(e) {
+        location.hash = 'viewEvents';
         displayCalendar();
     });
 

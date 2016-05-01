@@ -26,6 +26,20 @@
     </nav>
     <div id="mustache-html" class="container"></div>
 
+    <div class="modal fade" tabindex="-1" id="cancel-modal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>Are you sure you want to cancel?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirm-cancel" data-dismiss="modal" class="btn btn-warning">Yes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <script id="mustache-template" type="text/template">
         {{#dates}}
         <div class="date{{#preview}} preview{{/preview}}">
@@ -79,6 +93,7 @@
                 <button id="preview-edit-button" type="button" class="btn btn-secondary">Edit</button>
                 <button id="preview-button" type="button" class="btn btn-secondary">Preview</button>
                 <button id="save-button" type="button" class="btn btn-primary">Post</button>
+                <button id="cancel-button" type="button" class="btn btn-warning" data-toggle="modal" data-target="#cancel-modal">Cancel</button>
             </div>
             <span id="save-result"></span>
         </div>
