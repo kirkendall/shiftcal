@@ -28,7 +28,7 @@
 
     <script id="mustache-template" type="text/template">
         {{#dates}}
-        <div class="date">
+        <div class="date{{#preview}} preview{{/preview}}">
         <div class="dateHeader">{{date}}</div>
             {{#events}}
                 <div class="event row" data-event-id="{{id}}">
@@ -45,19 +45,19 @@
                             </div>
                         </div>
                     </a>
-                    <div id="detailsContainer{{id}}" class="collapse">
+                    <div id="detailsContainer{{id}}" {{^ preview }}class="collapse"{{/ preview }}>
                         <div class="hideButton col-xs-4">
-                            <button class="btn btn-default"data-toggle="collapse" data-target="#detailsContainer{{id}}">Hide</button>
+                            {{^ preview }}<button class="btn btn-default"data-toggle="collapse" data-target="#detailsContainer{{id}}">Hide</button>{{/ preview }}
                         </div>
                         <div class="eventDetails col-xs-8">
                             <div class="otherButtons">
                                 <a href="{{mapLink}}" target="_blank">
                                     <button class="btn btn-default map">Map</button>
-                                </a>
+                                </a>{{^ preview }}
                                 <button class="btn btn-default export">Export</button>
                                 {{#showEditButton}}<a href="#editEvent/{{id}}" >
                                     <button class="btn btn-default edit">Edit</button>
-                                </a>{{/showEditButton}}
+                                </a>{{/showEditButton}}{{/ preview }}
                             </div>
                             <div class="mainDetails">
                                 <p>{{details}}</p>
