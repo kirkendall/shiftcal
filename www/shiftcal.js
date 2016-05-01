@@ -82,7 +82,7 @@ $(document).ready( function() {
             for ( m = 0; m < 60; m += 15 ) {
                 if ( h > 11 ) {
                     meridian = 'PM';
-                };
+                }
                 if ( h === 0 ) {
                     displayHour = 12;
                 } else if ( h > 12 ) {
@@ -121,17 +121,15 @@ $(document).ready( function() {
         });
         if (shiftEvent.dates.length === 0) {
             $('#save-button').prop('disabled', true);
+            $('#preview-button').prop('disabled', true);
         }
         $('#save-button').click(function() {
-            var postVars = {},
+            var postVars,
                 isNew = !shiftEvent.id;
             $('.form-group').removeClass('has-error');
             $('.help-block').remove();
             $('#save-result').removeClass('text-success').removeClass('text-danger').text('');
-            $('form').serializeArray().map(function (x) {
-                postVars[x.name] = x.value;
-            });
-            postVars['dates'] = dateList();
+            postVars = eventFromForm();
             if (!isNew) {
                 postVars['id'] = shiftEvent.id;
             }
@@ -159,6 +157,45 @@ $(document).ready( function() {
                 contentType: 'application/json'
             });
         });
+
+        $(document).on('click', '#preview-button', function(e) {
+            previewEvent(shiftEvent);
+        });
+    }
+
+    function eventFromForm() {
+        var harvestedEvent = {};
+        $('form').serializeArray().map(function (x) {
+            harvestedEvent[x.name] = x.value;
+        });
+        harvestedEvent['dates'] = dateList();
+        return harvestedEvent;
+    }
+
+    //
+    function previewEvent(shiftEvent) {
+        var previewEvent = {},
+            editForm,
+            mustacheData;
+        $.extend(previewEvent, shiftEvent, eventFromForm());
+        previewEvent.displayTime = previewEvent.time;
+        previewEvent['length'] += ' miles';
+        editForm = $('#general-fields').remove();
+        mustacheData = {dates: [{
+            date: previewEvent.dates[0],
+            events: [previewEvent]
+        }]};
+        $('#preview-button').hide();
+        $('#preview-edit-button').show().on('click', function() {
+            $('.date').remove();
+            $('#mustache-html').append(editForm);
+            $('#preview-button').show();
+            $('#preview-edit-button').hide();
+        });
+        var template = $('#mustache-template').html();
+        var info = Mustache.render(template, mustacheData);
+        $('#mustache-html').append(info);
+        $('#detailsContainer').show();
     }
 
     /* Date Picker JS */
@@ -234,10 +271,12 @@ $(document).ready( function() {
                 if (dateMap[date]) {
                     selectedCount++;
                     $('#save-button').prop('disabled', false);
+                    $('#preview-button').prop('disabled', false);
                 } else {
                     selectedCount--;
                     if ( selectedCount === 0 ) {
                         $('#save-button').prop('disabled', true);
+                        $('#preview-button').prop('disabled', true);
                     }
                 }
                 $e.toggleClass('selected', dateMap[date]);

@@ -133,4 +133,7 @@ a.expandDetails {
     position: absolute;
     font-size: .8em;
 }
+#preview-edit-button {
+    display: none;
+}
 /* /Date Picker CSS */
