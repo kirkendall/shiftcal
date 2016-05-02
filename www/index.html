@@ -26,6 +26,20 @@
     </nav>
     <div id="mustache-html" class="container"></div>
 
+    <div class="modal fade" tabindex="-1" id="cancel-modal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>Are you sure you want to cancel?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirm-cancel" data-dismiss="modal" class="btn btn-warning">Yes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <script id="mustache-template" type="text/template">
         {{#dates}}
         <div class="date{{#preview}} preview{{/preview}}">
@@ -72,6 +86,7 @@
             {{/events}}
         </div>
         {{/dates}}
+        <a id="load-more" href="#">Show additional events</a>
     </script>
     <script id="mustache-edit" type="text/template">
         <div id="edit-header" >
@@ -79,6 +94,7 @@
                 <button id="preview-edit-button" type="button" class="btn btn-secondary">Edit</button>
                 <button id="preview-button" type="button" class="btn btn-secondary">Preview</button>
                 <button id="save-button" type="button" class="btn btn-primary">Post</button>
+                <button id="cancel-button" type="button" class="btn btn-warning" data-toggle="modal" data-target="#cancel-modal">Cancel</button>
             </div>
             <span id="save-result"></span>
         </div>
@@ -90,7 +106,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label" for="details">Description:</label>
-                <input type="text" class="form-control" name="details" id="details" value="{{details}}" />
+                <textarea class="form-control" name="details" id="details" >{{details}}</textarea>
             </div>
             <div class="form-group">
                 <label class="control-label" for="venue">Venue name:</label>
@@ -133,12 +149,14 @@
                 <input type="text" class="form-control" name="email" id="email" value="{{email}}" >
             </div>
             <div class="checkbox">
+                <input type="hidden" name="email-me" value="0" />
                 <label class="control-label" for="email-me">
                     <input type="checkbox" name="email-me" id="email-me" {{# emailMe }}checked{{/ emailMe }} />
                     Send forum messages to this email address
                 </label>
             </div>
             <div class="checkbox">
+                <input type="hidden" name="hideemail" value="0" />
                 <label class="control-label" for="hideemail">
                     <input type="checkbox" name="hideemail" id="hideemail" {{# hideEmail }}checked{{/ hideEmail }} />
                     Don't publish my email address online
@@ -146,6 +164,7 @@
             </div>
             <p>For tips on making your ride successful, we ask that you read the <a href="rideleadingcomic.html">Ride Leading Comic</a> at least once before submitting an event</p>
             <div class="checkbox">
+                <input type="hidden" name="read_comic" value="0" />
                 <label class="control-label" for="read_comic">
                     <input type="checkbox" name="read_comic" id="read_comic" {{# readComic }}checked{{/ readComic }} />
                     I have read the Ride Leading Comic

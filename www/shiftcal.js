@@ -1,13 +1,15 @@
 $(document).ready( function() {
-    function displayCalendar() {
-        var startDate = new Date();
+    var startDate = new Date(),
+        container = $('#mustache-html');
+
+    function displayCalendar(append) {
         var endDate = new Date();
-        endDate.setDate(startDate.getDate() + 3);
+        endDate.setDate(startDate.getDate() + 9);
         $.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
             var groupedByDate = [];
             var mustacheData = { dates: [] };
             $.each(data.events, function( index, value ) {
-                var date = value.date;
+                var date = formatDate(value.date);
                 if (groupedByDate[date] === undefined) {
                     groupedByDate[date] = {
                         date: date,
@@ -46,7 +48,12 @@ $(document).ready( function() {
             }
             var template = $('#mustache-template').html();
             var info = Mustache.render(template, mustacheData);
-            $('#mustache-html').empty().append(info);
+            if (append) {
+                $('#load-more').remove();
+            } else {
+                container.empty();
+            }
+            container.append(info);
         });
     }
 
@@ -116,7 +123,7 @@ $(document).ready( function() {
 
         template = $('#mustache-edit').html();
         rendered = Mustache.render(template, shiftEvent);
-        $('#mustache-html').empty().append(rendered);
+        container.empty().append(rendered);
         setupDatePicker(shiftEvent['dates'] || []);
 
         $('#edit-header').affix({
@@ -188,7 +195,7 @@ $(document).ready( function() {
         previewEvent['mapLink'] = getMapLink(previewEvent['address']);
         $('#general-fields').hide();
         mustacheData = {dates: [{
-            date: previewEvent.dates[0],
+            date: formatDate(previewEvent.dates[0]),
             events: [previewEvent]
         }]};
         $('#preview-button').hide();
@@ -200,7 +207,19 @@ $(document).ready( function() {
         });
         var template = $('#mustache-template').html();
         var info = Mustache.render(template, mustacheData);
-        $('#mustache-html').append(info);
+        container.append(info);
+    }
+
+    function formatDate(dateString) {
+        var date = new Date(dateString);
+        return date.toLocaleDateString(
+            navigator.language,
+            {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
+            }
+        );
     }
 
     /* Date Picker JS */
@@ -411,7 +430,9 @@ $(document).ready( function() {
         displayEditForm();
     });
 
-    $(document).on('click', 'a#view-events-button', function(e) {
+    $(document).on('click', 'a#view-events-button, #confirm-cancel', function(e) {
+        location.hash = 'viewEvents';
+        startDate = new Date();
         displayCalendar();
     });
 
@@ -423,6 +444,12 @@ $(document).ready( function() {
     $(document).on('click', 'button.edit', function(e) {
         var id = $(e.target).closest('div.event').data('event-id');
         displayEditForm(id);
+    });
+
+    $(document).on('click', '#load-more', function(e) {
+        startDate.setDate(startDate.getDate() + 10);
+        displayCalendar(true);
+        return false;
     });
 
     if (/^#addEvent/.test(location.hash)) {
