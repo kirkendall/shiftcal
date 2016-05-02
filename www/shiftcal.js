@@ -7,7 +7,7 @@ $(document).ready( function() {
             var groupedByDate = [];
             var mustacheData = { dates: [] };
             $.each(data.events, function( index, value ) {
-                var date = value.date;
+                var date = formatDate(value.date);
                 if (groupedByDate[date] === undefined) {
                     groupedByDate[date] = {
                         date: date,
@@ -188,7 +188,7 @@ $(document).ready( function() {
         previewEvent['mapLink'] = getMapLink(previewEvent['address']);
         $('#general-fields').hide();
         mustacheData = {dates: [{
-            date: previewEvent.dates[0],
+            date: formatDate(previewEvent.dates[0]),
             events: [previewEvent]
         }]};
         $('#preview-button').hide();
@@ -201,6 +201,18 @@ $(document).ready( function() {
         var template = $('#mustache-template').html();
         var info = Mustache.render(template, mustacheData);
         $('#mustache-html').append(info);
+    }
+
+    function formatDate(dateString) {
+        var date = new Date(dateString);
+        return date.toLocaleDateString(
+            navigator.language,
+            {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
+            }
+        );
     }
 
     /* Date Picker JS */
