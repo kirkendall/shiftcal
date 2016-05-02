@@ -2,7 +2,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .date {
-  max-width: 400px;
   margin: auto;
 }
 /*div { border: 1px solid red }*/
@@ -47,11 +46,17 @@ a.expandDetails {
 }
 #edit-header {
     width:100%;
+    background:white;
 }
 .affix {
     position: fixed;
     top: 0;
     background: #fff;
+}
+/* Cheat bootstrap for one line mobile nav */
+.nav>li>a {
+    display:inline-block;
+    color:#000 !important;
 }
 
 /* Date Picker CSS */
@@ -127,5 +132,8 @@ a.expandDetails {
     display: block;
     position: absolute;
     font-size: .8em;
+}
+#preview-edit-button {
+    display: none;
 }
 /* /Date Picker CSS */
