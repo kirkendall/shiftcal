@@ -41,7 +41,14 @@ function build_json_response($input) {
 
     $validator->addRequiredFields('title', 'venue', 'address', 'organizer', 'email', 'read_comic');
     $validator->addEmailFields('email');
-    
+    $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for \1');
+    // If id is specified require secret
+    $validator->addConditionalRule(
+        array('id'),
+        NULL,
+        array('secret')
+    );
+
     $messages = $validator->validate(TRUE, TRUE);
     if (!$data['read_comic']) {
         $messages['read_comic'] = 'You must have read the Ride Leading Comic';
@@ -57,6 +64,16 @@ function build_json_response($input) {
 
     // Converts data to an event, loading the existing one if id is included in data
     $event = Event::fromArray($data);
+
+    // Else
+    if ($event->exists() && !$event->secretValid($data['secret'])) {
+        return array(
+            'error' => array(
+                'message' => 'Invalid secret, use link from email'
+            )
+        );
+    }
+
     $messages = $event->validate($return_messages=TRUE, $remove_column_names=TRUE);
 
     $inputDateStrings = get($data['dates'], array());
@@ -85,15 +102,28 @@ function build_json_response($input) {
         );
     }
 
+    // if needs secret generate and email
+    if (!$event->exists()) {
+        $includeSecret = true;
+    }
+    else {
+        $includeSecret = false;
+    }
+
     // If there are validation errors this starts spewing html, so we validate before
     $event->store();
-
 
     // Create/delete EventTimes to match the list of dates included
     EventTime::matchEventTimesToDates($event, $validDates);
 
     // Returns the created object
-    return $event->toDetailArray();
+    $details = $event->toDetailArray();
+    if ($includeSecret) {
+        $details['secret'] = $event->getSecret();
+        // Wait until after it is stored to ensure it has an id
+        $event->emailSecret();
+    }
+    return $details;
 }
 
 ob_start();

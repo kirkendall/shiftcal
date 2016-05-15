@@ -44,6 +44,7 @@ class Event extends fActiveRecord {
         }
         if ($event == null) {
             $event = new Event();
+            $event->generateSecret();
         }
 
         // These are marked as required
@@ -78,6 +79,20 @@ class Event extends fActiveRecord {
         $detailArray["dates"] = $this->getDates();
         // return potentially augmented array
         return $detailArray;
+    }
+
+    public function secretValid($secret) {
+        return $this->getSecret() == $secret;
+    }
+
+    private function generateSecret() {
+        $this->setSecret(md5(drupal_random_bytes(32)));
+    }
+
+    public function emailSecret() {
+        global $PROTOCOL, $HOST, $PATH;
+        $base = $PROTOCOL . $HOST . $PATH;
+        mail($this->getEmail(), "Edit event", "$base#editEvent/" . $this->getId() . "/" .$this->getSecret());
     }
 }
 fORM::mapClassToTable('Event', 'calevent');

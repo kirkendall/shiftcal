@@ -100,6 +100,7 @@
         </div>
         <form id="general-fields">
             <input type="hidden" name="id" value="{{id}}" />
+            <input type="hidden" name="secret" value="{{secret}}" />
             <div class="form-group">
                 <label class="control-label" for="title">Event title:</label>
                 <input type="text" class="form-control" name="title" id="title" value="{{title}}" />
@@ -151,14 +152,14 @@
             <div class="checkbox">
                 <input type="hidden" name="email-me" value="0" />
                 <label class="control-label" for="email-me">
-                    <input type="checkbox" name="email-me" id="email-me" {{# emailMe }}checked{{/ emailMe }} />
+                    <input type="checkbox" name="email-me" id="email-me" value="1" {{# emailMe }}checked{{/ emailMe }} />
                     Send forum messages to this email address
                 </label>
             </div>
             <div class="checkbox">
                 <input type="hidden" name="hideemail" value="0" />
                 <label class="control-label" for="hideemail">
-                    <input type="checkbox" name="hideemail" id="hideemail" {{# hideEmail }}checked{{/ hideEmail }} />
+                    <input type="checkbox" name="hideemail" id="hideemail" value="1" {{# hideEmail }}checked{{/ hideEmail }} />
                     Don't publish my email address online
                 </label>
             </div>
@@ -166,7 +167,7 @@
             <div class="checkbox">
                 <input type="hidden" name="read_comic" value="0" />
                 <label class="control-label" for="read_comic">
-                    <input type="checkbox" name="read_comic" id="read_comic" {{# readComic }}checked{{/ readComic }} />
+                    <input type="checkbox" name="read_comic" id="read_comic" value="1" {{# readComic }}checked{{/ readComic }} />
                     I have read the Ride Leading Comic
                 </label>
             </div>
