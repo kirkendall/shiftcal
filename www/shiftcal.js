@@ -51,10 +51,11 @@ $(document).ready( function() {
         });
     }
 
-    function displayEditForm( id ) {
+    function displayEditForm( id , secret ) {
         if (id) {
             // TODO: loading spinner
             $.get( 'retrieve_event.php?id=' + id, function( data ) {
+                data.secret = secret;
                 data.readComic = true;
                 populateEditForm( data );
             });
@@ -141,7 +142,9 @@ $(document).ready( function() {
                     var msg = isNew ? 'Event saved!' : 'Event updated!';
                     $('#save-result').addClass('text-success').text(msg);
                     shiftEvent.id = returnVal.id;
-                    location.hash = '#editEvent/' + returnVal.id;
+                    if (returnVal.secret) {
+                        location.hash = '#editEvent/' + returnVal.id + '/' + returnVal.secret;
+                    }
                 },
                 error: function(returnVal) {
                     var err = returnVal.responseJSON.error;
@@ -426,7 +429,8 @@ $(document).ready( function() {
         /^#editEvent/.test(location.hash) &&
         location.hash.indexOf('/') > 0
     ) {
-        displayEditForm(location.hash.split('/')[1]);
+        var locationHashParts = location.hash.split('/');
+        displayEditForm(locationHashParts[1], locationHashParts[2]);
     } else {
         displayCalendar();
     }
