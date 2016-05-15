@@ -194,6 +194,7 @@ $(document).ready( function() {
         $.extend(previewEvent, shiftEvent, eventFromForm());
         previewEvent.displayTime = previewEvent.time;
         previewEvent['length'] += ' miles';
+        previewEvent['preview'] = true;
         previewEvent['mapLink'] = getMapLink(previewEvent['address']);
         $('#general-fields').hide();
         mustacheData = {dates: [{
