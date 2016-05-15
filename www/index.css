@@ -137,3 +137,12 @@ a.expandDetails {
     display: none;
 }
 /* /Date Picker CSS */
+.modal-body {
+    text-align:center;
+}
+#load-more {
+    display:block;
+    width:100%;
+    text-align:center;
+    font-size: 2em;
+}

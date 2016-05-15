@@ -38,7 +38,7 @@ function build_json_response($input) {
 
     $_POST = $data; // fValidation inspects $_POST for field data
     $validator = new fValidation();
-    //TODO: validate length, add 'start_date', 'start_time', custom error for checkboxes
+
     $validator->addRequiredFields('title', 'venue', 'address', 'organizer', 'email', 'read_comic');
     $validator->addEmailFields('email');
     $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for \1');
@@ -48,8 +48,11 @@ function build_json_response($input) {
         NULL,
         array('secret')
     );
-    
+
     $messages = $validator->validate(TRUE, TRUE);
+    if (!$data['read_comic']) {
+        $messages['read_comic'] = 'You must have read the Ride Leading Comic';
+    }
     if ($messages) {
         return array(
             'error' => array(
@@ -71,7 +74,7 @@ function build_json_response($input) {
         );
     }
 
-    $messages = $event->validate($return_messages=TRUE);
+    $messages = $event->validate($return_messages=TRUE, $remove_column_names=TRUE);
 
     $inputDateStrings = get($data['dates'], array());
     $validDates = array();
