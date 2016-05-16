@@ -214,7 +214,9 @@ $(document).ready( function() {
     }
 
     function formatDate(dateString) {
-        var date = new Date(dateString);
+        var parts = dateString.split('-'),
+            date = new Date(parts[0], parseInt(parts[1]) - 1, parts[2]);
+
         return date.toLocaleDateString(
             navigator.language,
             {
