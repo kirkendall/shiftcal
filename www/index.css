@@ -146,3 +146,9 @@ a.expandDetails {
     text-align:center;
     font-size: 2em;
 }
+.audience-F {
+    color: green;
+}
+.audience-A {
+    color: red;
+}
