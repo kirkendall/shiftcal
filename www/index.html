@@ -47,7 +47,7 @@
             {{#events}}
                 <div class="event row" data-event-id="{{id}}">
                     <div class="time col-xs-4">
-                        <h3>{{displayTime}}</h3>
+                        <h3 class="audience-{{audience}}">{{displayTime}}</h3>
                     </div>
                     <a class="expandDetails" href="#" data-toggle="collapse" data-target="#detailsContainer{{id}}">
                         <div class="col-xs-8" >
@@ -86,7 +86,9 @@
             {{/events}}
         </div>
         {{/dates}}
+        {{^ preview }}
         <a id="load-more" href="#">Show additional events</a>
+        {{/ preview }}
     </script>
     <script id="mustache-edit" type="text/template">
         <div id="edit-header" >
