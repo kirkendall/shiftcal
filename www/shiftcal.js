@@ -349,6 +349,7 @@ $(document).ready( function() {
 
     function normalizeDate(date) {
         var jsd = new Date(date);
+        jsd.setTime(jsd.getTime() + jsd.getTimezoneOffset()*60*1000);
         var day = jsd.getDate();
         var monthIndex = jsd.getMonth();
         var year = jsd.getFullYear();
