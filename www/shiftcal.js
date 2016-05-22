@@ -3,7 +3,7 @@ $(document).ready( function() {
         container = $('#mustache-html');
 
     function displayCalendar(append) {
-        var endDate = new Date();
+        var endDate = new Date(startDate);
         endDate.setDate(startDate.getDate() + 9);
         $.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
             var groupedByDate = [];
