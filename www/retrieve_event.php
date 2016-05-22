@@ -20,10 +20,12 @@ $response = array();
 
 if (isset($_GET['id'])) {
     $event_id=$_GET['id'];
+
     try {
         // get event by id
         $event = new Event($event_id);
-        $response = $event->toDetailArray();
+        $include_hidden = isset($_GET['secret']) && $event->secretValid($_GET['secret']);
+        $response = $event->toDetailArray($include_hidden);
     } catch (fExpectedException $e) {
         $response['error'] = array(
             'message' => $e->getMessage()

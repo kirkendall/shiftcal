@@ -30,7 +30,7 @@ $(document).ready( function() {
                 }
                 value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
                 value.mapLink = getMapLink(value.address);
-                value.showEditButton = true; // TODO: permissions
+                // value.showEditButton = true; // TODO: permissions
                 groupedByDate[date].events.push(value);
             });
 
@@ -64,9 +64,9 @@ $(document).ready( function() {
     }
 
     function displayEditForm( id , secret ) {
-        if (id) {
+        if (id && secret) {
             // TODO: loading spinner
-            $.get( 'retrieve_event.php?id=' + id, function( data ) {
+            $.get( 'retrieve_event.php?id=' + id + "&secret=" + secret, function( data ) {
                 data.secret = secret;
                 data.readComic = true;
                 populateEditForm( data );
