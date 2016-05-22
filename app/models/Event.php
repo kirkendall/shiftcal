@@ -1,7 +1,7 @@
 <?php
 
 class Event extends fActiveRecord {
-    public function toArray() {
+    public function toArray($include_hidden=false) {
         /*
         id:
         title:
@@ -21,10 +21,11 @@ class Event extends fActiveRecord {
             'organizer' => $this->getName(),
             'details' => $this->getDescr(),
             'time' => strval($this->getEventtime()),
+            'hideemail' => $this->getHideemail(),
             'length' => NULL
         );
 
-        if ($this->getHideemail() == 0) {
+        if ($this->getHideemail() == 0 || $include_hidden) {
             $details['email'] = $this->getEmail();
         }
         else {
@@ -72,9 +73,9 @@ class Event extends fActiveRecord {
         return $eventDates;
     }
 
-    public function toDetailArray() {
+    public function toDetailArray($include_hidden=false) {
         // first get the data into an array
-        $detailArray = $this->toArray();
+        $detailArray = $this->toArray($include_hidden);
         // add all times that exist, maybe none.
         $detailArray["dates"] = $this->getDates();
         // return potentially augmented array
