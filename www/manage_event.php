@@ -117,7 +117,7 @@ function build_json_response($input) {
     EventTime::matchEventTimesToDates($event, $validDates);
 
     // Returns the created object
-    $details = $event->toDetailArray();
+    $details = $event->toDetailArray(true);
     if ($includeSecret) {
         $details['secret'] = $event->getPassword();
         // Wait until after it is stored to ensure it has an id
