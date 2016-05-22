@@ -156,10 +156,13 @@ $(document).ready( function() {
                     shiftEvent.id = returnVal.id;
                     if (returnVal.secret) {
                         location.hash = '#editEvent/' + returnVal.id + '/' + returnVal.secret;
+                        $('#secret').val(returnVal.secret);
                     }
                 },
                 error: function(returnVal) {
-                    var err = returnVal.responseJSON.error;
+                    var err = returnVal.responseJSON
+                                ? returnVal.responseJSON.error
+                                : 'Server error saving event!';
                     $('#save-result').addClass('text-danger').text(err.message);
                     $.each(err.fields, function(fieldName, message) {
                         $('input[name=' + fieldName + ']')
