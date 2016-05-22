@@ -317,6 +317,7 @@ $(document).ready( function() {
 
         // Setup the month table scroll checks
         $dateSelect.scroll(checkBounds);
+        checkBounds();
     }
 
 
