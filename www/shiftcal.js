@@ -160,7 +160,9 @@ $(document).ready( function() {
                     }
                 },
                 error: function(returnVal) {
-                    var err = returnVal.responseJSON.error;
+                    var err = returnVal.responseJSON
+                                ? returnVal.responseJSON.error
+                                : 'Server error saving event!';
                     $('#save-result').addClass('text-danger').text(err.message);
                     $.each(err.fields, function(fieldName, message) {
                         $('input[name=' + fieldName + ']')
