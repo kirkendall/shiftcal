@@ -287,7 +287,7 @@ $(document).ready( function() {
         // Fill in the first month
         $monthTable.html(getMonthHTML(earliestMonth));
         // Scroll the table to the top of the first month
-        $dateSelect.scrollTop(loadLaterTop() - $dateSelect.offset().top/2);
+        $dateSelect.scrollTop(loadEarlierBottom());
 
         // Add a click handler for individual days
         $monthTable.click(function(ev) {
