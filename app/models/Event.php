@@ -1,6 +1,16 @@
 <?php
 
 class Event extends fActiveRecord {
+    protected function configure() {
+        global $IMAGEDIR;
+
+        fORMFile::configureFileUploadColumn(
+            $this,
+            'image',
+            $IMAGEDIR
+        );
+    }
+
     public function toArray($include_hidden=false) {
         /*
         id:
@@ -23,6 +33,15 @@ class Event extends fActiveRecord {
             'time' => strval($this->getEventtime()),
             'hideemail' => $this->getHideemail(),
             'length' => NULL
+            //'length' => $this->getLength(),
+            'timedetails' => $this->getTimedetails(),
+            'weburl' => $this->getWeburl(),
+            'image' => $this->getImage(),
+            'audience' => $this->getAudience(),
+            //'printevent' => $this->getPrintevent(),
+            'tinytitle' => $this->getTinytitle(),
+            'printdescr' => $this->getPrintdescr(),
+            //'printcontact' => $this->getPrintcontact()
         );
 
         if ($this->getHideemail() == 0 || $include_hidden) {
@@ -60,6 +79,13 @@ class Event extends fActiveRecord {
         $event->setDescr(get($input['details'], ''));
         $event->setEventtime(get($input['time'], ''));
         $event->setHighlight(0);
+        $event->setTimedetails(get($input['timedetails'], ''));
+        $event->setWeburl(get($input['weburl'], ''));
+        $event->setImage(get($input['image'], ''));
+        $event->setAudience(get($input['audience'], ''));
+        $event->setTinytitle(get($input['tinytitle'], ''));
+        $event->setPrintdescr(get($input['printdescr'], ''));
+        //$event->setPrintcontact(get($input['printcontact'], ''));
         // Length
         return $event;
     }
