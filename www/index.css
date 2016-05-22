@@ -56,7 +56,8 @@ a.expandDetails {
 /* Cheat bootstrap for one line mobile nav */
 .nav>li>a {
     display:inline-block;
-    color:#000 !important;
+    color:#fff !important;
+    font-weight: bold;
 }
 
 /* Date Picker CSS */
@@ -86,6 +87,8 @@ a.expandDetails {
 .calendar-day {
     border-top: 1px solid gray;
     padding: 3px;
+    color: #999;
+
     line-height: 1.5em;
     text-align: center;
 }
@@ -106,32 +109,37 @@ a.expandDetails {
 .calendar-month-title {
     position: relative;
     width: 30px;
+    color: #fff;
+    background-color: #f90;
+    font-weight: bold;
 }
 
 .color-jan, .color-mar, .color-may, .color-jul, .color-sep, .color-nov {
-    background-color: #aaa;
+    background-color: #fc6;
 }
 .color-jan-odd, .color-mar-odd, .color-may-odd,
 .color-jul-odd, .color-sep-odd, .color-nov-odd {
-    background-color: #bbb;
+    background-color: #fd6;
 }
 .color-feb, .color-apr, .color-jun, .color-aug, .color-oct, .color-dec {
-    background-color: #ccc;
+    background-color: #fd6;
 }
 .color-feb-odd, .color-apr-odd, .color-jun-odd,
 .color-aug-odd, .color-oct-odd, .color-dec-odd {
-    background-color: #ddd;
+    background-color: #fe9;
 }
 
 .calendar-month-title span {
     white-space: nowrap;
     transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
     width: 0;
     left: 10px;
     bottom: 0;
     display: block;
     position: absolute;
     font-size: .8em;
+    
 }
 .day-of-week {
     width: 100%;
