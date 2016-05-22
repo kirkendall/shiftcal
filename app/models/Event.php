@@ -32,7 +32,7 @@ class Event extends fActiveRecord {
             'details' => $this->getDescr(),
             'time' => strval($this->getEventtime()),
             'hideemail' => $this->getHideemail(),
-            'length' => NULL
+            'length' => NULL,
             //'length' => $this->getLength(),
             'timedetails' => $this->getTimedetails(),
             'weburl' => $this->getWeburl(),
