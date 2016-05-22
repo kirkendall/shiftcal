@@ -133,6 +133,12 @@ a.expandDetails {
     position: absolute;
     font-size: .8em;
 }
+.day-of-week {
+    width: 100%;
+    font-size: 0.9em;
+    text-align: center;
+    table-layout: fixed;
+}
 #preview-edit-button {
     display: none;
 }
