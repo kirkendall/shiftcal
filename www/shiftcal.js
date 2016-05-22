@@ -193,7 +193,8 @@ $(document).ready( function() {
             });
         });
 
-        $(document).on('click', '#preview-button', function(e) {
+        $(document).off('click', '#preview-button')
+            .on('click', '#preview-button', function(e) {
             previewEvent(shiftEvent);
         });
     }
@@ -207,7 +208,6 @@ $(document).ready( function() {
         return harvestedEvent;
     }
 
-    //
     function previewEvent(shiftEvent) {
         var previewEvent = {},
             mustacheData;
@@ -224,12 +224,7 @@ $(document).ready( function() {
             preview: true
         };
         $('#preview-button').hide();
-        $('#preview-edit-button').show().on('click', function() {
-            $('#event-entry').show();
-            $('.date').remove();
-            $('#preview-button').show();
-            $('#preview-edit-button').hide();
-        });
+        $('#preview-edit-button').show();
         var template = $('#mustache-template').html();
         var info = Mustache.render(template, mustacheData);
         container.append(info);
@@ -478,6 +473,13 @@ $(document).ready( function() {
         startDate.setDate(startDate.getDate() + 10);
         displayCalendar(true);
         return false;
+    });
+
+    $(document).on('click', '#preview-edit-button', function() {
+        $('#event-entry').show();
+        $('.date').remove();
+        $('#preview-button').show();
+        $('#preview-edit-button').hide();
     });
 
     if (/^#addEvent/.test(location.hash)) {
