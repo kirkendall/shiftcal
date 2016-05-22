@@ -81,9 +81,9 @@ $(document).ready( function() {
             displayHour, displayMinute, timeChoice,
             template, rendered, item,
             lengths = [ '0-3', '3-8', '8-15', '15+'],
-            audiences = [{code: 'F', text: 'Family friendly'},
-                         {code: 'G', text: 'General'},
-                         {code: 'A', text: '21+'}];
+            audiences = [{code: 'F', text: 'Family Friendly. Adults bring children.'},
+                         {code: 'G', text: 'General, For adults, but kids welcome.'},
+                         {code: 'A', text: '21+ only. Alcohol involved.'}];
 
         shiftEvent.lengthOptions = [];
         for ( i = 0; i < lengths.length; i++ ) {
