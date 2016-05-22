@@ -156,6 +156,7 @@ $(document).ready( function() {
                     shiftEvent.id = returnVal.id;
                     if (returnVal.secret) {
                         location.hash = '#editEvent/' + returnVal.id + '/' + returnVal.secret;
+                        $('#secret').val(returnVal.secret);
                     }
                 },
                 error: function(returnVal) {

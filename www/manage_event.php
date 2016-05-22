@@ -119,7 +119,7 @@ function build_json_response($input) {
     // Returns the created object
     $details = $event->toDetailArray();
     if ($includeSecret) {
-        $details['secret'] = $event->getSecret();
+        $details['secret'] = $event->getPassword();
         // Wait until after it is stored to ensure it has an id
         $event->emailSecret();
     }

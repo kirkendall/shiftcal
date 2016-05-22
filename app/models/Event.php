@@ -82,17 +82,17 @@ class Event extends fActiveRecord {
     }
 
     public function secretValid($secret) {
-        return $this->getSecret() == $secret;
+        return $this->getPassword() == $secret;
     }
 
     private function generateSecret() {
-        $this->setSecret(md5(drupal_random_bytes(32)));
+        $this->setPassword(md5(drupal_random_bytes(32)));
     }
 
     public function emailSecret() {
         global $PROTOCOL, $HOST, $PATH;
         $base = $PROTOCOL . $HOST . $PATH;
-        mail($this->getEmail(), "Edit event", "$base#editEvent/" . $this->getId() . "/" .$this->getSecret());
+        mail($this->getEmail(), "Edit event", "$base#editEvent/" . $this->getId() . "/" .$this->getPassword());
     }
 }
 fORM::mapClassToTable('Event', 'calevent');
