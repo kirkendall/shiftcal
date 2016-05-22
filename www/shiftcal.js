@@ -214,13 +214,15 @@ $(document).ready( function() {
         $.extend(previewEvent, shiftEvent, eventFromForm());
         previewEvent.displayTime = previewEvent.time;
         previewEvent['length'] += ' miles';
-        previewEvent['preview'] = true;
         previewEvent['mapLink'] = getMapLink(previewEvent['address']);
         $('#event-entry').hide();
-        mustacheData = {dates: [{
-            date: formatDate(previewEvent.dates[0]),
-            events: [previewEvent]
-        }]};
+        mustacheData = {
+            dates: [{
+                date: formatDate(previewEvent.dates[0]),
+                events: [previewEvent]
+            }],
+            preview: true
+        };
         $('#preview-button').hide();
         $('#preview-edit-button').show().on('click', function() {
             $('#event-entry').show();
