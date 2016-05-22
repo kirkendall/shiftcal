@@ -79,14 +79,19 @@ $(document).ready( function() {
     function populateEditForm( shiftEvent ) {
         var i, h, m, meridian,
             displayHour, displayMinute, timeChoice,
-            template, rendered,
-            lengths = [ '0-3', '3-8', '8-15', '15+' ];
+            template, rendered, item,
+            lengths = [ '0-3', '3-8', '8-15', '15+'],
+            audiences = [{code: 'F', text: 'Family friendly'},
+                         {code: 'G', text: 'General'},
+                         {code: 'A', text: '21+'}];
 
         shiftEvent.lengthOptions = [];
         for ( i = 0; i < lengths.length; i++ ) {
-            shiftEvent.lengthOptions.push({
-                range: lengths[i]
-            });
+            item = {range: lengths[i]};
+            if (shiftEvent.length == lengths[i]) {
+                item.isSelected = true;
+            }
+            shiftEvent.lengthOptions.push(item);
         }
 
         shiftEvent.timeOptions = [];
@@ -121,6 +126,18 @@ $(document).ready( function() {
             }
         }
         shiftEvent.timeOptions.push({ time: "11:59 PM" });
+
+        shiftEvent.audienceOptions = [];
+        if (!shiftEvent.audience) {
+            shiftEvent.audience = 'G';
+        }
+        shiftEvent.audienceOptions = [];
+        for ( i = 0; i < audiences.length; i++ ) {
+            if (shiftEvent.audience == audiences[i].code) {
+                audiences[i].isSelected = true;
+            }
+            shiftEvent.audienceOptions.push(audiences[i]);
+        }
 
         template = $('#mustache-edit').html();
         rendered = Mustache.render(template, shiftEvent);
