@@ -181,7 +181,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="weburl">Website for more details:</label>
-                                <textarea class="form-control" name="weburl" id="weburl" >{{weburl}}</textarea>
+                                <input type="text" class="form-control" name="weburl" id="weburl" value="{{weburl}}" />
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="image">Image:</label>
@@ -218,8 +218,8 @@
                                 <input type="text" class="form-control" name="tinytitle" id="tinytitle" value="{{tinytitle}}" maxlength="24" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="printdescr">Print description:</label>
-                                <textarea class="form-control" name="printdescr" id="printdescr" maxlength="255" >{{printdescr}}</textarea>
+                                <label class="control-label" for="printdescr">Print description (120 chars):</label>
+                                <textarea class="form-control" name="printdescr" id="printdescr" maxlength="120" >{{printdescr}}</textarea>
                             </div>
                             <!--div class="form-group">
                                 <label class="control-label" for="printcontact">Print contact info:</label>
