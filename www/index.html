@@ -8,6 +8,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/formdata.js"></script>
     <script src="shiftcal.js"></script>
     <title>S H I F T to Bikes</title>
 </head>
@@ -74,6 +75,9 @@
                                 </a>{{/showEditButton}}{{/ preview }}
                             </div>
                             <div class="mainDetails">
+                                {{# image}}
+                                <img src="{{image}}" />
+                                {{/ image}}
                                 <p>{{details}}</p>
                                 <p class="contactInfo">Organized by: {{organizer}}</p>
                                 {{#email}}
@@ -183,9 +187,17 @@
                                 <label class="control-label" for="weburl">Website for more details:</label>
                                 <input type="text" class="form-control" name="weburl" id="weburl" value="{{weburl}}" />
                             </div>
+                            {{# image}}
+                            <img src="{{image}}" />
+                            {{/ image}}
                             <div class="form-group">
+                                {{# image}}
+                                <label class="control-label" for="image">Update Image:</label>
+                                {{/ image}}
+                                {{^ image}}
                                 <label class="control-label" for="image">Image:</label>
-                                <input type="file" class="form-control" name="image" id="image" value="{{image}}" />
+                                {{/ image}}
+                                <input type="file" class="form-control" name="image" id="image" />
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="audience">Audience:</label>

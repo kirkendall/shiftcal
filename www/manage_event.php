@@ -6,11 +6,7 @@
  */
 
 /**
- * This endpoint updates events, expecting a POST with json of the form:
- *  JSON:
- *  {
- *      TODO: Document from Event::fromArray code
- *  }
+ * This endpoint updates events, expecting a form/multipart upload with two parts, json and file[]:
  *
  *  If there is a problem the error code will be 400 with a json response of the form:
  *  {
@@ -26,8 +22,15 @@
 
 include(getcwd() . '/../app/init.php');
 
-function build_json_response($input) {
-    $data = json_decode($input, true);
+function build_json_response() {
+    if (!isset($_POST['json'])) {
+        return array(
+            'error' => array(
+                'message' => "No JSON found"
+            )
+        );
+    }
+    $data = json_decode($_POST['json'], true);
     if (!$data) {
         return array(
             'error' => array(
@@ -93,6 +96,28 @@ function build_json_response($input) {
         $messages['dates'] = "Invalid dates: " . implode(', ', $invalidDates);
     }
 
+    if (isset($_FILES['file'])) {
+        $uploader = new fUpload();
+        $uploader->setMIMETypes(
+            array(
+                'image/gif',
+                'image/jpeg',
+                'image/pjpeg',
+                'image/png'
+            ),
+            'The file uploaded is not an image'
+        );
+        $uploader->setMaxSize('2MB');
+        $uploader->setOptional();
+        $file_message = $uploader->validate('file', TRUE);
+        if ($file_message != null) {
+            $messages['file'] = $file_message;
+        }
+        global $IMAGEDIR;
+        $file = $uploader->move($IMAGEDIR, 'file');
+        $event->setImage($file->getName());
+    }
+
     if ($messages) {
         return array(
             'error' => array(
@@ -127,7 +152,7 @@ function build_json_response($input) {
 }
 
 ob_start();
-$response = build_json_response(file_get_contents('php://input'));
+$response = build_json_response();
 $contents = ob_get_contents();
 ob_end_clean();
 if ($contents) {

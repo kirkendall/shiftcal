@@ -163,10 +163,18 @@ $(document).ready( function() {
             if (!isNew) {
                 postVars['id'] = shiftEvent.id;
             }
-            $.ajax({
+            var data = new FormData();
+            $.each($('#image')[0].files, function(i, file) {
+                data.append('file', file);
+            });
+            data.append('json', JSON.stringify(postVars));
+            var opts = {
                 type: 'POST',
                 url: 'manage_event.php',
-                data: JSON.stringify(postVars),
+                contentType: false,
+                processData: false,
+                cache: false,
+                data: data,
                 success: function(returnVal) {
                     var msg = isNew ? 'Event saved!' : 'Event updated!';
                     $('#save-result').addClass('text-success').text(msg);
@@ -187,10 +195,14 @@ $(document).ready( function() {
                             .addClass('has-error')
                             .append('<div class="help-block">' + message + '</div>');
                     });
-                },
-                dataType: 'json',
-                contentType: 'application/json'
-            });
+                }
+            };
+            if(data.fake) {
+                opts.xhr = function() { var xhr = jQuery.ajaxSettings.xhr(); xhr.send = xhr.sendAsBinary; return xhr; }
+                opts.contentType = "multipart/form-data; boundary="+data.boundary;
+                opts.data = data.toString();
+            }
+            $.ajax(opts);
         });
 
         $(document).off('click', '#preview-button')

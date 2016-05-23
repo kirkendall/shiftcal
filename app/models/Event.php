@@ -1,17 +1,8 @@
 <?php
 
 class Event extends fActiveRecord {
-    protected function configure() {
-        global $IMAGEDIR;
-
-        fORMFile::configureFileUploadColumn(
-            $this,
-            'image',
-            $IMAGEDIR
-        );
-    }
-
     public function toArray($include_hidden=false) {
+        global $IMAGEPATH;
         /*
         id:
         title:
@@ -36,7 +27,7 @@ class Event extends fActiveRecord {
             //'length' => $this->getLength(),
             'timedetails' => $this->getTimedetails(),
             'weburl' => $this->getWeburl(),
-            'image' => $this->getImage(),
+            'image' => $this->getImage() != null ? $IMAGEPATH . '/' . $this->getImage() : null,
             'audience' => $this->getAudience(),
             //'printevent' => $this->getPrintevent(),
             'tinytitle' => $this->getTinytitle(),
@@ -81,7 +72,6 @@ class Event extends fActiveRecord {
         $event->setHighlight(0);
         $event->setTimedetails(get($input['timedetails'], ''));
         $event->setWeburl(get($input['weburl'], ''));
-        $event->setImage(get($input['image'], ''));
         $event->setAudience(get($input['audience'], ''));
         $event->setTinytitle(get($input['tinytitle'], ''));
         $event->setPrintdescr(get($input['printdescr'], ''));
