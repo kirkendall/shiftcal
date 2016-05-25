@@ -62,14 +62,14 @@
                     </a>
                     <div id="detailsContainer{{id}}" {{^ preview }}class="collapse"{{/ preview }}>
                         <div class="hideButton col-xs-4">
-                            {{^ preview }}<button class="btn btn-default"data-toggle="collapse" data-target="#detailsContainer{{id}}">Hide</button>{{/ preview }}
+                            {{^ preview }}<button class="btn btn-expand" data-toggle="collapse" data-target="#detailsContainer{{id}}">Hide</button>{{/ preview }}
                         </div>
                         <div class="eventDetails col-xs-8">
                             <div class="otherButtons">
                                 <a href="{{mapLink}}" target="_blank">
-                                    <button class="btn btn-default map">Map</button>
+                                    <button class="btn btn-expand map">Map</button>
                                 </a>{{^ preview }}
-                                <button class="btn btn-default export">Export</button>
+                               
                                 {{#showEditButton}}<a href="#editEvent/{{id}}" >
                                     <button class="btn btn-default edit">Edit</button>
                                 </a>{{/showEditButton}}{{/ preview }}
@@ -96,14 +96,15 @@
     </script>
     <script id="mustache-edit" type="text/template">
         <div id="edit-header" >
-            <div class="btn-group" role="group">
-                <button id="preview-edit-button" type="button" class="btn btn-secondary">Edit</button>
-                <button id="preview-button" type="button" class="btn btn-secondary">Preview</button>
-                <button id="save-button" type="button" class="btn btn-primary">Post</button>
-                <button id="cancel-button" type="button" class="btn btn-warning" data-toggle="modal" data-target="#cancel-modal">Cancel</button>
-            </div>
+           
+                <button id="preview-edit-button" type="button" class="btn btn-addEvent">Edit</button>
+                <button id="preview-button" type="button" class="btn btn-addEvent">Preview</button>
+                <button id="save-button" type="button" class="btn btn-addEvent">Post</button>
+                <button id="cancel-button" type="button" class="btn btn-addEvent" data-toggle="modal" data-target="#cancel-modal">Cancel</button>
+            
             <span id="save-result"></span>
         </div>
+        <br>
         <form id="event-entry">
             <input type="hidden" name="id" value="{{id}}" />
             <input type="hidden" name="secret" value="{{secret}}" />
@@ -114,6 +115,7 @@
                             Basic facts
                         </a>
                     </div>
+                    
                     <div id="general-fields" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="form-group">
