@@ -21,9 +21,18 @@ nav.navbar {
     font-weight: bold;
 }
 
-.date {
-    margin: auto;
+.colorLegend {
+    margin: 5px 10px 15px;
 }
+
+.container {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 5px;
+	padding-right: 0px;
+	width: auto;
+}
+
 /*div { border: 1px solid red }*/
 .dateHeader{
     background-color: #fd6;

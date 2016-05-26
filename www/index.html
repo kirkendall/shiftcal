@@ -25,6 +25,8 @@
             </div>
         </div>
     </nav>
+    
+    
     <div id="mustache-html" class="container"></div>
 
     <div class="modal fade" tabindex="-1" id="cancel-modal" role="dialog">
@@ -42,6 +44,10 @@
     </div><!-- /.modal -->
 
     <script id="mustache-template" type="text/template">
+        <div class="colorLegend">
+        	<p class="audience-F">Family Friendly events have green times.</p>
+        	<p class="audience-A">Adult Only (21+) events have red times.</p>
+    	</div>
         {{#dates}}
         <div class="date{{#preview}} preview{{/preview}}">
         <div class="dateHeader">{{date}}</div>
@@ -212,36 +218,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#print-fields">
-                            Printed calendar
-                        </a>
-                    </div>
-                    <div id="print-fields" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="checkbox">
-                                <input type="hidden" name="printevent" value="0" />
-                                <label class="control-label" for="printevent">
-                                    <input type="checkbox" name="printevent" id="printevent" value="1" {{# printevent }}checked{{/ printevent }} />
-                                    Include in the print calendar?
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="tinytitle">Tiny title (24 chars):</label>
-                                <input type="text" class="form-control" name="tinytitle" id="tinytitle" value="{{tinytitle}}" maxlength="24" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="printdescr">Print description (120 chars):</label>
-                                <textarea class="form-control" name="printdescr" id="printdescr" maxlength="120" >{{printdescr}}</textarea>
-                            </div>
-                            <!--div class="form-group">
-                                <label class="control-label" for="printcontact">Print contact info:</label>
-                                <input type="text" class="form-control" name="printcontact" id="printcontact" value="{{printcontact}}" maxlength="255" />
-                            </div-->
-                        </div>
-                    </div>
-                </div>
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#contact-fields">
@@ -272,6 +249,36 @@
                                     Don't publish my email address online
                                 </label>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#print-fields">
+                            Printed calendar
+                        </a>
+                    </div>
+                    <div id="print-fields" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="checkbox">
+                                <input type="hidden" name="printevent" value="0" />
+                                <label class="control-label" for="printevent">
+                                    <input type="checkbox" name="printevent" id="printevent" value="1" {{# printevent }}checked{{/ printevent }} />
+                                    Include in the print calendar?
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="tinytitle">Tiny title (24 chars):</label>
+                                <input type="text" class="form-control" name="tinytitle" id="tinytitle" value="{{tinytitle}}" maxlength="24" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="printdescr">Print description (120 chars):</label>
+                                <textarea class="form-control" name="printdescr" id="printdescr" maxlength="120" >{{printdescr}}</textarea>
+                            </div>
+                            <!--div class="form-group">
+                                <label class="control-label" for="printcontact">Print contact info:</label>
+                                <input type="text" class="form-control" name="printcontact" id="printcontact" value="{{printcontact}}" maxlength="255" />
+                            </div-->
                         </div>
                     </div>
                 </div>
