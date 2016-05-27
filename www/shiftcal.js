@@ -2,12 +2,29 @@ $(document).ready( function() {
     var startDate = new Date(),
         container = $('#mustache-html');
 
-    function displayCalendar(append) {
-        var endDate = new Date(startDate);
-        endDate.setDate(startDate.getDate() + 9);
+    function displayCalendar(pedalpalooza, append) {
+        if (pedalpalooza) {
+           startDate = new Date("June 9, 2016");
+           var endDate = new Date("July 4, 2016 23:59:59");
+           var pedalpalooza = './images/pp2016.jpg';
+           
+        }
+        else {
+            var endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 9);
+        }
+        
+
+        
         $.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
             var groupedByDate = [];
             var mustacheData = { dates: [] };
+
+            mustacheData.notAppend = !append; 
+            mustacheData.pedalpalooza = pedalpalooza;
+
+
+            
             $.each(data.events, function( index, value ) {
                 var date = formatDate(value.date);
                 if (groupedByDate[date] === undefined) {
@@ -469,7 +486,9 @@ $(document).ready( function() {
     $(document).on('click', 'a#view-events-button, #confirm-cancel', function(e) {
         location.hash = 'viewEvents';
         startDate = new Date();
-        displayCalendar();
+    	var pp = false;
+    	var append = false;        
+        displayCalendar(pp, append);
     });
 
     $(document).on('click', 'a#about-button', function(e) {
@@ -478,6 +497,13 @@ $(document).ready( function() {
 
     $(document).on('click', 'a#oldSite-button', function(e) {
         window.location.href = "http://shift2bikes.com/cal";
+    });
+    
+    $(document).on('click', 'a#pedalpalooza-button', function(e) {
+        location.hash = 'pedalpalooza';
+    	var pp = true;
+    	var append = false;
+        displayCalendar(pp, append);
     });
     
     $(document).on('click', 'a.expandDetails', function(e) {
@@ -492,7 +518,9 @@ $(document).ready( function() {
 
     $(document).on('click', '#load-more', function(e) {
         startDate.setDate(startDate.getDate() + 10);
-        displayCalendar(true);
+        var pp = false;
+    	var append = true;
+        displayCalendar(pp, append);
         return false;
     });
 
@@ -512,7 +540,9 @@ $(document).ready( function() {
         var locationHashParts = location.hash.split('/');
         displayEditForm(locationHashParts[1], locationHashParts[2]);
     } else {
-        displayCalendar();
+        var pp = false;
+    	var append = false;
+        displayCalendar(pp, append);
     }
 
     function displayAbout() {

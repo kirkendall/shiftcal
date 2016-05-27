@@ -49,11 +49,18 @@
     </div><!-- /.modal -->
 
     <script id="mustache-template" type="text/template">
-        <div class="pg-width-text">
-        	<p class="audience-F">Family Friendly events have green times.</p>
-        	<p class="audience-A">Adult Only (21+) events have red times.</p>
-    	</div>
+        {{#pedalpalooza}}
+    	    <img src= {{pedalpalooza}} />
+    	{{/pedalpalooza}}
+        {{#notAppend}}
+            <div class="pg-width-text">
+        	    <p class="audience-F">Family Friendly events have green times.</p>
+        	    <p class="audience-A">Adult Only (21+) events have red times.</p>
+    	    </div>
+        {{/notAppend}}
     	
+
+        
         {{#dates}}
         <div class="date{{#preview}} preview{{/preview}}">
         <div class="secondaryHeader">{{date}}</div>
@@ -102,9 +109,11 @@
             {{/events}}
         </div>
         {{/dates}}
-        {{^ preview }}
-        <a id="load-more" href="#">Show additional events</a>
-        {{/ preview }}
+        {{^ pedalpalooza }}
+            {{^ preview }}
+                <a id="load-more" href="#">Show additional events</a>
+            {{/ preview }}
+        {{/pedalpalooza }}
     </script>
     <script id="mustache-edit" type="text/template">
         <div id="edit-header" >
