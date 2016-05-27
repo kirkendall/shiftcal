@@ -81,8 +81,8 @@ $(document).ready( function() {
             displayHour, displayMinute, timeChoice,
             template, rendered, item,
             lengths = [ '0-3', '3-8', '8-15', '15+'],
-            audiences = [{code: 'F', text: 'Family Friendly. Adults bring children.'},
-                         {code: 'G', text: 'General, For adults, but kids welcome.'},
+            audiences = [{code: 'F', text: 'Family friendly. Adults bring children.'},
+                         {code: 'G', text: 'General. For adults, but kids welcome.'},
                          {code: 'A', text: '21+ only. Alcohol involved.'}];
 
         shiftEvent.lengthOptions = [];
@@ -472,6 +472,14 @@ $(document).ready( function() {
         displayCalendar();
     });
 
+    $(document).on('click', 'a#about-button', function(e) {
+        displayAbout();
+    });
+
+    $(document).on('click', 'a#oldSite-button', function(e) {
+        window.location.href = "http://shift2bikes.com/cal";
+    });
+    
     $(document).on('click', 'a.expandDetails', function(e) {
         e.preventDefault();
         return false;
@@ -506,4 +514,12 @@ $(document).ready( function() {
     } else {
         displayCalendar();
     }
+
+    function displayAbout() {
+        var content = $('#aboutUs').html();
+        container.empty().append(content);
+    }
+        
+
+    
 });

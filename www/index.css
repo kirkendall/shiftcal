@@ -21,8 +21,8 @@ nav.navbar {
     font-weight: bold;
 }
 
-.colorLegend {
-    margin: 5px 10px 15px;
+.pg-width-text {
+    margin: 5px 10px 10px 5px;
 }
 
 .container {
@@ -34,7 +34,7 @@ nav.navbar {
 }
 
 /*div { border: 1px solid red }*/
-.dateHeader{
+.secondaryHeader{
     background-color: #fd6;
     float:left;
     width: 100%;

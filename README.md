@@ -39,6 +39,11 @@ Now that your environment is ready, let's get the source code installed and setu
 
 For additional explanation, expansion, and clarification of these instructions for those using XAMPP and/or OSX, see https://github.com/ShiftGithub/shiftcal/wiki/in-depth-setup-instructions
 
+To do list
+----------
+You can see our plans for improvements [here](https://tree.taiga.io/project/shift2bikes-shift-calendar/)
+ 
+
 How to make improvements to integration with Facebook  
 -----------------------------------------------------
 
@@ -47,4 +52,7 @@ The Facebook app ID is 135930960098034.
 How to propose changes
 ----------------------
 
-Please fork the master branch of the ShiftGithub/shiftcal code into a branch in your own account, commit your changes to that branch, make a pull request against against the master branch of ShiftGithub/shiftcal, and we'll try to merge it!
+Please fork the master branch of the ShiftGithub/shiftcal code into a branch in your own account, commit your changes to that branch, make a pull request against the master branch of ShiftGithub/shiftcal, and we'll try to merge it!
+
+
+
