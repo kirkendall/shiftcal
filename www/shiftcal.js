@@ -13,9 +13,7 @@ $(document).ready( function() {
             var endDate = new Date(startDate);
             endDate.setDate(startDate.getDate() + 9);
         }
-        
 
-        
         $.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
             var groupedByDate = [];
             var mustacheData = { dates: [] };
@@ -505,7 +503,13 @@ $(document).ready( function() {
     	var append = false;
         displayCalendar(pp, append);
     });
-    
+
+    $(document).on('click','.navbar-collapse.collapse.in',function(e) {
+        if( $(e.target).is('a') ) {
+            $(this).collapse('hide');
+        }
+    });
+
     $(document).on('click', 'a.expandDetails', function(e) {
         e.preventDefault();
         return false;
