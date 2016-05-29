@@ -1,28 +1,12 @@
 $(document).ready( function() {
-    var startDate = new Date(),
-        container = $('#mustache-html');
+   
+    var container = $('#mustache-html');
 
-    function displayCalendar(pedalpalooza, append) {
-        if (pedalpalooza) {
-           startDate = new Date("June 9, 2016");
-           var endDate = new Date("July 4, 2016 23:59:59");
-           var pedalpalooza = './images/pp2016.jpg';
-           
-        }
-        else {
-            var endDate = new Date(startDate);
-            endDate.setDate(startDate.getDate() + 9);
-        }
+    function getEventHTML(startDate, endDate, callback) {
 
         $.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
             var groupedByDate = [];
-            var mustacheData = { dates: [] };
-
-            mustacheData.append = append; 
-            mustacheData.pedalpalooza = pedalpalooza;
-
-
-            
+            var mustacheData = { dates: [] };            
             $.each(data.events, function( index, value ) {
                 var date = formatDate(value.date);
                 if (groupedByDate[date] === undefined) {
@@ -61,14 +45,9 @@ $(document).ready( function() {
             for ( var date in groupedByDate )  {
                 groupedByDate[date].events.sort(compareEvents);
             }
-            var template = $('#mustache-template').html();
+            var template = $('#view-events-template').html();
             var info = Mustache.render(template, mustacheData);
-            if (append) {
-                $('#load-more').remove();
-            } else {
-                container.empty();
-            }
-            container.append(info);
+           	callback(info);
         });
     }
 
@@ -252,7 +231,7 @@ $(document).ready( function() {
         };
         $('#preview-button').hide();
         $('#preview-edit-button').show();
-        var template = $('#mustache-template').html();
+        var template = $('#view-events-template').html();
         var info = Mustache.render(template, mustacheData);
         container.append(info);
     }
@@ -481,13 +460,33 @@ $(document).ready( function() {
         displayEditForm();
     });
 
-    $(document).on('click', 'a#view-events-button, #confirm-cancel', function(e) {
+    $(document).on('click', 'a#view-events-button, #confirm-cancel', viewEvents);
+    
+    function viewEvents(){
         location.hash = 'viewEvents';
-        startDate = new Date();
-        var pp = false;
-        var append = false;        
-        displayCalendar(pp, append);
-    });
+        var startDate = new Date(); 
+        var endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + 9);
+
+        container.empty()
+             .append($('#legend-template').html());
+
+        getEventHTML(startDate, endDate, function (eventHTML) {
+             container.append(eventHTML);
+             container.append($('#load-more-template').html());  
+             
+             
+             $(document).on('click', '#load-more', function(e) {
+                  startDate.setDate(startDate.getDate() + 10);
+                  endDate.setDate(startDate.getDate() + 9);
+                  getEventHTML(startDate, endDate, function(eventHTML) {
+                       $('#load-more').before(eventHTML);        
+                  });
+             });          
+        });
+        
+    }
+
 
     $(document).on('click', 'a#about-button', function(e) {
         displayAbout();
@@ -498,10 +497,20 @@ $(document).ready( function() {
     });
     
     $(document).on('click', 'a#pedalpalooza-button', function(e) {
-        location.hash = 'pedalpalooza';
-        var pp = true;
-        var append = false;
-        displayCalendar(pp, append);
+        location.hash = 'pedalpalooza';    
+
+        var startDate = new Date("June 9, 2016");
+        var endDate = new Date("July 4, 2016 23:59:59");
+        var pedalpalooza = './images/pp2016.jpg';
+        container.empty()
+    
+             .append($('#pedalpalooza-template').html())
+             .append($('#legend-template').html());
+
+        getEventHTML(startDate, endDate, function (eventHTML) {
+             container.append(eventHTML);         
+        });
+    
     });
 
     $(document).on('click','.navbar-collapse.collapse.in',function(e) {
@@ -520,13 +529,7 @@ $(document).ready( function() {
         displayEditForm(id);
     });
 
-    $(document).on('click', '#load-more', function(e) {
-        startDate.setDate(startDate.getDate() + 10);
-        var pp = false;
-        var append = true;
-        displayCalendar(pp, append);
-        return false;
-    });
+
 
     $(document).on('click', '#preview-edit-button', function() {
         $('#event-entry').show();
@@ -544,9 +547,8 @@ $(document).ready( function() {
         var locationHashParts = location.hash.split('/');
         displayEditForm(locationHashParts[1], locationHashParts[2]);
     } else {
-        var pp = false;
-        var append = false;
-        displayCalendar(pp, append);
+        
+        viewEvents();
     }
 
     function displayAbout() {
