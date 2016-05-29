@@ -484,8 +484,8 @@ $(document).ready( function() {
     $(document).on('click', 'a#view-events-button, #confirm-cancel', function(e) {
         location.hash = 'viewEvents';
         startDate = new Date();
-    	var pp = false;
-    	var append = false;        
+        var pp = false;
+        var append = false;        
         displayCalendar(pp, append);
     });
 
@@ -499,8 +499,8 @@ $(document).ready( function() {
     
     $(document).on('click', 'a#pedalpalooza-button', function(e) {
         location.hash = 'pedalpalooza';
-    	var pp = true;
-    	var append = false;
+        var pp = true;
+        var append = false;
         displayCalendar(pp, append);
     });
 
@@ -523,7 +523,7 @@ $(document).ready( function() {
     $(document).on('click', '#load-more', function(e) {
         startDate.setDate(startDate.getDate() + 10);
         var pp = false;
-    	var append = true;
+        var append = true;
         displayCalendar(pp, append);
         return false;
     });
@@ -545,13 +545,15 @@ $(document).ready( function() {
         displayEditForm(locationHashParts[1], locationHashParts[2]);
     } else {
         var pp = false;
-    	var append = false;
+        var append = false;
         displayCalendar(pp, append);
     }
 
     function displayAbout() {
         var content = $('#aboutUs').html();
         container.empty().append(content);
+        $('#about').focus();
+        return false;
     }
             
 });
