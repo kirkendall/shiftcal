@@ -20,7 +20,7 @@ $(document).ready( function() {
             var groupedByDate = [];
             var mustacheData = { dates: [] };
 
-            mustacheData.notAppend = !append; 
+            mustacheData.append = append; 
             mustacheData.pedalpalooza = pedalpalooza;
 
 
@@ -549,7 +549,5 @@ $(document).ready( function() {
         var content = $('#aboutUs').html();
         container.empty().append(content);
     }
-        
-
-    
+            
 });
