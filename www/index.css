@@ -1,36 +1,19 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    color: gray;
 }
-.date {
-  margin: auto;
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color:#fff;
 }
-/*div { border: 1px solid red }*/
-.dateHeader{
-background-color: #fdd;
-float:left;
-width: 100%;
-padding: 5px 10px 15px;
-font-weight: bold;
-font-size: 1.25em;
+
+/* Cheat bootstrap for one line mobile nav */
+.nav>li>a {
+    display:inline-block;
+    color:#fff !important;
+    font-weight: bold;
 }
-.time h3 {
-	text-align: right;
-}
-.hideButton {
-    text-align:right;
-}
-.mainDetails p {
-	margin-top: 1em;
-}
-.mainDetails p.contactInfo {
-	margin-bottom: 0.25em;
-}
-.mainDetails p.email {
-	margin-top: 0.25em;
-}
-.otherButtons a {
-	text-decoration: none;
-}
+
 .navbar-brand {
     padding: 2px 15px;
 }
@@ -38,26 +21,108 @@ font-size: 1.25em;
     background-color: #f90;
     background-image: none;
 }
+
 nav.navbar {
+    text-align: center;
     margin-bottom:40px;
 }
+
+.pg-width {
+    margin: 5px 10px 10px 5px;
+}
+
+.pg-width img {
+    max-width: 438px;
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.plain {
+    margin: 5px 10px 10px 5px;
+    clear: both;
+}
+
+.container {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 5px;
+	padding-right: 0px;
+	width: auto;
+}
+
+/*div { border: 1px solid red }*/
+.secondaryHeader{
+    background-color: #fd6;
+    float:left;
+    width: 100%;
+    padding: 5px 10px 15px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.event.row {
+    font-size:1em;
+    color: #37b;
+}
+
+h3 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.time h3 {
+    text-align: right;
+}
+
+.eventDetails {
+    color: gray;
+}
+
+.btn{
+ 
+    color: #37b;
+}
+
+.hideButton {
+    text-align:right;
+}
+
+
+.mainDetails p {
+    margin-top: 1em;
+	
+}
+.mainDetails p.contactInfo {
+    margin-bottom: 0.25em;
+}
+.mainDetails p.email {
+    margin-top: 0.25em;
+}
+.otherButtons a {
+    text-decoration: none;
+}
+
 a.expandDetails {
     color:inherit;
 }
+
 #edit-header {
     width:100%;
     background:white;
 }
+
 .affix {
     position: fixed;
     top: 0;
     background: #fff;
 }
-/* Cheat bootstrap for one line mobile nav */
-.nav>li>a {
-    display:inline-block;
-    color:#fff !important;
-    font-weight: bold;
+
+
+
+.control-label {
+    color: gray;
+    font-weight: normal;
 }
 
 /* Date Picker CSS */
@@ -95,7 +160,7 @@ a.expandDetails {
 
 .calendar-day:hover {
     cursor: pointer;
-    background-color: #eea236;
+    background-color: #fff;
 }
 
 .calendar-day.today {
@@ -146,6 +211,7 @@ a.expandDetails {
     font-size: 0.9em;
     text-align: center;
     table-layout: fixed;
+    color: #999;
 }
 #preview-edit-button {
     display: none;
@@ -158,7 +224,8 @@ a.expandDetails {
     display:block;
     width:100%;
     text-align:center;
-    font-size: 2em;
+    font-size: 1.5em;
+    color: #f90;
 }
 .audience-F {
     color: green;
@@ -166,3 +233,4 @@ a.expandDetails {
 .audience-A {
     color: red;
 }
+
