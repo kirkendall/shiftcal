@@ -66,10 +66,76 @@
     </div><!-- /.modal -->
 
     <script id="pedalpalooza-template" type="text/template">
+        <img alt="Pedalpalooza" id="pedalpalooza-img" src="images/pp2016.jpg">
         <div class="pg-width">
-    	    <img alt="Pedalpalooza" src="images/pp2016.jpg" />
     	    <p> Pedalpalooza is 3+ weeks of bikey fun. With 266 different events, most organized by individuals, bikers of all persuasions are likely to find many events of interest. Nearly all events are free. </p>
     	    <p> Visiting from out of town? We've started a <a href="http://www.shift2bikes.org/allbike.php#Visitor_Info">Visitor Info</a> page on our Wiki.</p>
+            <div id="date-select-container-pedalpalooza" class="date-select-container-style form-group">
+                <table class="day-of-week">
+                    <tbody><tr>
+                        <td class="calendar-month-title"></td>
+                        <td>Sun</td>
+                        <td>Mon</td>
+                        <td>Tue</td>
+                        <td>Wed</td>
+                        <td>Thu</td>
+                        <td>Fri</td>
+                        <td>Sat</td>
+                    </tr>
+                    </tbody></table>
+                <div class="date-select-style">
+                    <table class="month-table-style">
+                        <tr class="calendar-row">
+                            <td rowspan="3" class="calendar-month-title"><span>June 2016</span></td>
+                            <td class="calendar-day   color-jun-odd"></td>
+                            <td class="calendar-day   color-jun"></td>
+                            <td class="calendar-day   color-jun-odd"></td>
+                            <td class="calendar-day   color-jun"></td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-9">9</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-10">10</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-11">11</td>
+                        </tr>
+                        <tr class="calendar-row">
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-12">12</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-13">13</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-14">14</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-15">15</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-16">16</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-17">17</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-18">18</td>
+                        </tr>
+                        <tr class="calendar-row">
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-19">19</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-20">20</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-21">21</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-22">22</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-23">23</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-24">24</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-25">25</td>
+                        </tr>
+
+                        <tr class="calendar-row">
+                            <td rowspan="2" class="calendar-month-title">&nbsp;</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-26">26</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-27">27</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-28">28</td>
+                            <td class="calendar-day   color-jun" data-date="2016-6-29">29</td>
+                            <td class="calendar-day   color-jun-odd" data-date="2016-6-30">30</td>
+                            <td class="calendar-day   color-jul" data-date="2016-7-1">1</td>
+                            <td class="calendar-day   color-jul-odd" data-date="2016-7-2">2</td>
+                        </tr>
+                        <tr class="calendar-row">
+                            <td class="calendar-day   color-jul-odd" data-date="2016-7-3">3</td>
+                            <td class="calendar-day   color-jul" data-date="2016-7-4">4</td>
+                            <td class="calendar-day   color-jul-odd"></td>
+                            <td class="calendar-day   color-jul"></td>
+                            <td class="calendar-day   color-jul-odd"></td>
+                            <td class="calendar-day   color-jul"></td>
+                            <td class="calendar-day   color-jul-odd"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
     	</div>
     </script>
     
@@ -182,7 +248,7 @@
                                     {{/ lengthOptions }}
                                 </select>
                             </div>
-                            <div id="date-select-container" class="form-group">
+                            <div id="date-select-container" class="date-select-container-style form-group">
                                 <table class="day-of-week">
                                     <tr>
                                         <td class="calendar-month-title"></td>
@@ -195,9 +261,9 @@
                                         <td>Sat</td>
                                     </tr>
                                 </table>
-                                <div id="date-select">                                    
+                                <div id="date-select" class="date-select-style">
                                     <div id="load-earlier" class="loading-zone"></div>
-                                    <table id="month-table">
+                                    <table id="month-table" class="month-table-style">
                                     </table>
                                     <div id="load-later" class="loading-zone"></div>
                                 </div>

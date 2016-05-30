@@ -31,13 +31,6 @@ nav.navbar {
     margin: 5px 10px 10px 5px;
 }
 
-.pg-width img {
-    max-width: 438px;
-    width: 100%;
-    height: auto;
-    float: left;
-}
-
 .plain {
     margin: 5px 10px 10px 5px;
     clear: both;
@@ -116,9 +109,15 @@ a.expandDetails {
     position: fixed;
     top: 0;
     background: #fff;
+    z-index: 1;
 }
 
-
+#pedalpalooza-img {
+    float: left;
+    max-width: 438px;
+    width: 100%;
+    height: auto;
+}
 
 .control-label {
     color: gray;
@@ -127,16 +126,23 @@ a.expandDetails {
 
 /* Date Picker CSS */
 #date-select-container {
-    width: 320px;
     margin: 0 auto;
+}
+#date-select-container-pedalpalooza {
+    float: left;
+}
+.date-select-container-style {
+    width: 320px;
     background-color: #fff56f;
 }
 #date-select {
     height: 300px;
+}
+.date-select-style {
     background-color: #ffbd2c;
     overflow: scroll;
 }
-#month-table {
+.month-table-style {
     width: 100%;
 }
 #load-earlier {
@@ -204,7 +210,6 @@ a.expandDetails {
     display: block;
     position: absolute;
     font-size: .8em;
-    
 }
 .day-of-week {
     width: 100%;
