@@ -129,6 +129,7 @@ a.expandDetails {
     margin: 0 auto;
 }
 #date-select-container-pedalpalooza {
+	margin: 10px 0px 5px 5px;
     float: left;
 }
 .date-select-container-style {
@@ -138,6 +139,11 @@ a.expandDetails {
 #date-select {
     height: 300px;
 }
+
+#date-select-pp {
+    background-color: #ffbd2c;
+}
+
 .date-select-style {
     background-color: #ffbd2c;
     overflow: scroll;
