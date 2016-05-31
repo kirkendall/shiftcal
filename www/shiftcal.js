@@ -183,11 +183,16 @@ $(document).ready( function() {
                                 ? returnVal.responseJSON.error
                                 : { message: 'Server error saving event!' };
                     $('#save-result').addClass('text-danger').text(err.message);
+                    // Collapse all groups
+                    $('.panel-collapse').removeClass('in');
                     $.each(err.fields, function(fieldName, message) {
-                        $('input[name=' + fieldName + ']')
-                            .closest('.form-group,.checkbox')
+                        var input = $('input[name=' + fieldName + ']');
+                        input.closest('.form-group,.checkbox')
                             .addClass('has-error')
                             .append('<div class="help-block">' + message + '</div>');
+                        // Then re-expand any group with errors
+                        input.closest('.panel-collapse')
+                            .addClass('in');
                     });
                 }
             };
