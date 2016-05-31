@@ -152,7 +152,7 @@ $(document).ready( function() {
                 isNew = !shiftEvent.id;
             $('.form-group').removeClass('has-error');
             $('.help-block').remove();
-            $('#save-result').removeClass('text-success').removeClass('text-danger').text('');
+            $('#save-result').removeClass('text-danger').text('');
             postVars = eventFromForm();
             if (!isNew) {
                 postVars['id'] = shiftEvent.id;
@@ -170,13 +170,19 @@ $(document).ready( function() {
                 cache: false,
                 data: data,
                 success: function(returnVal) {
-                    var msg = isNew ? 'Event saved!' : 'Event updated!';
-                    $('#save-result').addClass('text-success').text(msg);
-                    shiftEvent.id = returnVal.id;
+                    var msg = isNew ?
+                        'Thank you! A link with a URL to edit and manage the ' +
+                            'event has been emailed to ' + postVars.email + '.' :
+                        'Your event has been updated!';
+
                     if (returnVal.secret) {
                         location.hash = '#editEvent/' + returnVal.id + '/' + returnVal.secret;
                         $('#secret').val(returnVal.secret);
+                        msg += ' You may also bookmark the current URL before you click OK.'
                     }
+                    $('#success-message').text(msg);
+                    $('#success-modal').modal('show');
+                    shiftEvent.id = returnVal.id;
                 },
                 error: function(returnVal) {
                     var err = returnVal.responseJSON
@@ -465,7 +471,7 @@ $(document).ready( function() {
         displayEditForm();
     });
 
-    $(document).on('click', 'a#view-events-button, #confirm-cancel', viewEvents);
+    $(document).on('click', 'a#view-events-button, #confirm-cancel, #success-ok', viewEvents);
     
     function viewEvents(){
         location.hash = 'viewEvents';
