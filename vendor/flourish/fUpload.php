@@ -481,7 +481,12 @@ class fUpload
 	 */
 	public function setMaxSize($size)
 	{
-		$ini_max_size = ini_get('upload_max_filesize');
+		if (defined('HHVM_VERSION')) {
+			// see bug https://github.com/facebook/hhvm/issues/4993
+			$ini_max_size = ini_get('hhvm.server.upload.upload_max_file_size');
+		} else {
+			$ini_max_size = ini_get('upload_max_filesize');
+		}
 		$ini_max_size = (!is_numeric($ini_max_size)) ? fFilesystem::convertToBytes($ini_max_size) : $ini_max_size;
 
 		$size = fFilesystem::convertToBytes($size);
