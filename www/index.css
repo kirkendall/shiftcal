@@ -148,7 +148,7 @@ a.expandDetails {
     background-color: #ffbd2c;
     overflow: scroll;
 }
-.month-table-style {
+.date-picker-style {
     width: 100%;
 }
 #load-earlier {
@@ -164,7 +164,7 @@ a.expandDetails {
 .calendar-day {
     border-top: 1px solid gray;
     padding: 3px;
-    color: #999;
+    color: gray;
 
     line-height: 1.5em;
     text-align: center;
@@ -222,7 +222,7 @@ a.expandDetails {
     font-size: 0.9em;
     text-align: center;
     table-layout: fixed;
-    color: #999;
+    color: gray;
 }
 #preview-edit-button {
     display: none;

@@ -266,7 +266,7 @@ $(document).ready( function() {
     var $dateSelect,
         $loadLater,
         $loadEarlier,
-        $monthTable,
+        $datePicker,
         monthTemplate,
         earliestMonth,
         latestMonth,
@@ -308,7 +308,7 @@ $(document).ready( function() {
         $loadLater = $('#load-later');
         $loadEarlier = $('#load-earlier');
         // Table that contains months
-        $monthTable = $("#month-table");
+        $datePicker = $("#date-picker");
 
         monthTemplate = $('#mustache-select-month').html();
 
@@ -446,15 +446,15 @@ $(document).ready( function() {
         var added = false;
         if (loadEarlierBottom() >= 0) {
             latestMonth = new Date(latestMonth.getFullYear(), latestMonth.getMonth()-1, 1);
-            var preHeight = $monthTable.height();
-            $monthTable.prepend(getMonthHTML(latestMonth));
-            var heightChange = $monthTable.height() - preHeight;
+            var preHeight = $datePicker.height();
+            $datePicker.prepend(getMonthHTML(latestMonth));
+            var heightChange = $datePicker.height() - preHeight;
             $dateSelect.scrollTop($dateSelect.scrollTop() + heightChange);
             added = true;
         }
         if (loadLaterTop() <= $dateSelect.height()) {
             earliestMonth = new Date(earliestMonth.getFullYear(), earliestMonth.getMonth()+1, 1);
-            $monthTable.append(getMonthHTML(earliestMonth));
+            $datePicker.append(getMonthHTML(earliestMonth));
             added = true;
         }
         if (added) {
