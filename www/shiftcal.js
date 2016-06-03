@@ -8,9 +8,11 @@ $(document).ready( function() {
             var groupedByDate = [];
             var mustacheData = { dates: [] };            
             $.each(data.events, function( index, value ) {
+
                 var date = formatDate(value.date);
                 if (groupedByDate[date] === undefined) {
                     groupedByDate[date] = {
+                        yyyymmdd: value.date,
                         date: date,
                         events: []
                     };
@@ -261,17 +263,6 @@ $(document).ready( function() {
         );
     }
 
-    /* Date Picker JS */
-    // Global state variables, initialized in setupDatePicker
-
-    /* /Date Picker JS */
-
-    $(document).on('click', 'a#add-event-button', function(e) {
-        displayEditForm();
-    });
-
-    $(document).on('click', 'a#view-events-button, #confirm-cancel, #success-ok', viewEvents);
-    
     function viewEvents(){
         location.hash = 'viewEvents';
         var startDate = new Date(); 
@@ -292,10 +283,49 @@ $(document).ready( function() {
                   });
              });          
         });
-        
     }
+    
+    function displayAbout() {
+        var content = $('#aboutUs').html();
+        container.empty().append(content);
+        $(document).scrollTop();
+    }
+    
+    function displayPedalpalooza() {
+        location.hash = 'pedalpalooza';    
+        var startDate = new Date("June 9, 2016");
+        var endDate = new Date("July 4, 2016 23:59:59");
+        var pedalpalooza = './images/pp2016.jpg';
+        container.empty()
+             .append($('#pedalpalooza-header').html())
+             .append($('#legend-template').html());
+        getEventHTML(startDate, endDate, function (eventHTML) {
+             container.append(eventHTML);
+             container.append($('#pedalpalooza-prior').html());         
+        });
+    }
+    
+    function dateJumpPedalpalooza(ev) {
+        var e = ev.target;
+        if (e.hasAttribute('data-date')) {
+            var $e = $(e);
+            var yyyymmdd = $e.attr('data-date');
+            var $jumpTo = $("div[data-date='" + yyyymmdd + "']");
+            console.log($jumpTo.children().length);
+            if ($jumpTo){
+                $('html, body').animate({
+                    scrollTop: $jumpTo.offset().top
+                }, 500);
+            }
+        }    
+    }
+    
+    $(document).on('click', 'a#add-event-button', function(e) {
+        displayEditForm();
+    });
 
-
+    $(document).on('click', 'a#view-events-button, #confirm-cancel, #success-ok', viewEvents);
+    
     $(document).on('click', 'a#about-button', function(e) {
         displayAbout();
     });
@@ -305,22 +335,14 @@ $(document).ready( function() {
     });
     
     $(document).on('click', 'a#pedalpalooza-button', function(e) {
-        location.hash = 'pedalpalooza';    
-
-        var startDate = new Date("June 9, 2016");
-        var endDate = new Date("July 4, 2016 23:59:59");
-        var pedalpalooza = './images/pp2016.jpg';
-        container.empty()
-    
-             .append($('#pedalpalooza-template').html())
-             .append($('#legend-template').html());
-
-        getEventHTML(startDate, endDate, function (eventHTML) {
-             container.append(eventHTML);         
-        });
-    
+        displayPedalpalooza();
     });
 
+
+    $(document).on('click', '#date-picker-pedalpalooza', function(ev) {
+        dateJumpPedalpalooza(ev);
+    });
+    
     $(document).on('click','.navbar-collapse.collapse.in',function(e) {
         if( $(e.target).is('a') ) {
             $(this).collapse('hide');
@@ -336,8 +358,6 @@ $(document).ready( function() {
         var id = $(e.target).closest('div.event').data('event-id');
         displayEditForm(id);
     });
-
-
 
     $(document).on('click', '#preview-edit-button', function() {
         $('#event-entry').show();
@@ -357,13 +377,6 @@ $(document).ready( function() {
     } else {
         
         viewEvents();
-    }
-
-    function displayAbout() {
-        var content = $('#aboutUs').html();
-        container.empty().append(content);
-        $('#about').focus();
-        return false;
     }
             
 });
