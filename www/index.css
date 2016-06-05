@@ -3,8 +3,26 @@ body {
     color: gray;
 }
 
+.navbar-brand {
+    padding: 2px 15px;
+}
+
+nav.navbar {
+    text-align: center;
+    margin-bottom:40px;
+}
+
+.navbar-default {
+    background-color: #f90;
+    background-image: none;
+}
+
 .navbar-default .navbar-toggle .icon-bar {
     background-color:#fff;
+}
+
+.navbar-toggle {
+    border: none;
 }
 
 /* Cheat bootstrap for one line mobile nav */
@@ -14,17 +32,12 @@ body {
     font-weight: bold;
 }
 
-.navbar-brand {
-    padding: 2px 15px;
-}
-.navbar-default {
-    background-color: #f90;
-    background-image: none;
-}
-
-nav.navbar {
-    text-align: center;
-    margin-bottom:40px;
+.container {
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 5px;
+	padding-right: 0px;
+	width: auto;
 }
 
 .pg-width {
@@ -34,14 +47,6 @@ nav.navbar {
 .plain {
     margin: 5px 10px 10px 5px;
     clear: both;
-}
-
-.container {
-	margin-left: 0px;
-	margin-right: 0px;
-	padding-left: 5px;
-	padding-right: 0px;
-	width: auto;
 }
 
 /*div { border: 1px solid red }*/
@@ -129,7 +134,7 @@ a.expandDetails {
     margin: 0 auto;
 }
 #date-select-container-pedalpalooza {
-    margin: 10px 0px 5px 5px;
+    margin: 10px 0px 5px 0px;
     float: left;
 }
 .date-select-container-style {
@@ -148,7 +153,7 @@ a.expandDetails {
     background-color: #ffbd2c;
     overflow: scroll;
 }
-.month-table-style {
+.date-picker-style {
     width: 100%;
 }
 #load-earlier {
@@ -164,8 +169,7 @@ a.expandDetails {
 .calendar-day {
     border-top: 1px solid gray;
     padding: 3px;
-    color: #999;
-
+    color: gray;
     line-height: 1.5em;
     text-align: center;
 }
@@ -222,7 +226,7 @@ a.expandDetails {
     font-size: 0.9em;
     text-align: center;
     table-layout: fixed;
-    color: #999;
+    color: gray;
 }
 #preview-edit-button {
     display: none;
@@ -231,7 +235,8 @@ a.expandDetails {
 .modal-body {
     text-align:center;
 }
-#load-more {
+
+a.footer {
     display:block;
     width:100%;
     text-align:center;
