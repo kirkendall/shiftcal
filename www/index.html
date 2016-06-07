@@ -64,6 +64,20 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>Are you sure you want to delete this event?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirm-delete" data-dismiss="modal" class="btn btn-warning">Yes</button>
+                    <button type="button" class="btn" data-dismiss="modal">No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <div class="modal fade" tabindex="-1" id="success-modal" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -223,8 +237,13 @@
                 <button id="preview-edit-button" type="button" class="btn btn-addEvent">Edit</button>
                 <button id="preview-button" type="button" class="btn btn-addEvent">Preview</button>
                 <button id="save-button" type="button" class="btn btn-addEvent">Post</button>
+            {{^ id }}
                 <button id="cancel-button" type="button" class="btn btn-addEvent" data-toggle="modal" data-target="#cancel-modal">Cancel</button>
-            
+            {{/ id }}
+            {{# id }}
+                <button id="delete-button" type="button" class="btn btn-addEvent" data-toggle="modal" data-target="#delete-modal">Delete</button>
+            {{/ id }}
+
             <span id="save-result"></span>
         </div>
         <br>

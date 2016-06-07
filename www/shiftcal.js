@@ -72,6 +72,32 @@ $(document).ready( function() {
         }
     }
 
+    function deleteEvent(id, secret) {
+        var opts = {
+            type: 'POST',
+            url: 'delete_event.php',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: 'json=' + JSON.stringify({
+                id: id,
+                secret: secret
+            }),
+            success: function(returnVal) {
+                var msg = 'Your event has been deleted';
+                $('#success-message').text(msg);
+                $('#success-modal').modal('show');
+            },
+            error: function(returnVal) {
+                var err = returnVal.responseJSON
+                    ? returnVal.responseJSON.error
+                    : { message: 'Server error deleting event!' };
+                $('#save-result').addClass('text-danger').text(err.message);
+            }
+        };
+        $.ajax(opts);
+    }
+
     function populateEditForm( shiftEvent ) {
         var i, h, m, meridian,
             displayHour, displayMinute, timeChoice,
@@ -138,6 +164,12 @@ $(document).ready( function() {
         template = $('#mustache-edit').html();
         rendered = Mustache.render(template, shiftEvent);
         container.empty().append(rendered);
+        if (shiftEvent.id) {
+            $(document).off('click', '#confirm-delete')
+                .on('click', '#confirm-delete', function() {
+                    deleteEvent(shiftEvent.id, shiftEvent.secret);
+                });
+        }
         $('#date-select').setupDatePicker(shiftEvent['dates'] || []);
 
         $('#edit-header').affix({
@@ -180,7 +212,7 @@ $(document).ready( function() {
                     if (returnVal.secret) {
                         location.hash = '#editEvent/' + returnVal.id + '/' + returnVal.secret;
                         $('#secret').val(returnVal.secret);
-                        msg += ' You may also bookmark the current URL before you click OK.'
+                        msg += ' You may also bookmark the current URL before you click OK.';
                     }
                     $('#success-message').text(msg);
                     $('#success-modal').modal('show');
@@ -319,13 +351,13 @@ $(document).ready( function() {
             }
         }    
     }
-    
+
     $(document).on('click', 'a#add-event-button', function(e) {
         displayEditForm();
     });
 
     $(document).on('click', 'a#view-events-button, #confirm-cancel, #success-ok', viewEvents);
-    
+
     $(document).on('click', 'a#about-button', function(e) {
         displayAbout();
     });
