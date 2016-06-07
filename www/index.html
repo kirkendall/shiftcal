@@ -235,27 +235,27 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#general-fields">
-                            Basic facts
+                            Required
                         </a>
                     </div>
                     
                     <div id="general-fields" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="form-group">
-                                <label class="control-label" for="title">Event title:</label>
-                                <input type="text" class="form-control" name="title" id="title" value="{{title}}" />
+                                <label class="control-label req-label" for="title">Event title:</label>
+                                <input type="text" class="form-control" name="title" id="title" value="{{title}}" required="true" />
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="details">Description:</label>
                                 <textarea class="form-control" name="details" id="details" >{{details}}</textarea>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="venue">Venue name:</label>
-                                <input type="text" class="form-control" name="venue" id="venue" value="{{venue}}" />
+                                <label class="control-label req-label" for="venue">Venue name:</label>
+                                <input type="text" class="form-control" name="venue" id="venue" value="{{venue}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="address">Address</label>
-                                <input type="text" class="form-control" name="address" id="address" value="{{address}}" />
+                                <label class="control-label req-label" for="address">Address</label>
+                                <input type="text" class="form-control" name="address" id="address" value="{{address}}" required="true" />
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="length">Length of route:</label>
@@ -286,12 +286,35 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="time">Time:</label>
+                                <label class="control-label req-label" for="time">Time:</label>
                                 <select name="time" class="form-control" id="time">
                                     {{# timeOptions }}
                                     <option value="{{time}}" {{# isSelected }}selected{{/ isSelected }}>{{time}}</option>
                                     {{/ timeOptions }}
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label req-label" for="organizer">Your name:</label>
+                                <input type="text" class="form-control" name="organizer" id="organizer" value="{{organizer}}" required="true" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label req-label" for="email">Your email:</label>
+                                <input type="text" class="form-control" name="email" id="email" value="{{email}}" required="true" />
+                            </div>
+                            <div class="checkbox">
+                                <input type="hidden" name="email-me" value="0" />
+                                <label class="control-label" for="email-me">
+                                    <input type="checkbox" name="email-me" id="email-me" value="1"  {{# emailMe }}checked{{/ emailMe }} />
+                                    Send forum messages to this email address
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <input type="hidden" name="hideemail" value="0" />
+                                <label class="control-label" for="hideemail">
+                                    <input type="checkbox" name="hideemail" id="hideemail" value="1"  {{# hideemail }}checked{{/ hideemail }} />
+                                    Don't publish my email address online
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -336,39 +359,6 @@
                     </div>
                 </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#contact-fields">
-                            Contact info
-                        </a>
-                    </div>
-                    <div id="contact-fields" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label class="control-label" for="organizer">Your name:</label>
-                                <input type="text" class="form-control" name="organizer" id="organizer" value="{{organizer}}">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="email">Your email:</label>
-                                <input type="text" class="form-control" name="email" id="email" value="{{email}}" >
-                            </div>
-                            <div class="checkbox">
-                                <input type="hidden" name="email-me" value="0" />
-                                <label class="control-label" for="email-me">
-                                    <input type="checkbox" name="email-me" id="email-me" value="1"  {{# emailMe }}checked{{/ emailMe }} />
-                                    Send forum messages to this email address
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="hidden" name="hideemail" value="0" />
-                                <label class="control-label" for="hideemail">
-                                    <input type="checkbox" name="hideemail" id="hideemail" value="1"  {{# hideemail }}checked{{/ hideemail }} />
-                                    Don't publish my email address online
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#print-fields">

@@ -260,3 +260,8 @@ a.footer {
     color: blue;
     cursor: pointer;
 }
+
+.req-label::after {
+    content: "*";
+    color: red;
+}
