@@ -261,15 +261,15 @@
                     <div id="general-fields" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="form-group">
-                                <label class="control-label req-label" for="title">Event title:</label>
+                                <label class="control-label req-label" for="title">Event title</label>
                                 <input type="text" class="form-control" name="title" id="title" value="{{title}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="details">Description:</label>
+                                <label class="control-label" for="details">Description</label>
                                 <textarea class="form-control" name="details" id="details" >{{details}}</textarea>
                             </div>
                             <div class="form-group">
-                                <label class="control-label req-label" for="venue">Venue name:</label>
+                                <label class="control-label req-label" for="venue">Venue name</label>
                                 <input type="text" class="form-control" name="venue" id="venue" value="{{venue}}" required="true" />
                             </div>
                             <div class="form-group">
@@ -277,7 +277,7 @@
                                 <input type="text" class="form-control" name="address" id="address" value="{{address}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="length">Length of route:</label>
+                                <label class="control-label" for="length">Length of route</label>
                                 <select name="length" class="form-control" id="length">
                                     {{# lengthOptions }}
                                     <option value="{{range}}" {{# isSelected }}selected{{/ isSelected }}>{{range}} miles</option>
@@ -305,7 +305,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label req-label" for="time">Time:</label>
+                                <label class="control-label req-label" for="time">Time</label>
                                 <select name="time" class="form-control" id="time">
                                     {{# timeOptions }}
                                     <option value="{{time}}" {{# isSelected }}selected{{/ isSelected }}>{{time}}</option>
@@ -314,11 +314,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label req-label" for="organizer">Your name:</label>
+                                <label class="control-label req-label" for="organizer">Your name</label>
                                 <input type="text" class="form-control" name="organizer" id="organizer" value="{{organizer}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label req-label" for="email">Your email:</label>
+                                <label class="control-label req-label" for="email">Your email</label>
                                 <input type="text" class="form-control" name="email" id="email" value="{{email}}" required="true" />
                             </div>
                             <div class="checkbox">
@@ -347,11 +347,11 @@
                     <div id="optional-fields" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="form-group">
-                                <label class="control-label" for="timedetails">Time details:</label>
+                                <label class="control-label" for="timedetails">Time details</label>
                                 <input type="text" class="form-control" name="timedetails" id="timedetails" value="{{timedetails}}" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="weburl">Website for more details:</label>
+                                <label class="control-label" for="weburl">Website for more details</label>
                                 <input type="text" class="form-control" name="weburl" id="weburl" value="{{weburl}}" />
                             </div>
                             {{# image}}
@@ -359,15 +359,15 @@
                             {{/ image}}
                             <div class="form-group">
                                 {{# image}}
-                                <label class="control-label" for="image">Update Image:</label>
+                                <label class="control-label" for="image">Update Image</label>
                                 {{/ image}}
                                 {{^ image}}
-                                <label class="control-label" for="image">Image:</label>
+                                <label class="control-label" for="image">Image</label>
                                 {{/ image}}
                                 <input type="file" class="form-control" name="image" id="image" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="audience">Audience:</label>
+                                <label class="control-label" for="audience">Audience</label>
                                 <select name="audience" class="form-control" id="audience">
                                     {{# audienceOptions }}
                                     <option value="{{code}}" {{# isSelected }}selected{{/ isSelected }}>{{text}}</option>
@@ -394,15 +394,15 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="tinytitle">Tiny title (24 chars):</label>
+                                <label class="control-label" for="tinytitle">Tiny title (24 chars)</label>
                                 <input type="text" class="form-control" name="tinytitle" id="tinytitle" value="{{tinytitle}}" maxlength="24" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="printdescr">Print description (120 chars):</label>
+                                <label class="control-label" for="printdescr">Print description (120 chars)</label>
                                 <textarea class="form-control" name="printdescr" id="printdescr" maxlength="120" >{{printdescr}}</textarea>
                             </div>
                             <!--div class="form-group">
-                                <label class="control-label" for="printcontact">Print contact info:</label>
+                                <label class="control-label" for="printcontact">Print contact info</label>
                                 <input type="text" class="form-control" name="printcontact" id="printcontact" value="{{printcontact}}" maxlength="255" />
                             </div-->
                         </div>

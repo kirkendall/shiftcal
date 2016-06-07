@@ -44,7 +44,7 @@ function build_json_response() {
 
     $validator->addRequiredFields('title', 'venue', 'address', 'organizer', 'email', 'read_comic');
     $validator->addEmailFields('email');
-    $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for \1');
+    $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for <span class="field-name">\1</span>');
     // If id is specified require secret
     $validator->addConditionalRule(
         array('id'),

@@ -230,10 +230,15 @@ $(document).ready( function() {
                     // Collapse all groups
                     $('.panel-collapse').removeClass('in');
                     $.each(err.fields, function(fieldName, message) {
-                        var input = $('input[name=' + fieldName + ']');
-                        input.closest('.form-group,.checkbox')
+                        var input = $('input[name=' + fieldName + ']'),
+                            parent = input.closest('.form-group,.checkbox'),
+                            label = $('label', parent);
+                        parent
                             .addClass('has-error')
                             .append('<div class="help-block">' + message + '</div>');
+                        $('.help-block .field-name', parent).text(
+                            label.text().toLowerCase()
+                        );
                         // Then re-expand any group with errors
                         input.closest('.panel-collapse')
                             .addClass('in');
