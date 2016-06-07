@@ -63,6 +63,10 @@ $(document).ready( function() {
         if (id && secret) {
             // TODO: loading spinner
             $.get( 'retrieve_event.php?id=' + id + "&secret=" + secret, function( data ) {
+                if (data.error) {
+                    container.html('This event has been deleted.');
+                    return;
+                }
                 data.secret = secret;
                 data.readComic = true;
                 populateEditForm( data );
