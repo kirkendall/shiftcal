@@ -250,3 +250,18 @@ a.footer {
     color: red;
 }
 
+#email-suggestion {
+    display:none;
+    color: red;
+    font-style: italic;
+}
+
+#email-suggestion .correction{
+    color: blue;
+    cursor: pointer;
+}
+
+.req-label::after {
+    content: "*";
+    color: red;
+}

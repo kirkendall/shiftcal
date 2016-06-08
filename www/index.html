@@ -10,6 +10,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/formdata.js"></script>
     <script src="datepicker.js"></script>
+    <script src="js/mailcheck.min.js"></script>
     <script src="shiftcal.js"></script>
     <title>S H I F T to Bikes</title>
 </head>
@@ -57,6 +58,20 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="confirm-cancel" data-dismiss="modal" class="btn btn-warning">Yes</button>
+                    <button type="button" class="btn" data-dismiss="modal">No</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" tabindex="-1" id="delete-modal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h4>Are you sure you want to delete this event?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirm-delete" data-dismiss="modal" class="btn btn-warning">Yes</button>
                     <button type="button" class="btn" data-dismiss="modal">No</button>
                 </div>
             </div><!-- /.modal-content -->
@@ -222,8 +237,13 @@
                 <button id="preview-edit-button" type="button" class="btn btn-addEvent">Edit</button>
                 <button id="preview-button" type="button" class="btn btn-addEvent">Preview</button>
                 <button id="save-button" type="button" class="btn btn-addEvent">Post</button>
+            {{^ id }}
                 <button id="cancel-button" type="button" class="btn btn-addEvent" data-toggle="modal" data-target="#cancel-modal">Cancel</button>
-            
+            {{/ id }}
+            {{# id }}
+                <button id="delete-button" type="button" class="btn btn-addEvent" data-toggle="modal" data-target="#delete-modal">Delete</button>
+            {{/ id }}
+
             <span id="save-result"></span>
         </div>
         <br>
@@ -234,30 +254,30 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#general-fields">
-                            Basic facts
+                            Required
                         </a>
                     </div>
                     
                     <div id="general-fields" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <div class="form-group">
-                                <label class="control-label" for="title">Event title:</label>
-                                <input type="text" class="form-control" name="title" id="title" value="{{title}}" />
+                                <label class="control-label req-label" for="title">Event title</label>
+                                <input type="text" class="form-control" name="title" id="title" value="{{title}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="details">Description:</label>
+                                <label class="control-label" for="details">Description</label>
                                 <textarea class="form-control" name="details" id="details" >{{details}}</textarea>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="venue">Venue name:</label>
-                                <input type="text" class="form-control" name="venue" id="venue" value="{{venue}}" />
+                                <label class="control-label req-label" for="venue">Venue name</label>
+                                <input type="text" class="form-control" name="venue" id="venue" value="{{venue}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="address">Address</label>
-                                <input type="text" class="form-control" name="address" id="address" value="{{address}}" />
+                                <label class="control-label req-label" for="address">Address</label>
+                                <input type="text" class="form-control" name="address" id="address" value="{{address}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="length">Length of route:</label>
+                                <label class="control-label" for="length">Length of route</label>
                                 <select name="length" class="form-control" id="length">
                                     {{# lengthOptions }}
                                     <option value="{{range}}" {{# isSelected }}selected{{/ isSelected }}>{{range}} miles</option>
@@ -285,71 +305,21 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="time">Time:</label>
+                                <label class="control-label req-label" for="time">Time</label>
                                 <select name="time" class="form-control" id="time">
                                     {{# timeOptions }}
                                     <option value="{{time}}" {{# isSelected }}selected{{/ isSelected }}>{{time}}</option>
                                     {{/ timeOptions }}
                                 </select>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#optional-fields">
-                            Optional details
-                        </a>
-                    </div>
-                    <div id="optional-fields" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label class="control-label" for="timedetails">Time details:</label>
-                                <input type="text" class="form-control" name="timedetails" id="timedetails" value="{{timedetails}}" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="weburl">Website for more details:</label>
-                                <input type="text" class="form-control" name="weburl" id="weburl" value="{{weburl}}" />
-                            </div>
-                            {{# image}}
-                            <img src="{{image}}" />
-                            {{/ image}}
-                            <div class="form-group">
-                                {{# image}}
-                                <label class="control-label" for="image">Update Image:</label>
-                                {{/ image}}
-                                {{^ image}}
-                                <label class="control-label" for="image">Image:</label>
-                                {{/ image}}
-                                <input type="file" class="form-control" name="image" id="image" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="audience">Audience:</label>
-                                <select name="audience" class="form-control" id="audience">
-                                    {{# audienceOptions }}
-                                    <option value="{{code}}" {{# isSelected }}selected{{/ isSelected }}>{{text}}</option>
-                                    {{/ audienceOptions }}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#contact-fields">
-                            Contact info
-                        </a>
-                    </div>
-                    <div id="contact-fields" class="panel-collapse collapse">
-                        <div class="panel-body">
                             <div class="form-group">
-                                <label class="control-label" for="organizer">Your name:</label>
-                                <input type="text" class="form-control" name="organizer" id="organizer" value="{{organizer}}">
+                                <label class="control-label req-label" for="organizer">Your name</label>
+                                <input type="text" class="form-control" name="organizer" id="organizer" value="{{organizer}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="email">Your email:</label>
-                                <input type="text" class="form-control" name="email" id="email" value="{{email}}" >
+                                <label class="control-label req-label" for="email">Your email</label>
+                                <input type="text" class="form-control" name="email" id="email" value="{{email}}" required="true" />
                             </div>
                             <div class="checkbox">
                                 <input type="hidden" name="email-me" value="0" />
@@ -370,6 +340,46 @@
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                        <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#optional-fields">
+                            Optional details
+                        </a>
+                    </div>
+                    <div id="optional-fields" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label class="control-label" for="timedetails">Time details</label>
+                                <input type="text" class="form-control" name="timedetails" id="timedetails" value="{{timedetails}}" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="weburl">Website for more details</label>
+                                <input type="text" class="form-control" name="weburl" id="weburl" value="{{weburl}}" />
+                            </div>
+                            {{# image}}
+                            <img src="{{image}}" />
+                            {{/ image}}
+                            <div class="form-group">
+                                {{# image}}
+                                <label class="control-label" for="image">Update Image</label>
+                                {{/ image}}
+                                {{^ image}}
+                                <label class="control-label" for="image">Image</label>
+                                {{/ image}}
+                                <input type="file" class="form-control" name="image" id="image" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="audience">Audience</label>
+                                <select name="audience" class="form-control" id="audience">
+                                    {{# audienceOptions }}
+                                    <option value="{{code}}" {{# isSelected }}selected{{/ isSelected }}>{{text}}</option>
+                                    {{/ audienceOptions }}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
                         <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#print-fields">
                             Printed calendar
                         </a>
@@ -384,15 +394,15 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="tinytitle">Tiny title (24 chars):</label>
+                                <label class="control-label" for="tinytitle">Tiny title (24 chars)</label>
                                 <input type="text" class="form-control" name="tinytitle" id="tinytitle" value="{{tinytitle}}" maxlength="24" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="printdescr">Print description (120 chars):</label>
+                                <label class="control-label" for="printdescr">Print description (120 chars)</label>
                                 <textarea class="form-control" name="printdescr" id="printdescr" maxlength="120" >{{printdescr}}</textarea>
                             </div>
                             <!--div class="form-group">
-                                <label class="control-label" for="printcontact">Print contact info:</label>
+                                <label class="control-label" for="printcontact">Print contact info</label>
                                 <input type="text" class="form-control" name="printcontact" id="printcontact" value="{{printcontact}}" maxlength="255" />
                             </div-->
                         </div>

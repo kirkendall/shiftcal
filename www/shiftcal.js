@@ -63,6 +63,10 @@ $(document).ready( function() {
         if (id && secret) {
             // TODO: loading spinner
             $.get( 'retrieve_event.php?id=' + id + "&secret=" + secret, function( data ) {
+                if (data.error) {
+                    container.html('This event has been deleted.');
+                    return;
+                }
                 data.secret = secret;
                 data.readComic = true;
                 populateEditForm( data );
@@ -70,6 +74,32 @@ $(document).ready( function() {
         } else {
             populateEditForm({ dates: [] });
         }
+    }
+
+    function deleteEvent(id, secret) {
+        var opts = {
+            type: 'POST',
+            url: 'delete_event.php',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: 'json=' + JSON.stringify({
+                id: id,
+                secret: secret
+            }),
+            success: function(returnVal) {
+                var msg = 'Your event has been deleted';
+                $('#success-message').text(msg);
+                $('#success-modal').modal('show');
+            },
+            error: function(returnVal) {
+                var err = returnVal.responseJSON
+                    ? returnVal.responseJSON.error
+                    : { message: 'Server error deleting event!' };
+                $('#save-result').addClass('text-danger').text(err.message);
+            }
+        };
+        $.ajax(opts);
     }
 
     function populateEditForm( shiftEvent ) {
@@ -138,6 +168,12 @@ $(document).ready( function() {
         template = $('#mustache-edit').html();
         rendered = Mustache.render(template, shiftEvent);
         container.empty().append(rendered);
+        if (shiftEvent.id) {
+            $(document).off('click', '#confirm-delete')
+                .on('click', '#confirm-delete', function() {
+                    deleteEvent(shiftEvent.id, shiftEvent.secret);
+                });
+        }
         $('#date-select').setupDatePicker(shiftEvent['dates'] || []);
 
         $('#edit-header').affix({
@@ -180,7 +216,7 @@ $(document).ready( function() {
                     if (returnVal.secret) {
                         location.hash = '#editEvent/' + returnVal.id + '/' + returnVal.secret;
                         $('#secret').val(returnVal.secret);
-                        msg += ' You may also bookmark the current URL before you click OK.'
+                        msg += ' You may also bookmark the current URL before you click OK.';
                     }
                     $('#success-message').text(msg);
                     $('#success-modal').modal('show');
@@ -194,10 +230,15 @@ $(document).ready( function() {
                     // Collapse all groups
                     $('.panel-collapse').removeClass('in');
                     $.each(err.fields, function(fieldName, message) {
-                        var input = $('input[name=' + fieldName + ']');
-                        input.closest('.form-group,.checkbox')
+                        var input = $('input[name=' + fieldName + ']'),
+                            parent = input.closest('.form-group,.checkbox'),
+                            label = $('label', parent);
+                        parent
                             .addClass('has-error')
                             .append('<div class="help-block">' + message + '</div>');
+                        $('.help-block .field-name', parent).text(
+                            label.text().toLowerCase()
+                        );
                         // Then re-expand any group with errors
                         input.closest('.panel-collapse')
                             .addClass('in');
@@ -319,13 +360,13 @@ $(document).ready( function() {
             }
         }    
     }
-    
+
     $(document).on('click', 'a#add-event-button', function(e) {
         displayEditForm();
     });
 
     $(document).on('click', 'a#view-events-button, #confirm-cancel, #success-ok', viewEvents);
-    
+
     $(document).on('click', 'a#about-button', function(e) {
         displayAbout();
     });
@@ -378,5 +419,26 @@ $(document).ready( function() {
         
         viewEvents();
     }
+    // Set up email error detection and correction
+    $(document).on( 'blur', '#email', function () {
+        $(this).mailcheck( {
+            suggested: function ( element, suggestion ) {
+                var message = 'Did you mean <span class="correction">'
+                    + suggestion.full + '</span>?';
+                $( '#email-suggestion' )
+                    .html( message )
+                    .show();
+            },
+            empty: function ( element ) {
+                $( '#emailMsg' )
+                    .hide();
+            }
+        } );
+    } );
+    $( document ).on( 'click', '#email-suggestion .correction', function () {
+        $( '#email' ).val( $( this ).text() );
+        $( '#email-suggestion' )
+            .hide();
+    } );
             
 });
