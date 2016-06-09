@@ -156,25 +156,29 @@
 
         $(document).off('click', '#preview-button')
             .on('click', '#preview-button', function(e) {
-            previewEvent(shiftEvent, callback);
+            previewEvent(shiftEvent, function(eventHTML) {
+                $('#mustache-html').append(eventHTML);
+            });
         });
     }
-
+    
     function previewEvent(shiftEvent, callback) {
         var previewEvent = {},
             mustacheData;
+        var $form = $('#event-entry');
         $.extend(previewEvent, shiftEvent, eventFromForm());
         previewEvent.displayTime = previewEvent.time;
         previewEvent['length'] += ' miles';
-        previewEvent['mapLink'] = getMapLink(previewEvent['address']);
-        $('#event-entry').hide();
+        previewEvent['mapLink'] = $form.getMapLink(previewEvent['address']);
+        $form.hide();
         mustacheData = {
-            dates: [{
-                date: formatDate(previewEvent.dates[0]),
-                events: [previewEvent]
-            }],
+            dates:[],
             preview: true
         };
+        $.each(previewEvent.dates, function(index, value) {
+            var date = $form.formatDate(value);
+            mustacheData.dates.push({ date: date, events: [previewEvent] });            
+        });
         $('#preview-button').hide();
         $('#preview-edit-button').show();
         var template = $('#view-events-template').html();
