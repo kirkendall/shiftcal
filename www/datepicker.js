@@ -28,6 +28,7 @@
                 dates.push(key);
             }
         }
+        dates.sort($('#date-select').compareDates);
         return dates;
     }
 

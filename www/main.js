@@ -35,17 +35,9 @@ $(document).ready( function() {
                 groupedByDate[date].events.push(value);
             });
 
-            var compareEvents = function ( event1, event2 ) {
-                if ( event1.time < event2.time ) {
-                    return -1;
-                }
-                if ( event1.time > event2.time ) {
-                    return 1;
-                }
-                return 0;
-            };
+
             for ( var date in groupedByDate )  {
-                groupedByDate[date].events.sort(compareEvents);
+                groupedByDate[date].events.sort(container.compareTimes);
             }
             var template = $('#view-events-template').html();
             var info = Mustache.render(template, mustacheData);
