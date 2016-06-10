@@ -9,9 +9,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/formdata.js"></script>
-    <script src="datepicker.js"></script>
     <script src="js/mailcheck.min.js"></script>
-    <script src="shiftcal.js"></script>
+    <script src="helpers.js"></script>
+    <script src="addevent.js"></script>
+    <script src="datepicker.js"></script>
+    <script src="main.js"></script>
     <title>S H I F T to Bikes</title>
 </head>
 <body>
@@ -381,7 +383,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a role="button" data-toggle="collapse" data-parent="#event-fields" href="#print-fields">
-                            Printed calendar
+                            Print calendar
                         </a>
                     </div>
                     <div id="print-fields" class="panel-collapse collapse">
@@ -390,7 +392,7 @@
                                 <input type="hidden" name="printevent" value="0" />
                                 <label class="control-label" for="printevent">
                                     <input type="checkbox" name="printevent" id="printevent" value="1" {{# printevent }}checked{{/ printevent }} />
-                                    Include in the print calendar?
+                                    Include in the print calendar? You must submit at least 3 weeks in advance. Inclusion not guaranteed.
                                 </label>
                             </div>
                             <div class="form-group">
