@@ -155,6 +155,10 @@ $(document).ready( function() {
     $(document).on('click', '#date-picker-pedalpalooza', function(ev) {
         dateJump(ev);
     });
+
+    $(document).on('touchstart', '#date-picker-pedalpalooza', function(ev) {
+        dateJump(ev);
+    });
     
     $(document).on('click','.navbar-collapse.collapse.in',function(e) {
         if( $(e.target).is('a') ) {
