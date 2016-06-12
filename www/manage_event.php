@@ -65,20 +65,6 @@ function build_json_response() {
         );
     }
 
-    // Converts data to an event, loading the existing one if id is included in data
-    $event = Event::fromArray($data);
-
-    // Else
-    if ($event->exists() && !$event->secretValid($data['secret'])) {
-        return array(
-            'error' => array(
-                'message' => 'Invalid secret, use link from email'
-            )
-        );
-    }
-
-    $messages = $event->validate($return_messages=TRUE, $remove_column_names=TRUE);
-
     $inputDateStrings = get($data['dates'], array());
     $validDates = array();
     $invalidDates = array();
@@ -95,6 +81,29 @@ function build_json_response() {
     if ($invalidDates) {
         $messages['dates'] = "Invalid dates: " . implode(', ', $invalidDates);
     }
+
+    if (count($validDates) === 1) {
+        $data['datestype'] = 'O';
+        $data['datestring'] = date_format($validDates[0], 'l, F j');
+    } else {
+        // not dealing with 'consecutive'
+        $data['datestype'] = 'S';
+        $data['datestring'] = 'Scattered days';
+    }
+
+    // Converts data to an event, loading the existing one if id is included in data
+    $event = Event::fromArray($data);
+
+    // Else
+    if ($event->exists() && !$event->secretValid($data['secret'])) {
+        return array(
+            'error' => array(
+                'message' => 'Invalid secret, use link from email'
+            )
+        );
+    }
+
+    $messages = $event->validate($return_messages=TRUE, $remove_column_names=TRUE);
 
     if (isset($_FILES['file'])) {
         $uploader = new fUpload();

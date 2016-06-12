@@ -32,6 +32,7 @@ class Event extends fActiveRecord {
             //'printevent' => $this->getPrintevent(),
             'tinytitle' => $this->getTinytitle(),
             'printdescr' => $this->getPrintdescr(),
+            'datestype' => $this->getDatestype(),
             //'printcontact' => $this->getPrintcontact()
         );
 
@@ -76,6 +77,8 @@ class Event extends fActiveRecord {
         $event->setAudience(get($input['audience'], ''));
         $event->setTinytitle(get($input['tinytitle'], ''));
         $event->setPrintdescr(get($input['printdescr'], ''));
+        $event->setDates(get($input['datestring'], '')); // string field 'dates' needed for legacy admin calendar
+        $event->setDatestype(get($input['datestype'], 'O'));
         //$event->setPrintcontact(get($input['printcontact'], ''));
         // Length
         return $event;
@@ -94,7 +97,7 @@ class Event extends fActiveRecord {
         // first get the data into an array
         $detailArray = $this->toArray($include_hidden);
         // add all times that exist, maybe none.
-        $detailArray["dates"] = $this->getDates();
+        $detailArray["dates"] = $this->getDates(); // Return the actual dates, not the hacky string
         // return potentially augmented array
         return $detailArray;
     }
