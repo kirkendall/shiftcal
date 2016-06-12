@@ -6,7 +6,7 @@
             $.get( 'retrieve_event.php?id=' + id + "&secret=" + secret, function( data ) {
                 data.secret = secret;
                 data.readComic = true;
-                populateEditForm( data );
+                populateEditForm( data, callback );
             });
         } else {
             populateEditForm({ dates: [] }, callback);
@@ -116,7 +116,8 @@
                 success: function(returnVal) {
                     var msg = isNew ?
                         'Thank you! A link with a URL to edit and manage the ' +
-                            'event has been emailed to ' + postVars.email + '.' :
+                            'event has been emailed to ' + postVars.email +
+                            '. You must click this link for the event to become visible.' :
                         'Your event has been updated!';
 
                     if (returnVal.secret) {

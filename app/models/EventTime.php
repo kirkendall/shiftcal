@@ -34,12 +34,13 @@ class EventTime extends fActiveRecord {
         $event->related_records = array();
     }
 
-    public static function getRange($firstDay, $lastDay) {
+    public static function getRangeVisible($firstDay, $lastDay) {
         return fRecordSet::build(
             'EventTime', // class
             array(
                 'eventdate>=' => $firstDay,
-                'eventdate<=' => $lastDay
+                'eventdate<=' => $lastDay,
+                'calevent{id}.hidden=' => 0
             ), // where
             array('eventdate' => 'asc')  // order by
         );

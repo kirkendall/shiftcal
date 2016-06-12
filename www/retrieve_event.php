@@ -24,8 +24,13 @@ if (isset($_GET['id'])) {
     try {
         // get event by id
         $event = new Event($event_id);
-        $include_hidden = isset($_GET['secret']) && $event->secretValid($_GET['secret']);
-        $response = $event->toDetailArray($include_hidden);
+        $secret_valid = isset($_GET['secret']) && $event->secretValid($_GET['secret']);
+
+        if ($secret_valid) {
+            $event->unhide();
+        }
+
+        $response = $event->toDetailArray($secret_valid);
     } catch (fExpectedException $e) {
         $response['error'] = array(
             'message' => $e->getMessage()
