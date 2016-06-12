@@ -98,7 +98,6 @@ $(document).ready( function() {
     function viewAbout() {
         var content = $('#aboutUs').html();
         container.empty().append(content);
-        $(document).scrollTop();
     }
     
     function viewPedalpalooza() {
