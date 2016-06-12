@@ -60,6 +60,8 @@ class EventTime extends fActiveRecord {
     public function toEventSummaryArray() {
         $eventArray = $this->getEvent()->toArray();
         $eventArray['date'] = $this->getFormattedDate();
+        $eventArray['cancelled'] = $this->getEventstatus() == 'C';
+        $eventArray['newsflash'] = $this->getNewsflash();
         return $eventArray;
     }
 }

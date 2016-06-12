@@ -189,7 +189,6 @@ $(document).ready( function() {
         var locationHashParts = location.hash.split('/');
         viewAddEventForm(locationHashParts[1], locationHashParts[2]);
     } else {
-        
         viewEvents();
     }
     // Set up email error detection and correction

@@ -64,6 +64,19 @@ nav.navbar {
     color: #37b;
 }
 
+.event.cancelled div {
+    text-decoration: line-through;
+}
+
+.cancelled-text {
+    color: red;
+    font-weight: bold;
+}
+
+.newsflash {
+    color: rgb(255, 0, 255);
+}
+
 h3 {
     font-size: 1em;
     font-weight: bold;
