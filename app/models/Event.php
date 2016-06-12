@@ -79,6 +79,7 @@ class Event extends fActiveRecord {
         $event->setPrintdescr(get($input['printdescr'], ''));
         $event->setDates(get($input['datestring'], '')); // string field 'dates' needed for legacy admin calendar
         $event->setDatestype(get($input['datestype'], 'O'));
+        $event->setArea('P'); // legacy compat, hardcoded to 'P'ortland for now
         //$event->setPrintcontact(get($input['printcontact'], ''));
         // Length
         return $event;
