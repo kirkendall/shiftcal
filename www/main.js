@@ -82,14 +82,16 @@ $(document).ready( function() {
 
         getEventHTML(startDate, endDate, function (eventHTML) {
              container.append(eventHTML);
-             container.append($('#load-more-template').html());               
-             $(document).on('click', '#load-more', function(e) {
-                  startDate.setDate(startDate.getDate() + 10);
-                  endDate.setDate(startDate.getDate() + 9);
-                  getEventHTML(startDate, endDate, function(eventHTML) {
-                       $('#load-more').before(eventHTML);        
-                  });
-             });          
+             container.append($('#load-more-template').html());
+             $(document).off('click', '#load-more')
+                  .on('click', '#load-more', function(e) {
+                      startDate.setDate(startDate.getDate() + 10);
+                      endDate.setDate(startDate.getDate() + 9);
+                      getEventHTML(startDate, endDate, function(eventHTML) {
+                          $('#load-more').before(eventHTML);
+                      });
+                      return false;
+                 });
         });
     }
     
@@ -213,5 +215,5 @@ $(document).ready( function() {
         $( '#email-suggestion' )
             .hide();
     } );
-            
+
 });
