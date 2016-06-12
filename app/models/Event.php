@@ -114,7 +114,7 @@ class Event extends fActiveRecord {
         global $PROTOCOL, $HOST, $PATH;
         $base = $PROTOCOL . $HOST . $PATH;
 	$headers = 'From: bikefun@shift2bikes.org' . "\r\n" .  'Reply-To: bikefun@shift2bikes.org' . "\r\n";
-        mail($this->getEmail(), "Your Bike Event" . $this->getTitle(), "Hi!  To confirm and publish the event, please visit $base#editEvent/" . $this->getId() . "/" .$this->getPassword(), $headers);
+        mail($this->getEmail(), "Shift2Bike Event Secret URL: " . $this->getTitle(), "Hi! To publish and edit the event, please visit $base#editEvent/" . $this->getId() . "/" .$this->getPassword(), $headers);
     }
 
     public function unhide() {
