@@ -205,11 +205,12 @@
                             <div class="otherButtons">
                                 <a href="{{mapLink}}" target="_blank">
                                     <button class="btn btn-expand map">Map</button>
-                                </a>{{^ preview }}
-                               
-                                {{#showEditButton}}<a href="#editEvent/{{id}}" >
-                                    <button class="btn btn-default edit">Edit</button>
-                                </a>{{/showEditButton}}{{/ preview }}
+                                </a>
+                                {{ #weburl }}
+                                <a href="{{weburl}}" target="_blank">
+                                    <button class="btn btn-expand weburl">Offsite Details</button>
+                                </a>
+                                {{ /weburl }}
                             </div>
                             <div class="mainDetails">
                                 {{# image}}
