@@ -187,7 +187,7 @@
                     <div class="time col-xs-4">
                         <h3 class="audience-{{audience}}">{{displayTime}}</h3>
                     </div>
-                    <a class="expandDetails" href="#" data-toggle="collapse" data-target="#detailsContainer{{cal_id}}">
+                    <a class="expandDetails" href="#" data-toggle="collapse" data-target="#detailsContainer{{caldaily_id}}">
                         <div class="col-xs-8" >
                             <div class="summary">
                                 <h3>
@@ -201,9 +201,9 @@
                             </div>
                         </div>
                     </a>
-                    <div id="detailsContainer{{cal_id}}" {{^ preview }}class="collapse"{{/ preview }}>
+                    <div id="detailsContainer{{caldaily_id}}" {{^ preview }}class="collapse"{{/ preview }}>
                         <div class="hideButton col-xs-4">
-                            {{^ preview }}<button class="btn btn-expand" data-toggle="collapse" data-target="#detailsContainer{{cal_id}}">Hide</button>{{/ preview }}
+                            {{^ preview }}<button class="btn btn-expand" data-toggle="collapse" data-target="#detailsContainer{{caldaily_id}}">Hide</button>{{/ preview }}
                         </div>
                         <div class="eventDetails col-xs-8">
                             <div class="otherButtons">
