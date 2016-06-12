@@ -178,7 +178,9 @@ $(document).ready( function() {
         $('#preview-edit-button').hide();
     });
 
-    if (/^#addEvent/.test(location.hash)) {
+    if (/^#pedalpalooza/.test(location.hash)) {
+        viewPedalpalooza();
+    } else if (/^#addEvent/.test(location.hash)) {
         viewAddEventForm();
     } else if (
         /^#editEvent/.test(location.hash) &&
