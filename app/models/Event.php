@@ -56,6 +56,7 @@ class Event extends fActiveRecord {
         if ($event == null) {
             $event = new Event();
             $event->generateSecret();
+            $event->setHidden(1);
         }
 
         // These are marked as required
@@ -111,5 +112,13 @@ class Event extends fActiveRecord {
         $base = $PROTOCOL . $HOST . $PATH;
         mail($this->getEmail(), "Edit event", "$base#editEvent/" . $this->getId() . "/" .$this->getPassword());
     }
+
+    public function unhide() {
+        if ($this->getHidden() != 0) {
+            $this->setHidden(0);
+            $this->store();
+        }
+    }
 }
+
 fORM::mapClassToTable('Event', 'calevent');
