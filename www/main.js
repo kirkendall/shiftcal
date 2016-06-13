@@ -109,8 +109,7 @@ $(document).ready( function() {
              .append($('#pedalpalooza-header').html())
              .append($('#legend-template').html());
         getEventHTML(startDate, endDate, function (eventHTML) {
-             container.append(eventHTML);
-             container.append($('#pedalpalooza-prior').html());         
+             container.append(eventHTML);     
         });
     }
     
@@ -190,7 +189,7 @@ $(document).ready( function() {
         var locationHashParts = location.hash.split('/');
         viewAddEventForm(locationHashParts[1], locationHashParts[2]);
     } else {
-        viewEvents();
+        viewPedalpalooza();
     }
     // Set up email error detection and correction
     $(document).on( 'blur', '#email', function () {
