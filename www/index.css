@@ -33,11 +33,10 @@ nav.navbar {
 }
 
 .container {
-	margin-left: 0px;
-	margin-right: 0px;
 	padding-left: 5px;
 	padding-right: 0px;
-	width: auto;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
 .pg-width {
@@ -82,6 +81,14 @@ h3 {
     font-weight: bold;
 }
 
+.timedetails {
+    text-align: right;
+}
+
+.summary p {
+    margin-bottom: 5px;
+}
+
 .time h3 {
     text-align: right;
 }
@@ -95,20 +102,9 @@ h3 {
     color: #37b;
 }
 
-.hideButton {
-    text-align:right;
-}
-
-
 .mainDetails p {
     margin-top: 1em;
 	
-}
-.mainDetails p.contactInfo {
-    margin-bottom: 0.25em;
-}
-.mainDetails p.email {
-    margin-top: 0.25em;
 }
 .otherButtons a {
     text-decoration: none;
