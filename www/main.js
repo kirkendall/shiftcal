@@ -180,15 +180,22 @@ $(document).ready( function() {
 
     if (/^#pedalpalooza/.test(location.hash)) {
         viewPedalpalooza();
-    } else if (/^#addEvent/.test(location.hash)) {
+    }
+    else if (/^#addEvent/.test(location.hash)) {
         viewAddEventForm();
-    } else if (
-        /^#editEvent/.test(location.hash) &&
-        location.hash.indexOf('/') > 0
-    ) {
+    }
+    else if (/^#editEvent/.test(location.hash) 
+	         && location.hash.indexOf('/') > 0 ) {
         var locationHashParts = location.hash.split('/');
         viewAddEventForm(locationHashParts[1], locationHashParts[2]);
-    } else {
+    }
+    else if ( /^#viewEvents/.test(location.hash)) {
+    	viewEvents();
+    }
+    else if ( /^#aboutUs/.test(location.hash)) {
+    	viewAbout();
+    }
+    else {
         viewPedalpalooza();
     }
     // Set up email error detection and correction
