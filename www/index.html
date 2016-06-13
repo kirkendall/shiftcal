@@ -202,16 +202,19 @@
                             </div>
                         </div>
                     </a>
+                    <div class="col-xs-2">
+                    </div>
                     <div id="detailsContainer{{caldaily_id}}" {{^ preview }}class="collapse"{{/ preview }}>
-                        <div class="eventDetails col-xs-push-2 col-xs-10">
+                        <div class="eventDetails  col-xs-10">
                             <div class="mainDetails">
-                                {{# image}}
-                                <img src="{{image}}" />
-                                {{/ image}}
-
+                                <div class="eventImg">
+                                    {{# image}}
+                                        <img src="{{image}}" />
+                                    {{/ image}}
+                                </div>
                                 <div>
                                     {{#mapLink}}
-                                    <a href="{{mapLink}}" target="_blank">
+                                        <a href="{{mapLink}}" target="_blank">
                                         <img src="images/google-maps-icon.png" />
                                     {{/mapLink}}
                                     {{^mapLink}}
