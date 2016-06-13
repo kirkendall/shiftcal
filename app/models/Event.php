@@ -26,7 +26,10 @@ class Event extends fActiveRecord {
             'length' => NULL,
             //'length' => $this->getLength(),
             'timedetails' => $this->getTimedetails(),
+            'locdetails' => $this->getLocdetails(),
+            'eventduration' => $this->getEventduration() != null && $this->getEventduration() > 0 ? $this->getEventduration() : null,
             'weburl' => $this->getWeburl(),
+            'webname' => $this->getWebname(),
             'image' => $this->getImage() != null ? $IMAGEPATH . '/' . $this->getImage() : null,
             'audience' => $this->getAudience(),
             //'printevent' => $this->getPrintevent(),
@@ -36,12 +39,9 @@ class Event extends fActiveRecord {
             //'printcontact' => $this->getPrintcontact()
         );
 
-        if ($this->getHideemail() == 0 || $include_hidden) {
-            $details['email'] = $this->getEmail();
-        }
-        else {
-            $details['email'] = null;
-        }
+        $details['email']   = $this->getHideemail() == 0   || $include_hidden ? $this->getEmail() : null;
+        $details['phone']   = $this->getHidephone() == 0   || $include_hidden ? $this->getPhone() : null;
+        $details['contact'] = $this->getHidecontact() == 0 || $include_hidden ? $this->getContact() : null;
 
         return $details;
     }
@@ -69,11 +69,18 @@ class Event extends fActiveRecord {
 
         // These are optional
         $event->setHideemail(get($input['hideemail'], 0));
+        $event->setPhone(get($input['phone'], ''));
+        $event->setHidephone(get($input['hidephone'], 0));
+        $event->setContact(get($input['contact'], ''));
+        $event->setHidecontact(get($input['hidecontact'], 0));
         $event->setDescr(get($input['details'], ''));
         $event->setEventtime(get($input['time'], ''));
         $event->setHighlight(0);
         $event->setTimedetails(get($input['timedetails'], ''));
+        $event->setLocdetails(get($input['locdetails'], ''));
+        $event->setEventduration(get($input['eventduration'], 0));
         $event->setWeburl(get($input['weburl'], ''));
+        $event->setWebname(get($input['webname'], ''));
         $event->setAudience(get($input['audience'], ''));
         $event->setTinytitle(get($input['tinytitle'], ''));
         $event->setPrintdescr(get($input['printdescr'], ''));

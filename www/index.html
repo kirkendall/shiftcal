@@ -188,47 +188,76 @@
         <div class="secondaryHeader">{{date}}</div>
             {{#events}}
                 <div class="event row {{#cancelled}}cancelled{{/cancelled}}" data-event-id="{{id}}">
-                    <div class="time col-xs-4">
+                    <div class="time col-xs-2">
                         <h3 class="audience-{{audience}}">{{displayTime}}</h3>
                     </div>
                     <a class="expandDetails" href="#" data-toggle="collapse" data-target="#detailsContainer{{caldaily_id}}">
-                        <div class="col-xs-8" >
+                        <div class="col-xs-10" >
                             <div class="summary">
                                 <h3>
                                     {{title}}
                                     {{#cancelled}}<span class="cancelled-text"> - CANCELLED</span>{{/cancelled}}
                                     {{#newsflash}}<span class="newsflash"> - {{newsflash}}</span>{{/newsflash}}
                                 </h3>
-                                <p> {{venue}} </p>
-                                <p> {{address}} </p>
-                                <p> {{length}}</p>
                             </div>
                         </div>
                     </a>
                     <div id="detailsContainer{{caldaily_id}}" {{^ preview }}class="collapse"{{/ preview }}>
-                        <div class="hideButton col-xs-4">
-                            {{^ preview }}<button class="btn btn-expand" data-toggle="collapse" data-target="#detailsContainer{{caldaily_id}}">Hide</button>{{/ preview }}
-                        </div>
-                        <div class="eventDetails col-xs-8">
-                            <div class="otherButtons">
-                                <a href="{{mapLink}}" target="_blank">
-                                    <button class="btn btn-expand map">Map</button>
-                                </a>
-                                {{ #weburl }}
-                                <a href="{{weburl}}" target="_blank">
-                                    <button class="btn btn-expand weburl">Offsite Details</button>
-                                </a>
-                                {{ /weburl }}
-                            </div>
+                        <div class="eventDetails col-xs-push-2 col-xs-10">
                             <div class="mainDetails">
                                 {{# image}}
                                 <img src="{{image}}" />
                                 {{/ image}}
+
+                                <div>
+                                    {{#mapLink}}
+                                    <a href="{{mapLink}}" target="_blank">
+                                        <img src="images/google-maps-icon.png" />
+                                    {{/mapLink}}
+                                    {{^mapLink}}
+                                    <p>
+                                    {{/mapLink}}
+
+                                        {{venue}}{{#address}}{{#venue}}, {{/venue}}{{address}}{{/address}}
+
+                                    {{^mapLink}}
+                                    </p>
+                                    {{/mapLink}}
+                                    {{#mapLink}}
+                                    </a>
+                                    {{/mapLink}}
+
+                                    {{locdetails}}
+                                </div>
+
+                                {{ #weburl }}
+                                <p><a href="{{weburl}}" target="_blank">
+                                    <img src="images/webpage.png" />
+                                    {{#webname}}{{webname}}{{/webname}}
+                                    {{^webname}}Website{{/webname}}
+                                </a></p>
+                                {{ /weburl }}
+
+                                <p><img src="images/alarm.png" /> {{displayTime}}{{#timedetails}}, {{timedetails}}{{/timedetails}}</p>
+                                {{#eventduration}}
+                                <p><img src="images/stopwatch.png" /> {{eventduration}} minutes</p>
+                                {{/eventduration}}
+
                                 <p>{{details}}</p>
-                                <p class="contactInfo">Organized by: {{organizer}}</p>
-                                {{#email}}
-                                <p class="email">Contact info: {{email}}</p>
-                                {{/email}}
+
+                                <p class="contactInfo">
+                                    <img src="images/profile.png" /> {{organizer}}
+
+                                    {{#email}}
+                                        <a href="mailto:{{email}}"><img src="images/email.png" /> {{email}}</a>
+                                    {{/email}}
+
+                                    {{#phone}}
+                                        <a href="tel:{{phone}}"><img src="images/phone.png" /> {{phone}}</a>
+                                    {{/phone}}
+
+                                    {{contact}}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -325,25 +354,23 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label req-label" for="organizer">Your name</label>
+                                <label class="control-label req-label" for="organizer">Organizer</label>
                                 <input type="text" class="form-control" name="organizer" id="organizer" value="{{organizer}}" required="true" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label req-label" for="email">Your email</label>
+                                <label class="control-label req-label" for="email">Email</label>
                                 <input type="text" class="form-control" name="email" id="email" value="{{email}}" required="true" />
                             </div>
-                            <div class="checkbox">
-                                <input type="hidden" name="email-me" value="0" />
-                                <label class="control-label" for="email-me">
-                                    <input type="checkbox" name="email-me" id="email-me" value="1"  {{# emailMe }}checked{{/ emailMe }} />
-                                    Send forum messages to this email address
+                            <div>
+                                <label class="control-label" for="hideemail">
+                                    <input type="checkbox" name="hideemail" id="hideemail" value="1" {{# hideemail }}checked{{/ hideemail }} />
+                                    Don't publish my email address online
                                 </label>
                             </div>
                             <div class="checkbox">
-                                <input type="hidden" name="hideemail" value="0" />
-                                <label class="control-label" for="hideemail">
-                                    <input type="checkbox" name="hideemail" id="hideemail" value="1"  {{# hideemail }}checked{{/ hideemail }} />
-                                    Don't publish my email address online
+                                <label class="control-label" for="email-me">
+                                    <input type="checkbox" name="email-me" id="email-me" value="1" {{# emailMe }}checked{{/ emailMe }} />
+                                    Send forum messages to this email address
                                 </label>
                             </div>
                         </div>
@@ -362,9 +389,44 @@
                                 <input type="text" class="form-control" name="timedetails" id="timedetails" value="{{timedetails}}" />
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="weburl">Website for more details</label>
-                                <input type="text" class="form-control" name="weburl" id="weburl" value="{{weburl}}" />
+                                <label class="control-label" for="locdetails">Location details</label>
+                                <input type="text" class="form-control" name="locdetails" id="locdetails" value="{{locdetails}}" />
                             </div>
+                            <div class="form-group">
+                                <label class="control-label" for="eventduration">Event duration (minutes)</label>
+                                <input type="text" class="form-control" name="eventduration" id="eventduration" value="{{eventduration}}" />
+                            </div>
+
+                            <div>Website for additional details</div>
+                            <div class="row">
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label class="control-label" for="webname">Name</label>
+                                    <input type="text" class="form-control" name="webname" id="webname" value="{{webname}}" />
+                                </div>
+                                <div class="form-group col-xs-12 col-sm-6">
+                                    <label class="control-label" for="weburl">URL</label>
+                                    <input type="text" class="form-control" name="weburl" id="weburl" value="{{weburl}}" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" for="phone">Phone</label>
+                                <input type="text" class="form-control" name="phone" id="phone" value="{{phone}}" />
+                            </div>
+                            <label class="control-label" for="hidephone">
+                                <input type="checkbox" name="hidephone" id="hidephone" value="1" {{# hidephone }}checked{{/ hidephone }} />
+                                Don't publish my phone number online
+                            </label>
+
+                            <div class="form-group">
+                                <label class="control-label" for="contact">Additional Contact Info</label>
+                                <input type="text" class="form-control" name="contact" id="contact" value="{{contact}}" />
+                            </div>
+                            <label class="control-label" for="hidecontact">
+                                <input type="checkbox" name="hidecontact" id="hidecontact" value="1" {{# hidecontact }}checked{{/ hidecontact }} />
+                                Don't publish additional contact information online
+                            </label>
+
                             {{# image}}
                             <img src="{{image}}" />
                             {{/ image}}
