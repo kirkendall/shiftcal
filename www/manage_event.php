@@ -42,7 +42,7 @@ function build_json_response() {
     $_POST = $data; // fValidation inspects $_POST for field data
     $validator = new fValidation();
 
-    $validator->addRequiredFields('title', 'venue', 'address', 'organizer', 'email', 'read_comic');
+    $validator->addRequiredFields('title', 'details', 'venue', 'address', 'organizer', 'email', 'read_comic');
     $validator->addEmailFields('email');
     $validator->addRegexReplacement('#^(.*?): (.*)$#', '\2 for <span class="field-name">\1</span>');
     // If id is specified require secret

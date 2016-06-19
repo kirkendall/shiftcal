@@ -137,7 +137,7 @@
                     // Collapse all groups
                     $('.panel-collapse').removeClass('in');
                     $.each(err.fields, function(fieldName, message) {
-                        var input = $('input[name=' + fieldName + ']');
+                        var input = $('[name=' + fieldName + ']');
                         input.closest('.form-group,.checkbox')
                             .addClass('has-error')
                             .append('<div class="help-block">' + message + '</div>');
