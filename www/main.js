@@ -131,6 +131,12 @@ $(document).ready( function() {
     function viewAddEventForm(id, secret) {
         container.getAddEventForm( id, secret, function(eventHTML) {
             container.empty().append(eventHTML);
+            if (id) {
+                $(document).off('click', '#confirm-delete')
+                    .on('click', '#confirm-delete', function() {
+                        deleteEvent(id, secret);
+                    });
+            }
         });
     }
     

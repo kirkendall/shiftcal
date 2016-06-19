@@ -4,6 +4,10 @@
         if (id && secret) {
             // TODO: loading spinner
             $.get( 'retrieve_event.php?id=' + id + "&secret=" + secret, function( data ) {
+                if (data.error) {
+                    callback( 'This event has been deleted.' );
+                    return
+                }
                 data.secret = secret;
                 data.readComic = true;
                 populateEditForm( data, callback );
@@ -11,7 +15,7 @@
         } else {
             populateEditForm({ dates: [] }, callback);
         }
-    }
+    };
 
     function populateEditForm(shiftEvent, callback) {
         var i, h, m, meridian,
