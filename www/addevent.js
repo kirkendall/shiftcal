@@ -196,4 +196,36 @@
         return harvestedEvent;
     }
 
+    // Set up email error detection and correction
+    $( document ).on( 'blur', '#email', function () {
+        $( this ).mailcheck( {
+            suggested: function ( element, suggestion ) {
+                var template = $( '#email-suggestion-template' ).html(),
+                    data = { suggestion: suggestion.full },
+                    message = Mustache.render( template, data );
+                $( '#email-suggestion' )
+                    .html( message )
+                    .show();
+            },
+            empty: function ( element ) {
+                $( '#emailMsg' )
+                    .hide();
+            }
+        } );
+    } );
+
+    $( document ).on( 'click', '#email-suggestion .correction', function () {
+        $( '#email' ).val( $( this ).text() );
+        $( '#email-suggestion' )
+            .hide();
+    } );
+
+    $( document ).on( 'click', '#email-suggestion .glyphicon-remove', function () {
+        $( '#email-suggestion' )
+            .hide();
+        // They clicked the X button, turn mailcheck off
+        // TODO: Remember unwanted corrections in local storage, don't offer again
+        $( document ).off( 'blur', '#email' );
+    } );
+
 }(jQuery));

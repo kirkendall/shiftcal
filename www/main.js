@@ -202,26 +202,5 @@ $(document).ready( function() {
     else {
         viewPedalpalooza();
     }
-    // Set up email error detection and correction
-    $(document).on( 'blur', '#email', function () {
-        $(this).mailcheck( {
-            suggested: function ( element, suggestion ) {
-                var message = 'Did you mean <span class="correction">'
-                    + suggestion.full + '</span>?';
-                $( '#email-suggestion' )
-                    .html( message )
-                    .show();
-            },
-            empty: function ( element ) {
-                $( '#emailMsg' )
-                    .hide();
-            }
-        } );
-    } );
-    $( document ).on( 'click', '#email-suggestion .correction', function () {
-        $( '#email' ).val( $( this ).text() );
-        $( '#email-suggestion' )
-            .hide();
-    } );
 
 });
