@@ -132,11 +132,11 @@
                 error: function(returnVal) {
                     var err = returnVal.responseJSON
                                 ? returnVal.responseJSON.error
-                                : { message: 'Server error saving event!' };
-                    $('#save-result').addClass('text-danger').text(err.message);
+                                : { message: 'Server error saving event!' },
+                        okGroups,
+                        errGroups;
 
-                    // Collapse all groups
-                    $('.panel-collapse').removeClass('in');
+                    $('#save-result').addClass('text-danger').text(err.message);
 
                     $.each(err.fields, function(fieldName, message) {
                         var input = $('[name=' + fieldName + ']'),
@@ -148,10 +148,13 @@
                         $('.help-block .field-name', parent).text(
                             label.text().toLowerCase()
                         );
-                        // Then re-expand any group with errors
-                        input.closest('.panel-collapse')
-                            .addClass('in');
                     });
+
+                    // Collapse groups without errors, show groups with errors
+                    errGroups = $('.has-error').closest('.panel-collapse');
+                    okGroups = $('.panel-collapse').not(errGroups);
+                    errGroups.collapse('show');
+                    okGroups.collapse('hide');
                 }
             };
             if(data.fake) {
