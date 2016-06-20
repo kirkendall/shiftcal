@@ -4,6 +4,10 @@
         if (id && secret) {
             // TODO: loading spinner
             $.get( 'retrieve_event.php?id=' + id + "&secret=" + secret, function( data ) {
+                if (data.error) {
+                    callback( 'This event has been deleted.' );
+                    return
+                }
                 data.secret = secret;
                 data.readComic = true;
                 populateEditForm( data, callback );
@@ -11,7 +15,7 @@
         } else {
             populateEditForm({ dates: [] }, callback);
         }
-    }
+    };
 
     function populateEditForm(shiftEvent, callback) {
         var i, h, m, meridian,
@@ -132,19 +136,29 @@
                 error: function(returnVal) {
                     var err = returnVal.responseJSON
                                 ? returnVal.responseJSON.error
-                                : { message: 'Server error saving event!' };
+                                : { message: 'Server error saving event!' },
+                        okGroups,
+                        errGroups;
+
                     $('#save-result').addClass('text-danger').text(err.message);
-                    // Collapse all groups
-                    $('.panel-collapse').removeClass('in');
+
                     $.each(err.fields, function(fieldName, message) {
-                        var input = $('input[name=' + fieldName + ']');
-                        input.closest('.form-group,.checkbox')
+                        var input = $('[name=' + fieldName + ']'),
+                            parent = input.closest('.form-group,.checkbox'),
+                            label = $('label', parent);
+                        parent
                             .addClass('has-error')
                             .append('<div class="help-block">' + message + '</div>');
-                        // Then re-expand any group with errors
-                        input.closest('.panel-collapse')
-                            .addClass('in');
+                        $('.help-block .field-name', parent).text(
+                            label.text().toLowerCase()
+                        );
                     });
+
+                    // Collapse groups without errors, show groups with errors
+                    errGroups = $('.has-error').closest('.panel-collapse');
+                    okGroups = $('.panel-collapse').not(errGroups);
+                    errGroups.collapse('show');
+                    okGroups.collapse('hide');
                 }
             };
             if(data.fake) {
@@ -195,5 +209,37 @@
         harvestedEvent['dates'] = $('#date-picker').dateList();
         return harvestedEvent;
     }
+
+    // Set up email error detection and correction
+    $( document ).on( 'blur', '#email', function () {
+        $( this ).mailcheck( {
+            suggested: function ( element, suggestion ) {
+                var template = $( '#email-suggestion-template' ).html(),
+                    data = { suggestion: suggestion.full },
+                    message = Mustache.render( template, data );
+                $( '#email-suggestion' )
+                    .html( message )
+                    .show();
+            },
+            empty: function ( element ) {
+                $( '#emailMsg' )
+                    .hide();
+            }
+        } );
+    } );
+
+    $( document ).on( 'click', '#email-suggestion .correction', function () {
+        $( '#email' ).val( $( this ).text() );
+        $( '#email-suggestion' )
+            .hide();
+    } );
+
+    $( document ).on( 'click', '#email-suggestion .glyphicon-remove', function () {
+        $( '#email-suggestion' )
+            .hide();
+        // They clicked the X button, turn mailcheck off
+        // TODO: Remember unwanted corrections in local storage, don't offer again
+        $( document ).off( 'blur', '#email' );
+    } );
 
 }(jQuery));

@@ -268,11 +268,20 @@ a.footer {
     display:none;
     color: red;
     font-style: italic;
+    margin-top: 5px;
 }
 
-#email-suggestion .correction{
+#email-suggestion .correction {
     color: blue;
     cursor: pointer;
+}
+
+#email-suggestion .glyphicon {
+    color: grey;
+    cursor: pointer;
+    margin-left: 3px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
 }
 
 .req-label::after {
