@@ -40,7 +40,8 @@ class EventTime extends fActiveRecord {
             array(
                 'eventdate>=' => $firstDay,
                 'eventdate<=' => $lastDay,
-                'calevent{id}.hidden!' => 1
+                'calevent{id}.hidden!' => 1,
+                'eventstatus!' => 'S'
             ), // where
             array('eventdate' => 'asc')  // order by
         );
