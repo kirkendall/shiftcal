@@ -179,6 +179,7 @@
         <div class="plain">
         	<p class="audience-F">Family Friendly events have green times.</p>
         	<p class="audience-A">Adult Only (21+) events have red times.</p>
+        	<p class="area-V">Events in the Vancouver area have blue times.</p>
     	</div>
     </script>
     
@@ -189,7 +190,7 @@
             {{#events}}
                 <div class="event row {{#cancelled}}cancelled{{/cancelled}}" data-event-id="{{id}}">
                     <div class="time col-xs-2">
-                        <h3 class="audience-{{audience}}">{{displayTime}}</h3>
+                        <h3 class="audience-{{audience}} area-{{area}}">{{displayTime}}</h3>
                     </div>
                     <a class="expandDetails" href="#" data-toggle="collapse" data-target="#detailsContainer{{caldaily_id}}">
                         <div class="col-xs-10" >
@@ -391,6 +392,14 @@
                             <div class="form-group">
                                 <label class="control-label" for="timedetails">Time details</label>
                                 <input type="text" class="form-control" name="timedetails" id="timedetails" value="{{timedetails}}" />
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="area">Area</label>
+                                <select name="area" class="form-control" id="area">
+                                    {{# areaOptions }}
+                                    <option value="{{code}}" {{# isSelected }}selected{{/ isSelected }}>{{text}}</option>
+                                    {{/ areaOptions }}
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="locdetails">Location details</label>
