@@ -24,7 +24,9 @@
             lengths = [ '0-3', '3-8', '8-15', '15+'],
             audiences = [{code: 'F', text: 'Family friendly. Adults bring children.'},
                          {code: 'G', text: 'General. For adults, but kids welcome.'},
-                         {code: 'A', text: '21+ only. Alcohol involved.'}];
+                         {code: 'A', text: '21+ only. Alcohol involved.'}],
+            areas = [{code: 'P', text: 'Portland'},
+                {code: 'V', text: 'Vancouver'}];
 
         shiftEvent.lengthOptions = [];
         for ( i = 0; i < lengths.length; i++ ) {
@@ -68,7 +70,6 @@
         }
         shiftEvent.timeOptions.push({ time: "11:59 PM" });
 
-        shiftEvent.audienceOptions = [];
         if (!shiftEvent.audience) {
             shiftEvent.audience = 'G';
         }
@@ -78,6 +79,17 @@
                 audiences[i].isSelected = true;
             }
             shiftEvent.audienceOptions.push(audiences[i]);
+        }
+
+        if (!shiftEvent.area) {
+            shiftEvent.area = 'P';
+        }
+        shiftEvent.areaOptions = [];
+        for ( i = 0; i < areas.length; i++ ) {
+            if (shiftEvent.area == areas[i].code) {
+                areas[i].isSelected = true;
+            }
+            shiftEvent.areaOptions.push(areas[i]);
         }
 
         template = $('#mustache-edit').html();
