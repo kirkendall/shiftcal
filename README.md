@@ -3,7 +3,7 @@
 This is the source code for the Shift calendar.
 ===============================================
 
-It has been sanitized of passwords from the copy running at http://shift2bikes.org/cal , but if you'd like to see it in action that's where to check it out.
+It has been sanitized of passwords from the copy running at http://shift2bikes.org/betacal , but if you'd like to see it in action that's where to check it out.
 
 Basic Architecture
 ------------------
