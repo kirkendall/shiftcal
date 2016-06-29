@@ -78,6 +78,7 @@ $(document).ready( function() {
         endDate.setDate(startDate.getDate() + 9);
 
         container.empty()
+             .append($('#scrollToTop').html())
              .append($('#legend-template').html());
 
         getEventHTML(startDate, endDate, function (eventHTML) {
@@ -107,6 +108,7 @@ $(document).ready( function() {
         var pedalpalooza = './images/pp2016.jpg';
         container.empty()
              .append($('#pedalpalooza-header').html())
+             .append($('#scrollToTop').html())
              .append($('#legend-template').html());
         getEventHTML(startDate, endDate, function (eventHTML) {
              container.append(eventHTML);     
@@ -209,4 +211,17 @@ $(document).ready( function() {
         viewPedalpalooza();
     }
 
+    //scroll to top functionality
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 100) {
+            $('.scrollToTop').fadeIn();
+        } else {
+            $('.scrollToTop').fadeOut();
+        }
+    });
+    
+    $('scrollToTop').click(function(){
+        $('html, body').animate({scrollTop: 0}, 800);
+        return false;
+    });
 });
