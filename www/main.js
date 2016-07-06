@@ -208,7 +208,7 @@ $(document).ready( function() {
     	viewAbout();
     }
     else {
-        viewPedalpalooza();
+        viewEvents();
     }
 
     //scroll to top functionality
