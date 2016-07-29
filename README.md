@@ -1,9 +1,11 @@
 # shiftcal
 
-This is the source code for the Shift calendar.
-===============================================
+This is the source code for the Shift/Pedalpalooza Calendar.
+===========================================================
 
-It has been sanitized of passwords from the copy running at http://shift2bikes.org/betacal , but if you'd like to see it in action that's where to check it out.
+The purpose of the Shift/Pedalpalooza Calendar is to empower citizens to create and view bike events and to spread bike fun. 
+
+This repository has been sanitized of passwords from the copy running at http://shift2bikes.org/betacal , but if you'd like to see it in action that's where to check it out.
 
 Basic Architecture
 ------------------
@@ -11,6 +13,17 @@ Basic Architecture
 The front-end uses jQuery, Mustache templates, and Bootstrap.
 
 The back-end uses Flourish php and MySQL.
+
+License
+-------
+
+This repository is under MIT License:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 How to setup & run locally
 --------------------------
