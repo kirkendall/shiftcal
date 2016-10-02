@@ -140,6 +140,7 @@ $(document).ready( function() {
     }
 
     function viewEvent(id) {
+        location.hash = 'event-' + id;
         container.empty()
             .append($('#show-all-template').html())
             .append($('#scrollToTop').html())
