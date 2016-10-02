@@ -158,7 +158,10 @@ $(document).ready( function() {
         viewPedalpalooza();
     });
 
-
+    $(document).on('click', 'a#contact-button', function(e) {
+        window.location.href = "http://shift2bikes.com/contacts";
+    });
+    
     $(document).on('click', '#date-picker-pedalpalooza', function(ev) {
         dateJump(ev);
     });
