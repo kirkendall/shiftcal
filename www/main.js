@@ -2,8 +2,51 @@ $(document).ready( function() {
    
     var container = $('#mustache-html');
 
-    function getEventHTML(startDate, endDate, callback) {
+    // TODO: deduplicate with getEventHTML
+    function getOneEventHTML(id, callback) {
+        $.get( 'events.php?id=' + id, function( data ) {
+            var mustacheData = { dates: [] };
+            var groupedByDate = {};
+            $.each(data.events, function( index, value ) {
+                var date = container.formatDate(value.date);
+                if (groupedByDate[date] === undefined) {
+                    groupedByDate[date] = {
+                        yyyymmdd: value.date,
+                        date: date,
+                        events: []
+                    };
+                    mustacheData.dates.push(groupedByDate[date]);
+                }
+                var timeParts = value.time.split(':');
+                var hour = parseInt(timeParts[0]);
+                var meridian = 'AM';
+                if ( hour === 0 ) {
+                    hour = 12;
+                } else if ( hour >= 12 ) {
+                    meridian = 'PM';
+                    if ( hour > 12 ) {
+                        hour = hour - 12;
+                    }
+                }
+                value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
+                value.mapLink = container.getMapLink(value.address);
+                value.preview = true;
+                // value.showEditButton = true; // TODO: permissions
+                groupedByDate[date].events.push(value);
+            });
 
+
+            for ( var date in groupedByDate )  {
+                groupedByDate[date].events.sort(container.compareTimes);
+            }
+            var template = $('#view-events-template').html();
+            var info = Mustache.render(template, mustacheData);
+            callback(info);
+        });
+
+    }
+
+    function getEventHTML(startDate, endDate, callback) {
         $.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
             var groupedByDate = [];
             var mustacheData = { dates: [] };            
@@ -95,6 +138,17 @@ $(document).ready( function() {
                  });
         });
     }
+
+    function viewEvent(id) {
+        container.empty()
+            .append($('#show-all-template').html())
+            .append($('#scrollToTop').html())
+            .append($('#legend-template').html());
+
+        getOneEventHTML(id, function (eventHTML) {
+            container.append(eventHTML);
+        });
+    }
     
     function viewAbout() {
         var content = $('#aboutUs').html();
@@ -178,6 +232,20 @@ $(document).ready( function() {
         return false;
     });
 
+    $(document).on('click', 'a.share-link', function(e) {
+        var $e = $(e.target);
+        viewEvent($e.attr('data-id'));
+
+        e.preventDefault();
+        return false;
+    });
+
+    $(document).on('click', 'a#show-all', function (e) {
+        viewEvents();
+        e.preventDefault();
+        return false;
+    });
+
     $(document).on('click', 'button.edit', function(e) {
         var id = $(e.target).closest('div.event').data('event-id');
         viewAddEventForm(id);
@@ -206,6 +274,11 @@ $(document).ready( function() {
     }
     else if ( /^#aboutUs/.test(location.hash)) {
     	viewAbout();
+    }
+    else if ( /^#event-([0-9]*)/.test(location.hash)) {
+        var rx = /^#event-([0-9]*)/g;
+        var arr = rx.exec(location.hash);
+        viewEvent(arr[1]);
     }
     else {
         viewEvents();
