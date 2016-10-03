@@ -2,12 +2,20 @@ $(document).ready( function() {
    
     var container = $('#mustache-html');
 
-    // TODO: deduplicate with getEventHTML
-    function getOneEventHTML(id, callback) {
-        $.get( 'events.php?id=' + id, function( data ) {
+    function getEventHTML(options, callback) {
+        var url = 'events.php?';
+        if ('id' in options) {
+            url += 'id=' + options['id'];
+        }
+        if ('startdate' in options && 'enddate' in options) {
+            url += 'startdate=' + options['startdate'].toISOString() + '&enddate=' + options['enddate'].toISOString();
+        }
+
+        $.get( url, function( data ) {
+            var groupedByDate = [];
             var mustacheData = { dates: [] };
-            var groupedByDate = {};
             $.each(data.events, function( index, value ) {
+
                 var date = container.formatDate(value.date);
                 if (groupedByDate[date] === undefined) {
                     groupedByDate[date] = {
@@ -30,7 +38,9 @@ $(document).ready( function() {
                 }
                 value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
                 value.mapLink = container.getMapLink(value.address);
-                value.preview = true;
+                if ('id' in options) {
+                    value.preview = true;
+                }
                 // value.showEditButton = true; // TODO: permissions
                 groupedByDate[date].events.push(value);
             });
@@ -42,49 +52,6 @@ $(document).ready( function() {
             var template = $('#view-events-template').html();
             var info = Mustache.render(template, mustacheData);
             callback(info);
-        });
-
-    }
-
-    function getEventHTML(startDate, endDate, callback) {
-        $.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
-            var groupedByDate = [];
-            var mustacheData = { dates: [] };            
-            $.each(data.events, function( index, value ) {
-
-                var date = container.formatDate(value.date);
-                if (groupedByDate[date] === undefined) {
-                    groupedByDate[date] = {
-                        yyyymmdd: value.date,
-                        date: date,
-                        events: []
-                    };
-                    mustacheData.dates.push(groupedByDate[date]);
-                }
-                var timeParts = value.time.split(':');
-                var hour = parseInt(timeParts[0]);
-                var meridian = 'AM';
-                if ( hour === 0 ) {
-                    hour = 12;
-                } else if ( hour >= 12 ) {
-                    meridian = 'PM';
-                    if ( hour > 12 ) {
-                        hour = hour - 12;
-                    }
-                }
-                value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
-                value.mapLink = container.getMapLink(value.address);
-                // value.showEditButton = true; // TODO: permissions
-                groupedByDate[date].events.push(value);
-            });
-
-
-            for ( var date in groupedByDate )  {
-                groupedByDate[date].events.sort(container.compareTimes);
-            }
-            var template = $('#view-events-template').html();
-            var info = Mustache.render(template, mustacheData);
-           	callback(info);
         });
     }
 
@@ -124,14 +91,20 @@ $(document).ready( function() {
              .append($('#scrollToTop').html())
              .append($('#legend-template').html());
 
-        getEventHTML(startDate, endDate, function (eventHTML) {
+        getEventHTML({
+            startdate: startDate,
+            enddate: endDate,
+        }, function (eventHTML) {
              container.append(eventHTML);
              container.append($('#load-more-template').html());
              $(document).off('click', '#load-more')
                   .on('click', '#load-more', function(e) {
                       startDate.setDate(startDate.getDate() + 10);
                       endDate.setDate(startDate.getDate() + 9);
-                      getEventHTML(startDate, endDate, function(eventHTML) {
+                      getEventHTML({
+                          startdate: startDate,
+                          enddate: endDate
+                      }, function(eventHTML) {
                           $('#load-more').before(eventHTML);
                       });
                       return false;
@@ -146,7 +119,7 @@ $(document).ready( function() {
             .append($('#scrollToTop').html())
             .append($('#legend-template').html());
 
-        getOneEventHTML(id, function (eventHTML) {
+        getEventHTML({id:id}, function (eventHTML) {
             container.append(eventHTML);
         });
     }
@@ -165,7 +138,10 @@ $(document).ready( function() {
              .append($('#pedalpalooza-header').html())
              .append($('#scrollToTop').html())
              .append($('#legend-template').html());
-        getEventHTML(startDate, endDate, function (eventHTML) {
+        getEventHTML({
+            startdate: startDate,
+            enddate: endDate
+        }, function (eventHTML) {
              container.append(eventHTML);     
         });
     }
