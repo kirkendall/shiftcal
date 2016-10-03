@@ -34,6 +34,15 @@ class EventTime extends fActiveRecord {
         $event->related_records = array();
     }
 
+    public static function getByID($id) {
+        return fRecordSet::build(
+            'EventTime', // class
+            array(
+                'pkid=' => $id
+            )
+        );
+    }
+
     public static function getRangeVisible($firstDay, $lastDay) {
         return fRecordSet::build(
             'EventTime', // class

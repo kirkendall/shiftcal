@@ -32,6 +32,10 @@ nav.navbar {
     font-weight: bold;
 }
 
+#show-all {
+    text-align: right;
+}
+
 .scrollToTop {
     width:100px;
     height:70px;

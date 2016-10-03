@@ -2,11 +2,18 @@ $(document).ready( function() {
    
     var container = $('#mustache-html');
 
-    function getEventHTML(startDate, endDate, callback) {
+    function getEventHTML(options, callback) {
+        var url = 'events.php?';
+        if ('id' in options) {
+            url += 'id=' + options['id'];
+        }
+        if ('startdate' in options && 'enddate' in options) {
+            url += 'startdate=' + options['startdate'].toISOString() + '&enddate=' + options['enddate'].toISOString();
+        }
 
-        $.get( 'events.php?startdate=' + startDate.toISOString() + '&enddate=' + endDate.toISOString(), function( data ) {
+        $.get( url, function( data ) {
             var groupedByDate = [];
-            var mustacheData = { dates: [] };            
+            var mustacheData = { dates: [] };
             $.each(data.events, function( index, value ) {
 
                 var date = container.formatDate(value.date);
@@ -31,6 +38,9 @@ $(document).ready( function() {
                 }
                 value.displayTime = hour + ':' + timeParts[1] + ' ' + meridian;
                 value.mapLink = container.getMapLink(value.address);
+                if ('id' in options) {
+                    value.preview = true;
+                }
                 // value.showEditButton = true; // TODO: permissions
                 groupedByDate[date].events.push(value);
             });
@@ -41,7 +51,7 @@ $(document).ready( function() {
             }
             var template = $('#view-events-template').html();
             var info = Mustache.render(template, mustacheData);
-           	callback(info);
+            callback(info);
         });
     }
 
@@ -81,18 +91,36 @@ $(document).ready( function() {
              .append($('#scrollToTop').html())
              .append($('#legend-template').html());
 
-        getEventHTML(startDate, endDate, function (eventHTML) {
+        getEventHTML({
+            startdate: startDate,
+            enddate: endDate,
+        }, function (eventHTML) {
              container.append(eventHTML);
              container.append($('#load-more-template').html());
              $(document).off('click', '#load-more')
                   .on('click', '#load-more', function(e) {
                       startDate.setDate(startDate.getDate() + 10);
                       endDate.setDate(startDate.getDate() + 9);
-                      getEventHTML(startDate, endDate, function(eventHTML) {
+                      getEventHTML({
+                          startdate: startDate,
+                          enddate: endDate
+                      }, function(eventHTML) {
                           $('#load-more').before(eventHTML);
                       });
                       return false;
                  });
+        });
+    }
+
+    function viewEvent(id) {
+        location.hash = 'event-' + id;
+        container.empty()
+            .append($('#show-all-template').html())
+            .append($('#scrollToTop').html())
+            .append($('#legend-template').html());
+
+        getEventHTML({id:id}, function (eventHTML) {
+            container.append(eventHTML);
         });
     }
     
@@ -110,7 +138,10 @@ $(document).ready( function() {
              .append($('#pedalpalooza-header').html())
              .append($('#scrollToTop').html())
              .append($('#legend-template').html());
-        getEventHTML(startDate, endDate, function (eventHTML) {
+        getEventHTML({
+            startdate: startDate,
+            enddate: endDate
+        }, function (eventHTML) {
              container.append(eventHTML);     
         });
     }
@@ -177,6 +208,20 @@ $(document).ready( function() {
         return false;
     });
 
+    $(document).on('click', 'a.share-link', function(e) {
+        var $e = $(e.target);
+        viewEvent($e.attr('data-id'));
+
+        e.preventDefault();
+        return false;
+    });
+
+    $(document).on('click', 'a#show-all', function (e) {
+        viewEvents();
+        e.preventDefault();
+        return false;
+    });
+
     $(document).on('click', 'button.edit', function(e) {
         var id = $(e.target).closest('div.event').data('event-id');
         viewAddEventForm(id);
@@ -205,6 +250,11 @@ $(document).ready( function() {
     }
     else if ( /^#aboutUs/.test(location.hash)) {
     	viewAbout();
+    }
+    else if ( /^#event-([0-9]*)/.test(location.hash)) {
+        var rx = /^#event-([0-9]*)/g;
+        var arr = rx.exec(location.hash);
+        viewEvent(arr[1]);
     }
     else {
         viewEvents();
