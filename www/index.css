@@ -32,10 +32,6 @@ nav.navbar {
     font-weight: bold;
 }
 
-#show-all {
-    text-align: right;
-}
-
 .scrollToTop {
     width:100px;
     height:70px;
@@ -268,7 +264,7 @@ a.expandDetails {
     text-align:center;
 }
 
-a.footer {
+a.more-events {
     display:block;
     width:100%;
     text-align:center;
