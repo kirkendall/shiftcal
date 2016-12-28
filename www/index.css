@@ -112,13 +112,13 @@ h3 {
 }
 
 .btn{
- 
+
     color: #37b;
 }
 
 .mainDetails p {
     margin-top: 1em;
-	
+
 }
 .otherButtons a {
     text-decoration: none;
@@ -129,7 +129,8 @@ a.expandDetails {
 }
 
 .eventImg img{
-    width: 100%;
+    float: right;
+    width: 50%;
     height: auto;
 }
 
