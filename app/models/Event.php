@@ -2,7 +2,6 @@
 
 class Event extends fActiveRecord {
     public function toArray($include_hidden=false) {
-        global $IMAGEPATH;
         /*
         id:
         title:
@@ -30,7 +29,7 @@ class Event extends fActiveRecord {
             'eventduration' => $this->getEventduration() != null && $this->getEventduration() > 0 ? $this->getEventduration() : null,
             'weburl' => $this->getWeburl(),
             'webname' => $this->getWebname(),
-            'image' => $this->getImage() != null ? $IMAGEPATH . '/' . $this->getImage() : null,
+            'image' => $this->getImagePath(),
             'audience' => $this->getAudience(),
             //'printevent' => $this->getPrintevent(),
             'tinytitle' => $this->getTinytitle(),
@@ -131,6 +130,37 @@ class Event extends fActiveRecord {
             $this->setHidden(0);
             $this->store();
         }
+    }
+
+    private function getImagePath() {
+        global $IMAGEDIR;
+
+        $old_name = $this->getImage();
+        if ($old_name == null) {
+            return null;
+        }
+
+        $old_path = "$IMAGEDIR/$old_name";
+        $id = $this->getId();
+
+        // What the name should be
+        $t = pathinfo($old_name);
+        $ext = $t['extension'];
+        $new_name = "$id.$ext";
+
+        if ($new_name === $old_name) {
+            // Named correctly
+            return $old_path;
+        }
+
+        // Named incorrectly, move, update db, return
+        $new_path = "$IMAGEDIR/$new_name";
+
+        rename($old_path, $new_path);
+        $this->setImage($new_name);
+        $this->store();
+
+        return $new_path;
     }
 }
 
