@@ -32,10 +32,6 @@ nav.navbar {
     font-weight: bold;
 }
 
-#show-all {
-    text-align: right;
-}
-
 .scrollToTop {
     width:100px;
     height:70px;
@@ -116,13 +112,13 @@ h3 {
 }
 
 .btn{
- 
+
     color: #37b;
 }
 
 .mainDetails p {
     margin-top: 1em;
-	
+
 }
 .otherButtons a {
     text-decoration: none;
@@ -133,7 +129,8 @@ a.expandDetails {
 }
 
 .eventImg img{
-    width: 100%;
+    float: right;
+    width: 50%;
     height: auto;
 }
 
@@ -268,7 +265,7 @@ a.expandDetails {
     text-align:center;
 }
 
-a.footer {
+a.more-events {
     display:block;
     width:100%;
     text-align:center;
