@@ -133,27 +133,28 @@ class Event extends fActiveRecord {
     }
 
     private function getImagePath() {
-        global $IMAGEPATH;
+        global $IMAGEDIR;
 
         $old_name = $this->getImage();
         if ($old_name == null) {
             return null;
         }
 
-        $old_path = "$IMAGEPATH/$old_name";
+        $old_path = "$IMAGEDIR/$old_name";
         $id = $this->getId();
 
-        if (0 === strpos($old_name, "$id")) {
+        // What the name should be
+        $t = pathinfo($old_name);
+        $ext = $t['extension'];
+        $new_name = "$id.$ext";
+
+        if ($new_name === $old_name) {
             // Named correctly
             return $old_path;
         }
 
         // Named incorrectly, move, update db, return
-        $t = pathinfo($old_name);
-        $ext = $t['extension'];
-        $new_name = "$id.$ext";
-
-        $new_path = "$IMAGEPATH/$new_name";
+        $new_path = "$IMAGEDIR/$new_name";
 
         rename($old_path, $new_path);
         $this->setImage($new_name);
