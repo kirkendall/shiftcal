@@ -30,9 +30,10 @@ How to setup & run locally
 
 Anyone who wants to run the site locally will need the following to start with:
 
-- PHP version < 5.7 and >= 5.4.   You can find this by running "php -i" or making a webpage that calls phpinfo();
+- PHP version >= 5.4.   You can find this by running "php -i" or making a webpage that calls phpinfo();
 - mysql installed and running and accessible from your dev environment
-- The 'mysql' module enabled for PHP (there is a line that is uncommented in the correct php.ini to the effect of 'extension=mysql.so').  This module has been deprecated in 5.5 and 5.6 but still works.  **IT WILL NOT WORK IN PHP 5.7!**
+- The 'mysql', 'pdo\_mysql', or 'mysqli' module enabled for PHP
+ - For 'mysql' (there is a line that is uncommented in the correct php.ini to the effect of 'extension=mysql.so').  This module has been deprecated in 5.5 and 5.6 but still works.  **IT WILL NOT WORK IN PHP 5.7!**
 - enabled the apache module for PHP 
 
 Once you've gotten all that sorted, you should be able to create a page with just the code:
