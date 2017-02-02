@@ -29,6 +29,7 @@ class Event extends fActiveRecord {
             'locdetails' => $this->getLocdetails(),
             'eventduration' => $this->getEventduration() != null && $this->getEventduration() > 0 ? $this->getEventduration() : null,
             'weburl' => $this->getWeburl(),
+            'shareable' => $this->getShareable(),
             'webname' => $this->getWebname(),
             'image' => $this->getImage() != null ? $IMAGEPATH . '/' . $this->getImage() : null,
             'audience' => $this->getAudience(),
@@ -122,10 +123,15 @@ class Event extends fActiveRecord {
     public function emailSecret() {
         global $PROTOCOL, $HOST, $PATH;
         $base = $PROTOCOL . $HOST . $PATH;
-	$headers = 'From: bikefun@shift2bikes.org' . "\r\n" .  'Reply-To: bikefun@shift2bikes.org' . "\r\n";
+	    $headers = 'From: bikefun@shift2bikes.org' . "\r\n" .  'Reply-To: bikefun@shift2bikes.org' . "\r\n";
         mail($this->getEmail(), "Shift2Bike Event Secret URL: " . $this->getTitle(), "Hi! To publish and edit the event, please visit $base#editEvent/" . $this->getId() . "/" .$this->getPassword(), $headers);
     }
 
+    private function getShareable() {
+    	$caldaily_id = $this->getId();
+    	return "#event-" . $caldaily_id;
+    }
+    
     public function unhide() {
         if ($this->getHidden() != 0) {
             $this->setHidden(0);
