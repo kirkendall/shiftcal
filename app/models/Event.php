@@ -124,7 +124,8 @@ class Event extends fActiveRecord {
         global $PROTOCOL, $HOST, $PATH;
         $base = $PROTOCOL . $HOST . $PATH;
 	    $headers = 'From: bikefun@shift2bikes.org' . "\r\n" .  'Reply-To: bikefun@shift2bikes.org' . "\r\n";
-        mail($this->getEmail(), "Shift2Bike Event Secret URL: " . $this->getTitle(), "Hi! To publish and edit the event, please visit $base#editEvent/" . $this->getId() . "/" .$this->getPassword(), $headers);
+	    $message = "Dear " . $this->getName() . ", \r\n\r\nThank you for adding your event, " . $this->getTitle() . ", to the Shift Calendar. To activate and manage it, you must visit $base#editEvent/" . $this->getId() . "/" .$this->getPassword() . "\r\n\r\nBike on!\r\n\r\n-Shift";
+        mail($this->getEmail(), "Shift2Bike Event Secret URL: " . $this->getTitle(), $message, $headers);
     }
 
     private function getShareable() {
