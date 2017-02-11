@@ -29,7 +29,6 @@ class Event extends fActiveRecord {
             'locdetails' => $this->getLocdetails(),
             'eventduration' => $this->getEventduration() != null && $this->getEventduration() > 0 ? $this->getEventduration() : null,
             'weburl' => $this->getWeburl(),
-            'shareable' => $this->getShareable(),
             'webname' => $this->getWebname(),
             'image' => $this->getImage() != null ? $IMAGEPATH . '/' . $this->getImage() : null,
             'audience' => $this->getAudience(),
@@ -133,11 +132,6 @@ class Event extends fActiveRecord {
         mail($this->getEmail(), $subject, $message, $headers);
     }
 
-    private function getShareable() {
-    	$caldaily_id = $this->getId();
-    	return "#event-" . $caldaily_id;
-    }
-    
     public function unhide() {
         if ($this->getHidden() != 0) {
             $this->setHidden(0);
