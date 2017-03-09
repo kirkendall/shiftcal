@@ -131,9 +131,9 @@ $(document).ready( function() {
     
     function viewPedalpalooza() {
         location.hash = 'pedalpalooza';    
-        var startDate = new Date("June 9, 2016");
-        var endDate = new Date("July 4, 2016 23:59:59");
-        var pedalpalooza = './images/pp2016.jpg';
+        var startDate = new Date("June 1, 2017");
+        var endDate = new Date("June 30, 2017 23:59:59");
+        var pedalpalooza = '/cal/images/pp2017.jpg'
         container.empty()
              .append($('#pedalpalooza-header').html())
              .append($('#scrollToTop').html())
