@@ -267,7 +267,19 @@
                                     {{contact}}
                                 </p>
                                 <p class="permalink">
-                                    <a href="#event-{{ caldaily_id }}" data-id="{{ caldaily_id }}" class="share-link">Sharable link</a>
+                                    <a 
+                                        href="{{shareable}}" 
+                                        data-id="{{caldaily_id}}" 
+                                        class="share-link">
+                                        Sharable link
+                                    </a>   
+                                    <!-- disable Facebook for now since previews on timeline aren't available
+                                    <a 
+                                       href="https://www.facebook.com/sharer/sharer.php?u={{shareable}}"
+                                       target="_blank">
+                                       Share on Facebook
+                                    </a>
+                                    -->                         
                                 </p>
                             </div>
                         </div>

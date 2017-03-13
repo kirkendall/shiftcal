@@ -45,7 +45,6 @@ $(document).ready( function() {
                 groupedByDate[date].events.push(value);
             });
 
-
             for ( var date in groupedByDate )  {
                 groupedByDate[date].events.sort(container.compareTimes);
             }

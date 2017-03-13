@@ -67,10 +67,16 @@ class EventTime extends fActiveRecord {
         return $this->getEventdate()->format('Y-m-d');
     }
 
+    private function getShareable() {
+        $caldaily_id = $this->getPkid();
+        return "http://www.shift2bikes.org/fun/www/%23event-" . $caldaily_id;
+    }
+    
     public function toEventSummaryArray() {
         $eventArray = $this->getEvent()->toArray();
         $eventArray['date'] = $this->getFormattedDate();
         $eventArray['caldaily_id'] = $this->getPkid();
+        $eventArray['shareable'] = $this->getShareable();
         $eventArray['cancelled'] = $this->getEventstatus() == 'C';
         $eventArray['newsflash'] = $this->getNewsflash();
         return $eventArray;
