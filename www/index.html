@@ -100,7 +100,7 @@
         <img alt="Pedalpalooza" id="pedalpalooza-img" src="images/pp2017.jpg">
         <div class="pg-width">
     	    <p> Pedalpalooza is 3+ weeks of bikey fun. With ~300 different events, most organized by individuals, bikers of all persuasions are likely to find many events of interest. Nearly all events are free. </p>
-    	    <p> Visiting from out of town? We've started a <a href="http://www.shift2bikes.org/allbike.php#Visitor_Info">Visitor Info</a> page on our Wiki.</p>
+    	    <p> Visiting from out of town? We've started a <a href="http://www.shift2bikes.org/allbike.php#Visitor_Info">Visitor Info</a> page.</p>
     	    <p> <a href="http://www.shift2bikes.org/pedalpalooza/index.shtml">Pedalpalooza from prior years</a> </p>
     	    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                 <input type="hidden" name="cmd" value="_s-xclick">
@@ -255,10 +255,14 @@
 
                                 <p class="contactInfo">
                                     <img src="images/profile.png" /> {{organizer}}
+                                    
+                                    {{^hideemail}}
 
                                     {{#email}}
                                         <a href="mailto:{{email}}"><img src="images/email.png" /> {{email}}</a>
                                     {{/email}}
+                                    
+                                    {{/hideemail}}
 
                                     {{#phone}}
                                         <a href="tel:{{phone}}"><img src="images/phone.png" /> {{phone}}</a>
@@ -281,6 +285,14 @@
                                     </a>
                                     -->                         
                                 </p>
+                                {{#preview}}
+                                     <hr>
+                                     The following will only show on the print calendar.
+                                     <br>
+                                       tinytitle: {{tinytitle}}
+                                     <br>
+                                       print description: {{printdescr}}
+                                {{/preview}}
                             </div>
                         </div>
                     </div>
