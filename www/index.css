@@ -1,0 +1,308 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: gray;
+}
+
+.navbar-brand {
+    padding: 2px 15px;
+}
+
+nav.navbar {
+    text-align: center;
+    margin-bottom:40px;
+}
+
+.navbar-default {
+    background-color: #f90;
+    background-image: none;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color:#fff;
+}
+
+.navbar-toggle {
+    border: none;
+}
+
+/* Cheat bootstrap for one line mobile nav */
+.nav>li>a {
+    display:inline-block;
+    color:#fff !important;
+    font-weight: bold;
+}
+
+.scrollToTop {
+    width:100px;
+    height:70px;
+    text-align:center;
+    color:#f90;
+    position:fixed;
+    bottom:75px;
+    right:40px;
+    display:none;
+    z-index:1;
+    background: url('images/up-arrow.png') no-repeat 0px 20px;
+    background-position: center;
+}
+
+.container {
+	padding-left: 5px;
+	padding-right: 0px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.pg-width {
+    margin: 5px 10px 10px 5px;
+}
+
+.plain {
+    margin: 5px 10px 10px 5px;
+    clear: both;
+}
+
+/*div { border: 1px solid red }*/
+.secondaryHeader{
+    background-color: #fd6;
+    float:left;
+    width: 100%;
+    padding: 5px 10px 15px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.event.row {
+    font-size:1em;
+    color: #37b;
+}
+
+.event.cancelled div {
+    text-decoration: line-through;
+}
+
+.cancelled-text {
+    color: red;
+    font-weight: bold;
+}
+
+.newsflash {
+    color: rgb(255, 0, 255);
+}
+
+h3 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.timedetails {
+    text-align: right;
+}
+
+.summary p {
+    margin-bottom: 5px;
+}
+
+.time h3 {
+    text-align: right;
+}
+
+.eventDetails {
+    color: gray;
+}
+
+.btn{
+
+    color: #37b;
+}
+
+.mainDetails p {
+    margin-top: 1em;
+
+}
+.otherButtons a {
+    text-decoration: none;
+}
+
+a.expandDetails {
+    color:inherit;
+}
+
+.eventImg img{
+    float: right;
+    width: 50%;
+    height: auto;
+}
+
+#edit-header {
+    width:100%;
+    background:white;
+}
+
+.affix {
+    position: fixed;
+    top: 0;
+    background: #fff;
+    z-index: 1;
+}
+
+#pedalpalooza-img {
+    float: left;
+    max-width: 438px;
+    width: 100%;
+    height: auto;
+}
+
+.control-label {
+    color: gray;
+    font-weight: normal;
+}
+
+/* Date Picker CSS */
+#date-select-container {
+    margin: 0 auto;
+}
+#date-select-container-pedalpalooza {
+    margin: 10px 0px 5px 0px;
+    float: left;
+}
+.date-select-container-style {
+    width: 320px;
+    background-color: #fff56f;
+}
+#date-select {
+    height: 300px;
+}
+
+#date-select-pp {
+    background-color: #ffbd2c;
+}
+
+.date-select-style {
+    background-color: #ffbd2c;
+    overflow: scroll;
+}
+.date-picker-style {
+    width: 100%;
+}
+#load-earlier {
+    background-color: green;
+}
+#load-later {
+    background-color: red;
+}
+.loading-zone {
+    height: 600px;
+}
+
+.calendar-day {
+    border-top: 1px solid gray;
+    padding: 3px;
+    color: gray;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+.calendar-day:hover {
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.calendar-day.today {
+    background-color: green;
+}
+
+.calendar-day.selected {
+    background-color: red;
+}
+
+.calendar-month-title {
+    position: relative;
+    width: 30px;
+    color: #fff;
+    background-color: #f90;
+    font-weight: bold;
+}
+
+.color-jan, .color-mar, .color-may, .color-jul, .color-sep, .color-nov {
+    background-color: #fc6;
+}
+.color-jan-odd, .color-mar-odd, .color-may-odd,
+.color-jul-odd, .color-sep-odd, .color-nov-odd {
+    background-color: #fd6;
+}
+.color-feb, .color-apr, .color-jun, .color-aug, .color-oct, .color-dec {
+    background-color: #fd6;
+}
+.color-feb-odd, .color-apr-odd, .color-jun-odd,
+.color-aug-odd, .color-oct-odd, .color-dec-odd {
+    background-color: #fe9;
+}
+
+.calendar-month-title span {
+    white-space: nowrap;
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    width: 0;
+    left: 10px;
+    bottom: 0;
+    display: block;
+    position: absolute;
+    font-size: .8em;
+}
+.day-of-week {
+    width: 100%;
+    font-size: 0.9em;
+    text-align: center;
+    table-layout: fixed;
+    color: gray;
+}
+#preview-edit-button {
+    display: none;
+}
+/* /Date Picker CSS */
+.modal-body {
+    text-align:center;
+}
+
+a.more-events {
+    display:block;
+    width:100%;
+    text-align:center;
+    font-size: 1.5em;
+    color: #f90;
+}
+.audience-F {
+    color: green;
+}
+.audience-A {
+    color: red;
+}
+.area-V {
+    color: blue;
+}
+
+#email-suggestion {
+    display:none;
+    color: red;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+#email-suggestion .correction {
+    color: blue;
+    cursor: pointer;
+}
+
+#email-suggestion .glyphicon {
+    color: grey;
+    cursor: pointer;
+    margin-left: 3px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+.req-label::after {
+    content: "*";
+    color: red;
+}
